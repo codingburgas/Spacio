@@ -14,6 +14,9 @@ void homeMenu()
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
+    Image image = LoadImage("../assets/images/mainCharacter.png");
+    Texture2D mainCharacter = LoadTextureFromImage(image);
+
     int questionCounter = 0;
 
     const char* questions[8] = { "Do you choose to gaze at the stars\nor delve into the study\nof micro-particles?",
@@ -34,7 +37,8 @@ void homeMenu()
 
         BeginDrawing();
 
-        ClearBackground(BLACK);
+        ClearBackground(GetColor(0x312b47ff));
+        DrawTexture(mainCharacter, -20, 80, WHITE);
 
         DrawTextEx(Poppins, questions[questionCounter], Vector2{ 600, 260 }, 35, 5, WHITE);
 
