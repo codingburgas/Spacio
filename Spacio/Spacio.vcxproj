@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Spacio.cpp" />
+    <ClCompile Include="userMenu\userConfirm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="homeMenu.h" />

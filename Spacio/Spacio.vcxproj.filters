@@ -18,6 +18,9 @@
     <ClCompile Include="Spacio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="userMenu\userConfirm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="homeMenu.h">
