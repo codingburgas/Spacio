@@ -1,8 +1,21 @@
 #include "raylib.h"
 #include <string>
 #include <iostream>
+#include "homeMenu.h"
 
 using namespace std;
+
+void userInfo(Texture2D mainCharacter, Font boldPoppins, Font Poppins, int questionCounter, Rectangle planetButton, const char* questions[], const char* planetsAnswers[])
+{
+    DrawTexture(mainCharacter, -20, 80, WHITE);
+
+    DrawTextEx(boldPoppins, "Welcome, choose what you want to learn about", Vector2{ 200, 70 }, 40, 5, WHITE);
+
+    DrawTextEx(Poppins, questions[questionCounter], Vector2{ 600, 240 }, 35, 5, WHITE);
+
+    DrawRectangleRec(planetButton, GetColor(0x312b4700));
+    DrawTextEx(Poppins, planetsAnswers[questionCounter], Vector2{ 665, 400 }, 35, 5, WHITE);
+}
 
 void homeMenu()
 {
@@ -43,7 +56,7 @@ void homeMenu()
         "Do you prefer examining the vast\nstructures of the Universe or delving\ninto the basics of composite particles?" };
 
     const char* planetsAnswers[8] = { "Stars", "Galaxies", "Cosmic phenomena", "Black holes",
-        "Stellar cores", "Gravitational waves", "Astronomical observation", "Vast structures" };
+            "Stellar cores", "Gravitational waves", "Astronomical observation", "Vast structures" };
 
     const char* higgsAnswers[8] = { "Micro-particles", "Elementary particles", "Atomic structures", "Subatomic interactions",
         "Experimental results", "Interactions between quarks", "Analysis of particle data", "Composite particles" };
@@ -82,15 +95,9 @@ void homeMenu()
         BeginDrawing();
 
         ClearBackground(GetColor(0x312b47ff));
-        DrawTexture(mainCharacter, -20, 80, WHITE);
 
-        DrawTextEx(boldPoppins, "Welcome, choose what you want to learn about", Vector2{ 200, 70 }, 40, 5, WHITE);
-
-        DrawTextEx(Poppins, questions[questionCounter], Vector2{ 600, 240 }, 35, 5, WHITE);
-
-        DrawRectangleRec(planetButton, GetColor(0x312b4700));
-        DrawTextEx(Poppins, planetsAnswers[questionCounter], Vector2{ 665, 400 }, 35, 5, WHITE);
-
+        userInfo(mainCharacter, boldPoppins, Poppins, questionCounter, planetButton, questions, planetsAnswers);
+       
         if (buttonClickedPlanets)
         {
             planets++;
@@ -109,6 +116,16 @@ void homeMenu()
         }
 
         EndDrawing();
+        if (higgs > planets) {
+            finalChoice = higgsBoson;
+        }
+        else if (planets > higgs)
+        {
+            finalChoice = planet;
+        }
+        else {
+            finalChoice = nature;
+        }
     }
 
     StopMusicStream(music);
