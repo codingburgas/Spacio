@@ -25,6 +25,8 @@ void homeMenu()
         "Would you enjoy astronomical\nobservation or analyzing data\nfrom particle experiments ?",
         "Do you prefer examining the vast\nstructures of the Universe or delving\ninto the basics of composite particles?" };
 
+    SetTextLineSpacing(38);
+
     SetTargetFPS(60);
 
     while (!WindowShouldClose())
