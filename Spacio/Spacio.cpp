@@ -11,6 +11,9 @@ void homeMenu()
 
     InitWindow(screenWidth, screenHeight, "Spacio");
 
+    Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
+    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
+
     int questionCounter = 0;
 
     const char* questions[8] = { "Do you choose to gaze at the stars\nor delve into the study\nof micro-particles?",
@@ -29,7 +32,7 @@ void homeMenu()
 
         BeginDrawing();
 
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLACK);
 
         DrawTextEx(Poppins, questions[questionCounter], Vector2{ 600, 260 }, 35, 5, WHITE);
 
