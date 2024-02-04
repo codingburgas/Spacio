@@ -14,8 +14,11 @@ void homeMenu()
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
+    Image logo = LoadImage("../assets/images/logo.png");
     Image image = LoadImage("../assets/images/mainCharacter.png");
     Texture2D mainCharacter = LoadTextureFromImage(image);
+
+    SetWindowIcon(logo);
 
     Rectangle planetButton = { 648, 400, 150, 40 };
     Rectangle higgsButton = { 648, 480, 180, 40 };
@@ -61,6 +64,8 @@ void homeMenu()
 
         ClearBackground(GetColor(0x312b47ff));
         DrawTexture(mainCharacter, -20, 80, WHITE);
+
+        DrawTextEx(boldPoppins, "Welcome, choose what you want to learn about", Vector2{ 200, 70 }, 40, 5, WHITE);
 
         DrawTextEx(Poppins, questions[questionCounter], Vector2{ 600, 260 }, 35, 5, WHITE);
 
