@@ -1,6 +1,6 @@
 #include "raylib.h"
 
-int main()
+void homeMenu()
 {
     const int screenWidth = 800;
     const int screenHeight = 450;
@@ -20,5 +20,9 @@ int main()
 
         EndDrawing();
     }
+}
 
+int main()
+{
+    homeMenu();
 }
