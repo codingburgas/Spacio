@@ -11,6 +11,14 @@ void homeMenu()
 
     InitWindow(screenWidth, screenHeight, "Spacio");
 
+    InitAudioDevice();
+
+    Music music = LoadMusicStream("../assets/audios/cornfieldChase.mp3");
+    PlayMusicStream(music);
+
+    Music welcomeAudio = LoadMusicStream("../assets/audios/welcomeAudio.mp3");
+    PlayMusicStream(welcomeAudio);
+
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
@@ -44,12 +52,23 @@ void homeMenu()
     int planets = 0;
     int higgs = 0;
 
-    SetTextLineSpacing(38);
+    float welcomeAudioSecond = GetMusicTimeLength(welcomeAudio);
+    float audioTime = 0.0;
+
+    SetTextLineSpacing(40);
 
     SetTargetFPS(60);
 
     while (!WindowShouldClose())
     {
+        UpdateMusicStream(music);
+
+        if (IsMusicStreamPlaying(welcomeAudio) and audioTime < 2.7)
+        {
+            UpdateMusicStream(welcomeAudio);
+            audioTime += GetFrameTime();
+        }
+
         if (CheckCollisionPointRec(GetMousePosition(), planetButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             buttonClickedPlanets = true;
@@ -67,7 +86,7 @@ void homeMenu()
 
         DrawTextEx(boldPoppins, "Welcome, choose what you want to learn about", Vector2{ 200, 70 }, 40, 5, WHITE);
 
-        DrawTextEx(Poppins, questions[questionCounter], Vector2{ 600, 260 }, 35, 5, WHITE);
+        DrawTextEx(Poppins, questions[questionCounter], Vector2{ 600, 240 }, 35, 5, WHITE);
 
         DrawRectangleRec(planetButton, GetColor(0x312b4700));
         DrawTextEx(Poppins, planetsAnswers[questionCounter], Vector2{ 665, 400 }, 35, 5, WHITE);
@@ -91,6 +110,12 @@ void homeMenu()
 
         EndDrawing();
     }
+
+    StopMusicStream(music);
+    StopMusicStream(welcomeAudio);
+
+
+    CloseAudioDevice();
 }
 
 int main()
