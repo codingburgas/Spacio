@@ -3,9 +3,11 @@
 void intro() {
     BeginDrawing();
 
+    Image background = LoadImage("../assets/images/introBackground.png");
+    Texture2D backgroundIntro = LoadTextureFromImage(background);
     ClearBackground(RAYWHITE);
 
-    DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+    DrawTexture(backgroundIntro, 0, 0, WHITE);
 
     EndDrawing();
 }
