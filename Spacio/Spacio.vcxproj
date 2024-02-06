@@ -143,11 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Spacio.cpp" />
-    <ClCompile Include="userMenu\userConfirm.cpp" />
+    <ClCompile Include="src\intro.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="homeMenu.h" />
+    <ClInclude Include="src\intro.h" />
+    <ClInclude Include="src\mainMenu.h" />
+    <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
