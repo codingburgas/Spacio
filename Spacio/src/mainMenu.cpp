@@ -9,10 +9,5 @@ void mainMenu()
 
     SetTargetFPS(60);
 
-    while (!WindowShouldClose())
-    {
-        intro();
-    }
-
-    CloseAudioDevice();
+    intro();
 }
