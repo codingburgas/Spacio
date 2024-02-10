@@ -147,12 +147,14 @@
     <ClCompile Include="src\intro.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mainMenu.cpp" />
+    <ClCompile Include="src\questions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\characterPick.h" />
     <ClInclude Include="src\intro.h" />
     <ClInclude Include="src\mainMenu.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\questions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

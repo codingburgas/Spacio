@@ -1,4 +1,5 @@
 #include "characterPick.h"
+#include <iostream>
 
 void mouseCursorAstronauts(Rectangle boyAstronaut, Rectangle girlAstronaut)
 {
@@ -13,16 +14,22 @@ void mouseCursorAstronauts(Rectangle boyAstronaut, Rectangle girlAstronaut)
     }
 }
 
-bool pickVoice(bool girlVoice, bool boyVoice, Rectangle boyBox, Rectangle girlBox)
+bool girlVoice = false;
+bool boyVoice = false;
+
+bool pickVoice(Rectangle boyBox, Rectangle girlBox)
 {
+
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         if (CheckCollisionPointRec(GetMousePosition(), boyBox)) {
-            return boyVoice = true;
+            boyVoice = true;
         }
-        if (CheckCollisionPointRec(GetMousePosition(), girlBox)){
-            return girlVoice = true;
+        if (CheckCollisionPointRec(GetMousePosition(), girlBox)) {
+            girlVoice = true;
         }
     }
+
+    return girlVoice || boyVoice;
 }
 
 void characterPick(Font Poppins, Font boldPoppins)
@@ -35,9 +42,6 @@ void characterPick(Font Poppins, Font boldPoppins)
     Rectangle boyBox = { 285, 200, 161, 204 };
     Rectangle girlBox = { 1018, 180, 214, 214 };
 
-    bool girlVoice = false;
-    bool boyVoice = true;
-
     while (!WindowShouldClose())
     {
 
@@ -49,9 +53,10 @@ void characterPick(Font Poppins, Font boldPoppins)
         DrawTexture(boyAstronaut, 285, 200, RAYWHITE);
 
         mouseCursorAstronauts(boyBox, girlBox);
-        pickVoice(boyVoice, girlVoice, boyBox, girlBox);
 
         DrawTextEx(boldPoppins, "Choose a companion", Vector2(350, 60), 75, 5, WHITE);
+
+        pickVoice(boyBox, girlBox);
 
         ClearBackground(RAYWHITE);
 
