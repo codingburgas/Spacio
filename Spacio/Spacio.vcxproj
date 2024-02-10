@@ -143,11 +143,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\characterPick.cpp" />
     <ClCompile Include="src\intro.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\characterPick.h" />
     <ClInclude Include="src\intro.h" />
     <ClInclude Include="src\mainMenu.h" />
     <ClInclude Include="src\pch.h" />

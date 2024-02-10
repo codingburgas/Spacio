@@ -14,9 +14,15 @@ void mouseCursor(Rectangle digIn, Rectangle quit)
 
 bool buttonActions(Rectangle digIn, Rectangle quit, buttonTypes type)
 {
-    if (CheckCollisionPointRec(GetMousePosition(), quit) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && type == buttonTypes::QUIT) {
-        return true;
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        if (CheckCollisionPointRec(GetMousePosition(), quit) && type == buttonTypes::QUIT) {
+            return true;
+        }
+        if (CheckCollisionPointRec(GetMousePosition(), digIn) && type == buttonTypes::DIGIN) {
+            return true;
+        }
     }
+    return false;
 }
 
 
@@ -50,6 +56,12 @@ void intro() {
 
         if (buttonActions(digIn, quit, buttonTypes::QUIT))
         {
+            break;
+        }
+
+        if (buttonActions(digIn, quit, buttonTypes::DIGIN))
+        {
+            characterPick();
             break;
         }
 
