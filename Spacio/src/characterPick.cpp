@@ -58,6 +58,12 @@ void characterPick(Font Poppins, Font boldPoppins)
 
         pickVoice(boyBox, girlBox);
 
+        if (pickVoice(boyBox, girlBox))
+        {
+            questions(boyVoice, girlVoice);
+            break;
+        }
+
         ClearBackground(RAYWHITE);
 
         EndDrawing();
