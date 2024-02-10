@@ -2,4 +2,4 @@
 
 #include "pch.h"
 
-void characterPick();
+void characterPick(Font Poppins, Font boldPoppins);
