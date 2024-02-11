@@ -1,4 +1,5 @@
 #include "questions.h"
+#include <iostream>
 
 void mouseCursorQuestions(Rectangle planetButton, Rectangle higgsButton)
 {
@@ -90,15 +91,15 @@ void questions(bool boyVoice, bool girlVoice)
 
         mouseCursorQuestions(planetButton, higgsButton);
 
+        DrawRectangleRec(higgsButton, GetColor(0x312b4700));
+        DrawTextEx(boldPoppins, higgsAnswers[questionCounter], Vector2{ 665, 580 }, 40, 5, WHITE);
+
         if (buttonClickedPlanets)
         {
             planets++;
             questionCounter++;
             buttonClickedPlanets = false;
         }
-
-        DrawRectangleRec(higgsButton, GetColor(0x312b4700));
-        DrawTextEx(boldPoppins, higgsAnswers[questionCounter], Vector2{ 665, 580 }, 40, 5, WHITE);
 
         if (buttonClickedHiggs)
         {
@@ -109,7 +110,9 @@ void questions(bool boyVoice, bool girlVoice)
 
         confirmReady(higgs, planets, pick);
 
-        if (questionCounter == 7)
+        std::cout << questionCounter;
+
+        if (questionCounter == 8)
         {
             userConfirm(pick);
             break;
