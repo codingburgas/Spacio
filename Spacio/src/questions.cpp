@@ -7,8 +7,8 @@ void questions(bool boyVoice, bool girlVoice)
 
     Texture2D background = LoadTexture("../assets/images/questionsBackground.png");
 
-    Rectangle planetButton = { 648, 400, 150, 40 };
-    Rectangle higgsButton = { 648, 480, 180, 40 };
+    Rectangle planetButton = { 648, 500, 150, 40 };
+    Rectangle higgsButton = { 648, 580, 180, 40 };
     bool buttonClickedPlanets = false;
     bool buttonClickedHiggs = false;
 
@@ -53,10 +53,10 @@ void questions(bool boyVoice, bool girlVoice)
 
         DrawTextEx(boldPoppins, "Welcome, choose what you want to learn about", Vector2{ 250, 160 }, 50, 5, WHITE);
 
-        DrawTextEx(Poppins, questions[questionCounter], Vector2{ 600, 260 }, 35, 5, WHITE);
+        DrawTextEx(Poppins, questions[questionCounter], Vector2{ 600, 320 }, 40, 5, WHITE);
 
         DrawRectangleRec(planetButton, GetColor(0x312b4700));
-        DrawTextEx(Poppins, planetsAnswers[questionCounter], Vector2{ 665, 400 }, 35, 5, WHITE);
+        DrawTextEx(boldPoppins, planetsAnswers[questionCounter], Vector2{ 665, 500 }, 40, 5, WHITE);
 
         if (buttonClickedPlanets)
         {
@@ -66,7 +66,7 @@ void questions(bool boyVoice, bool girlVoice)
         }
 
         DrawRectangleRec(higgsButton, GetColor(0x312b4700));
-        DrawTextEx(Poppins, higgsAnswers[questionCounter], Vector2{ 665, 480 }, 35, 5, WHITE);
+        DrawTextEx(boldPoppins, higgsAnswers[questionCounter], Vector2{ 665, 580 }, 40, 5, WHITE);
 
         if (buttonClickedHiggs)
         {
