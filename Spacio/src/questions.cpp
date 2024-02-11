@@ -1,5 +1,18 @@
 #include "questions.h"
 
+void mouseCursorQuestions(Rectangle planetButton, Rectangle higgsButton)
+{
+    if (CheckCollisionPointRec(GetMousePosition(), planetButton)) {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+    }
+    else if (CheckCollisionPointRec(GetMousePosition(), higgsButton)) {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+    }
+    else {
+        SetMouseCursor(MOUSE_CURSOR_ARROW);
+    }
+}
+
 void questions(bool boyVoice, bool girlVoice)
 {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
@@ -57,6 +70,8 @@ void questions(bool boyVoice, bool girlVoice)
 
         DrawRectangleRec(planetButton, GetColor(0x312b4700));
         DrawTextEx(boldPoppins, planetsAnswers[questionCounter], Vector2{ 665, 500 }, 40, 5, WHITE);
+
+        mouseCursorQuestions(planetButton, higgsButton);
 
         if (buttonClickedPlanets)
         {
