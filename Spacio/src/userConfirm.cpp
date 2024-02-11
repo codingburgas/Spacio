@@ -42,7 +42,7 @@ void userConfirm(int pick)
         }
         else if (IsKeyPressed(KEY_ONE))
         {
-
+            getStation();
             break;
         }
         else if (IsKeyPressed(KEY_TWO))
