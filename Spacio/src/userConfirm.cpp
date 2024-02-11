@@ -1,4 +1,5 @@
 #include "userConfirm.h"
+#include <iostream>
 
 void userConfirm(int pick)
 {
@@ -33,6 +34,22 @@ void userConfirm(int pick)
         DrawTextEx(boldPoppins, ("It seems like you're interested in " + choice + "\nWould you like to change the subject?").c_str(), Vector2(400, 120), 50, 3, RAYWHITE);
 
         DrawTextEx(poppins, "Press Enter to continue\n\nPress 1 to learn about Planets\nPress 2 for Higgs Boson\nPress 3 for Nature", Vector2(675, 420), 50, 3, GetColor(0xBABABAff));
+
+        if (IsKeyPressed(KEY_ENTER))
+        {
+
+            break;
+        }
+        else if (IsKeyPressed(KEY_ONE))
+        {
+
+            break;
+        }
+        else if (IsKeyPressed(KEY_TWO))
+        {
+
+            break;
+        }
 
         EndDrawing();
     }
