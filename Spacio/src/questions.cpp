@@ -5,6 +5,8 @@ void questions(bool boyVoice, bool girlVoice)
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
+    Texture2D background = LoadTexture("../assets/images/questionsBackground.png");
+
     Rectangle planetButton = { 648, 400, 150, 40 };
     Rectangle higgsButton = { 648, 480, 180, 40 };
     bool buttonClickedPlanets = false;
@@ -45,9 +47,11 @@ void questions(bool boyVoice, bool girlVoice)
 
         BeginDrawing();
 
-        ClearBackground(GetColor(0x312b47ff));
+        ClearBackground(RAYWHITE);
 
-        DrawTextEx(boldPoppins, "Welcome, choose what you want to learn about", Vector2{ 200, 70 }, 40, 5, WHITE);
+        DrawTexture(background, 0, 0, RAYWHITE);
+
+        DrawTextEx(boldPoppins, "Welcome, choose what you want to learn about", Vector2{ 250, 160 }, 50, 5, WHITE);
 
         DrawTextEx(Poppins, questions[questionCounter], Vector2{ 600, 260 }, 35, 5, WHITE);
 
