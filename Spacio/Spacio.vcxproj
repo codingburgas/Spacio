@@ -156,6 +156,7 @@
     <ClInclude Include="src\mainMenu.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\questions.h" />
+    <ClInclude Include="src\userConfirm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

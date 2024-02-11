@@ -50,5 +50,8 @@
     <ClInclude Include="src\questions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\userConfirm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
