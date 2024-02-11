@@ -2,4 +2,4 @@
 
 #include "pch.h"
 
-void userConfirm();
+void userConfirm(int pick);

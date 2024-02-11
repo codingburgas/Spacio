@@ -13,6 +13,21 @@ void mouseCursorQuestions(Rectangle planetButton, Rectangle higgsButton)
     }
 }
 
+void confirmReady(int higgs, int planets, int& pick) {
+    if (planets > higgs)
+    {
+        pick = 1;
+    }
+    else if (higgs > planets)
+    {
+        pick = 2;
+    }
+    else if (higgs == planets)
+    {
+        pick = 3;
+    }
+}
+
 void questions(bool boyVoice, bool girlVoice)
 {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
@@ -24,6 +39,8 @@ void questions(bool boyVoice, bool girlVoice)
     Rectangle higgsButton = { 648, 580, 180, 40 };
     bool buttonClickedPlanets = false;
     bool buttonClickedHiggs = false;
+
+    int pick;
 
     const char* questions[8] = { "Do you choose to gaze at the stars\nor delve into the study\nof micro-particles?",
         "Do you prefer exploring galaxies\nor focusing on elementary particles?",
@@ -88,6 +105,14 @@ void questions(bool boyVoice, bool girlVoice)
             higgs++;
             questionCounter++;
             buttonClickedHiggs = false;
+        }
+
+        confirmReady(higgs, planets, pick);
+
+        if (questionCounter == 7)
+        {
+            userConfirm(pick);
+            break;
         }
 
         EndDrawing();
