@@ -1,26 +1,71 @@
 #include "getStation.h"
 
+#define MAX_INPUT_CHARS     10
+
+
 
 
 void getStation() {
-	Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
-	Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
+    Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
+    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
+    Texture2D background = LoadTexture("../assets/images/getStationBackground.png");
 
-	Texture2D background = LoadTexture("../assets/images/getStationBackground.png");
 
-	while (!WindowShouldClose()) {
-		
+    Rectangle textBox = { 320, 420, 860, 120 };
+    char name[MAX_INPUT_CHARS + 1] = "\0";
+    int letterCount = 0;
+    bool mouseOnText = false;
+    int framesCounter = 0;
 
-		BeginDrawing();
-		
+    while (!WindowShouldClose()) {
 
-		ClearBackground(RAYWHITE);
-		DrawTexture(background, 0, 0, RAYWHITE);
-		DrawTextEx(Poppins,"Hey kurva",Vector2(20, 20), 50, 5, BLACK);
+        if (CheckCollisionPointRec(GetMousePosition(), textBox)) mouseOnText = true;
+        else mouseOnText = false;
 
-		
+        if (mouseOnText) {
 
-		EndDrawing();
+            int key = GetCharPressed();
+            while (key > 0) {
+                if ((key >= 32) && (key <= 125) && (letterCount < MAX_INPUT_CHARS)) {
+                    name[letterCount] = (char)key;
+                    name[letterCount + 1] = '\0';
+                    letterCount++;
+                }
+                key = GetCharPressed();
+            }
 
-	}
+            if (IsKeyPressed(KEY_BACKSPACE)) {
+                letterCount--;
+                if (letterCount < 0) letterCount = 0;
+                name[letterCount] = '\0';
+            }
+        }
+
+        BeginDrawing();
+
+        ClearBackground(RAYWHITE);
+        DrawTexture(background, 0, 0, RAYWHITE);
+        DrawTextEx(boldPoppins, "Which station are you launching from?", Vector2{ 280, 260 }, 50, 5, WHITE);
+
+
+        DrawRectangleRec(textBox, LIGHTGRAY);
+        if (mouseOnText) DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, PURPLE);
+        else DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, DARKGRAY);
+
+        // Calculate the position to center the text
+        int textWidth = MeasureText(name, 100);
+        int textX = textBox.x + (textBox.width - textWidth) / 2;
+        int textY = textBox.y + (textBox.height - 100) / 2;
+
+        DrawText(name, textX, textY, 100, DARKPURPLE);
+
+        DrawText(TextFormat("INPUT CHARS: %i/%i", letterCount, MAX_INPUT_CHARS), 515, 600, 20, DARKGRAY);
+
+        EndDrawing();
+    }
+
+    // Unload resources if needed
+    UnloadTexture(background);
+    UnloadFont(Poppins);
+    UnloadFont(boldPoppins);
 }
