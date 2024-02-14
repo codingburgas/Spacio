@@ -26,6 +26,8 @@ void particlePick() {
 	Texture2D background = LoadTexture("../assets/images/chooseParticleBg.png");
 	
 
+    Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, 0, 0);
+    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 500, 0, 0);
 
 	Rectangle masslessParticle = { 283, 302, 295, 295 };
 	Rectangle massParticle = { 830,304 ,295 ,295 };
@@ -37,7 +39,14 @@ void particlePick() {
 
         DrawTexture(background, 0, 0, RAYWHITE);
 
+        DrawTextEx(boldPoppins, "What do you want to be?", Vector2(336, 118), 64, 5, WHITE);
+        DrawTextEx(boldPoppins, "Massless particle ", Vector2(294, 605), 32, 5, WHITE);
+        DrawTextEx(boldPoppins, "Particle with mass", Vector2(835, 595), 32, 5, WHITE);
+
+
         mouseCursorParticles(masslessParticle, massParticle);
+
+
 
         ClearBackground(RAYWHITE);
 
