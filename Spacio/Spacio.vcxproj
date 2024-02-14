@@ -147,6 +147,7 @@
     <ClCompile Include="src\intro.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mainMenu.cpp" />
+    <ClCompile Include="src\particlePick.cpp" />
     <ClCompile Include="src\questions.cpp" />
     <ClCompile Include="src\userConfirm.cpp" />
     <ClCompile Include="src\getStation.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="src\getStation.h" />
     <ClInclude Include="src\intro.h" />
     <ClInclude Include="src\mainMenu.h" />
+    <ClInclude Include="src\particlePick.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\questions.h" />
     <ClInclude Include="src\userConfirm.h" />
