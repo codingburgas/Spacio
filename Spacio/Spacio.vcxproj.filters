@@ -43,6 +43,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\higgsFieldGame.cpp">
+    <ClCompile Include="src\readyForQuiz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -75,6 +76,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\higgsFieldGame.h">
+    <ClInclude Include="src\readyForQuiz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
