@@ -1,5 +1,4 @@
 #include "questions.h"
-#include <iostream>
 
 void mouseCursorQuestions(Rectangle planetButton, Rectangle higgsButton)
 {
@@ -109,8 +108,6 @@ void questions(bool boyVoice, bool girlVoice)
         }
 
         confirmReady(higgs, planets, pick);
-
-        std::cout << questionCounter;
 
         if (questionCounter == 8)
         {

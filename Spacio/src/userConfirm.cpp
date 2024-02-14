@@ -37,7 +37,6 @@ void userConfirm(int pick)
 
         if (IsKeyPressed(KEY_ENTER))
         {
-
             break;
         }
         else if (IsKeyPressed(KEY_ONE))
