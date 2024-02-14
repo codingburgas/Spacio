@@ -9,3 +9,5 @@
 #include "questions.h"
 #include "userConfirm.h"
 #include "getStation.h"
+#include "userName.h"
+#include "readyForQuiz.h"

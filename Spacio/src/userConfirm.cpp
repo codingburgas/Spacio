@@ -49,6 +49,11 @@ void userConfirm(int pick)
 
             break;
         }
+        else if (IsKeyPressed(KEY_THREE))
+        {
+            readyForQuiz();
+            break;
+        }
 
         EndDrawing();
     }
