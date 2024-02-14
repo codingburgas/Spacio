@@ -1,4 +1,5 @@
 #include "particlePick.h"
+#include "higgsFieldGame.h"
 #include <iostream>
 
 bool mouseCursorOnRectangle(Rectangle rectangle) {
@@ -46,7 +47,16 @@ void particlePick() {
 
         mouseCursorParticles(masslessParticle, massParticle);
 
-
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            if (mouseCursorOnRectangle(masslessParticle)) {
+                HiggsFieldGame(false);
+                break;
+            }
+            if (mouseCursorOnRectangle(massParticle)) {
+                HiggsFieldGame(true);
+                break;
+            }
+        }
 
         ClearBackground(RAYWHITE);
 
