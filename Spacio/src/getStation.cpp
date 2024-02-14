@@ -1,9 +1,7 @@
 #include "getStation.h"
+#include <iostream>
 
 #define MAX_INPUT_CHARS     15
-
-
-
 
 void getStation() {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);

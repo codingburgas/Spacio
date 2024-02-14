@@ -150,6 +150,7 @@
     <ClCompile Include="src\questions.cpp" />
     <ClCompile Include="src\userConfirm.cpp" />
     <ClCompile Include="src\getStation.cpp" />
+    <ClCompile Include="src\userName.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\characterPick.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\questions.h" />
     <ClInclude Include="src\userConfirm.h" />
+    <ClInclude Include="src\userName.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
