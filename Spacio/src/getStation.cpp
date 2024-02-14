@@ -1,6 +1,6 @@
 #include "getStation.h"
 
-#define MAX_INPUT_CHARS     10
+#define MAX_INPUT_CHARS     15
 
 
 
@@ -59,8 +59,14 @@ void getStation() {
 
         DrawText(name, textX, textY, 100, DARKPURPLE);
 
-        DrawText(TextFormat("INPUT CHARS: %i/%i", letterCount, MAX_INPUT_CHARS), 515, 600, 20, DARKGRAY);
+        DrawText(TextFormat("INPUT CHARS: %i/%i", letterCount, MAX_INPUT_CHARS), 320, 550, 20, DARKGRAY);
+        DrawTextEx(boldPoppins, "Press Enter to continue", Vector2{ 480, 660 }, 50, 5, WHITE);
 
+        if (IsKeyPressed(KEY_ENTER))
+        {
+
+            break;
+        }
         EndDrawing();
     }
 
