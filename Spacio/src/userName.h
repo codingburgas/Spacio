@@ -1,4 +1,4 @@
 #pragma once
 #include "pch.h"
 
-void userName();
+void userName(int pick);

@@ -16,7 +16,7 @@ void cursor(Rectangle buttonYes, Rectangle buttonNo)
 void Quiz()
 {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
-   
+    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
     Texture2D background = LoadTexture("../assets/images/readyForBackground.png");
 
@@ -34,7 +34,7 @@ void Quiz()
 
         DrawTexture(background, 0, 0, RAYWHITE);
 
-        DrawText("Are you ready for a quiz", 500, 50, 35, LIGHTGRAY);
+        DrawTextEx(boldPoppins, "Are you ready for a quiz", Vector2(500, 50), 40, 5, LIGHTGRAY);
 
         EndDrawing();
     }
