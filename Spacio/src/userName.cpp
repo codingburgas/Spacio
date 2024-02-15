@@ -17,9 +17,6 @@ void userName(int pick) {
 
     while (!WindowShouldClose())
     {
-
-<<<<<<< HEAD
-=======
         if (CheckCollisionPointRec(GetMousePosition(), inputBox)) mouseOnText = true;
         else mouseOnText = false;
 
@@ -45,15 +42,14 @@ void userName(int pick) {
 
         std::string userNameStr(name);
 
->>>>>>> 137c4f173466dd3aa6042dfa337c7c5a19703d0a
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
 
-<<<<<<< HEAD
+
         DrawText("Test", 190, 200, 20, LIGHTGRAY);
         DrawTexture(background, 0, 0, RAYWHITE);
-=======
+
         DrawTexture(background, 0, 0, RAYWHITE);
         DrawTextEx(boldPoppins, "What's your name", Vector2(480, 190), 60, 5, RAYWHITE);
 
@@ -68,7 +64,6 @@ void userName(int pick) {
         DrawTextEx(boldPoppins, name, Vector2(textX, textY), 100, 5, RAYWHITE);
 
         DrawTextEx(Poppins, "Press Enter to continue", Vector2(445, 580), 50, 5, GetColor(0xBABABAff));
->>>>>>> 137c4f173466dd3aa6042dfa337c7c5a19703d0a
 
         EndDrawing();
 
@@ -81,20 +76,16 @@ void userName(int pick) {
             }
             else if (pick == 2)
             {
-<<<<<<< HEAD
-                particlePick();
-=======
+
                 particlePick(userNameStr);
->>>>>>> 137c4f173466dd3aa6042dfa337c7c5a19703d0a
+
                 break;
             }
             else if (pick == 3)
             {
-<<<<<<< HEAD
+
                 Quiz();
-=======
-                readyForQuiz();
->>>>>>> 137c4f173466dd3aa6042dfa337c7c5a19703d0a
+
                 break;
             }
         }
