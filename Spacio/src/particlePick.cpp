@@ -23,7 +23,7 @@ void mouseCursorParticles(Rectangle masslessParticle, Rectangle massParticle)
     }
 }
 
-void particlePick() {
+void particlePick(std::string userNameStr) {
 	Texture2D background = LoadTexture("../assets/images/chooseParticleBg.png");
 	
 
