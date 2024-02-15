@@ -34,7 +34,7 @@ void Quiz()
 
         DrawTexture(background, 0, 0, RAYWHITE);
 
-        DrawTextEx(boldPoppins, "Are you ready for a quiz", Vector2(500, 50), 40, 5, LIGHTGRAY);
+        DrawTextEx(boldPoppins, "Are you ready for a quiz", Vector2(500, 50), 50, 5, LIGHTGRAY);
 
         EndDrawing();
     }

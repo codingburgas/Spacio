@@ -55,7 +55,11 @@ void userConfirm(int pick)
         else if (IsKeyPressed(KEY_THREE))
         {
             pick = 3;
+<<<<<<< HEAD
             Quiz();
+=======
+            userName(pick);
+>>>>>>> 137c4f173466dd3aa6042dfa337c7c5a19703d0a
             break;
         }
 
