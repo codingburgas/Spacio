@@ -51,7 +51,7 @@ void userConfirm(int pick)
         }
         else if (IsKeyPressed(KEY_THREE))
         {
-            readyForQuiz();
+            Quiz();
             break;
         }
 
