@@ -37,21 +37,25 @@ void userConfirm(int pick)
 
         if (IsKeyPressed(KEY_ENTER))
         {
+            userName(pick);
             break;
         }
         else if (IsKeyPressed(KEY_ONE))
         {
-            getStation();
+            pick = 1;
+            userName(pick);
             break;
         }
         else if (IsKeyPressed(KEY_TWO))
         {
-
+            pick = 2;
+            userName(pick);
             break;
         }
         else if (IsKeyPressed(KEY_THREE))
         {
-            readyForQuiz();
+            pick = 3;
+            userName(pick);
             break;
         }
 
