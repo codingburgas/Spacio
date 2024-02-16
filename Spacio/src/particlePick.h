@@ -1,4 +1,4 @@
 #pragma once
 #include "pch.h"
 
-void particlePick();
+void particlePick(std::string name);

@@ -1,4 +1,6 @@
 #pragma once
 #include "pch.h"
 
-void readyForQuiz();
+void cursor(Rectangle buttonYes, Rectangle buttonNo);
+
+void Quiz();

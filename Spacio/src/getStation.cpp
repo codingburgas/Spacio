@@ -60,16 +60,12 @@ void getStation() {
         DrawText(TextFormat("INPUT CHARS: %i/%i", letterCount, MAX_INPUT_CHARS), 320, 550, 20, DARKGRAY);
         DrawTextEx(boldPoppins, "Press Enter to continue", Vector2{ 480, 660 }, 50, 5, WHITE);
 
+        EndDrawing();
+
         if (IsKeyPressed(KEY_ENTER))
         {
-
+            pickPlanet();
             break;
         }
-        EndDrawing();
     }
-
-    // Unload resources if needed
-    UnloadTexture(background);
-    UnloadFont(Poppins);
-    UnloadFont(boldPoppins);
 }

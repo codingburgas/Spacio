@@ -55,7 +55,9 @@ void userConfirm(int pick)
         else if (IsKeyPressed(KEY_THREE))
         {
             pick = 3;
-            userName(pick);
+
+            Quiz();
+
             break;
         }
 
