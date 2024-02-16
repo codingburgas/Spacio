@@ -15,6 +15,8 @@ void userName(int pick) {
     bool mouseOnText = false;
     int framesCounter = 0;
 
+    SetMouseCursor(MOUSE_CURSOR_ARROW);
+
     while (!WindowShouldClose())
     {
         if (CheckCollisionPointRec(GetMousePosition(), inputBox)) mouseOnText = true;
