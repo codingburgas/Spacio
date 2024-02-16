@@ -163,6 +163,7 @@
     <ClInclude Include="src\mainMenu.h" />
     <ClInclude Include="src\particlePick.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\pickPlanet.h" />
     <ClInclude Include="src\questions.h" />
     <ClInclude Include="src\readyForQuiz.h" />
     <ClInclude Include="src\userConfirm.h" />
