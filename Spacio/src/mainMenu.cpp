@@ -9,6 +9,5 @@ void mainMenu()
 
     SetTargetFPS(60);
 
-    pickPlanet();
-    /*intro();*/
+    intro();
 }
