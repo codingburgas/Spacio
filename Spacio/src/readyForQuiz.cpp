@@ -1,4 +1,5 @@
 #include "readyForQuiz.h"
+int pick;
 
 void readyForQuiz()
 {
@@ -30,10 +31,10 @@ void readyForQuiz()
         DrawRectangleRec(buttonNo, GetColor(0x312b4700));
 
         if (CheckCollisionPointRec(GetMousePosition(), buttonYes) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            getStation();
+            gameQuiz();
         }
         else if (CheckCollisionPointRec(GetMousePosition(), buttonNo) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            getStation();
+            userConfirm(pick);
         }
 
         EndDrawing();
