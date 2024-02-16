@@ -13,6 +13,7 @@
     <ClCompile Include="src\getStation.cpp" />
     <ClCompile Include="src\userName.cpp" />
     <ClCompile Include="src\pickPlanet.cpp" />
+    <ClCompile Include="src\gameQuiz.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\characterPick.h" />
@@ -27,5 +28,6 @@
     <ClInclude Include="src\userConfirm.h" />
     <ClInclude Include="src\userName.h" />
     <ClInclude Include="src\pickPlanet.h" />
+    <ClInclude Include="src\gameQuiz.h" />
   </ItemGroup>
 </Project>
