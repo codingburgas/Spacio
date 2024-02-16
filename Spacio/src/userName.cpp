@@ -17,7 +17,6 @@ void userName(int pick) {
 
     while (!WindowShouldClose())
     {
-
         if (CheckCollisionPointRec(GetMousePosition(), inputBox)) mouseOnText = true;
         else mouseOnText = false;
 
@@ -47,6 +46,10 @@ void userName(int pick) {
 
         ClearBackground(RAYWHITE);
 
+
+        DrawText("Test", 190, 200, 20, LIGHTGRAY);
+        DrawTexture(background, 0, 0, RAYWHITE);
+
         DrawTexture(background, 0, 0, RAYWHITE);
         DrawTextEx(boldPoppins, "What's your name", Vector2(480, 190), 60, 5, RAYWHITE);
 
@@ -73,12 +76,16 @@ void userName(int pick) {
             }
             else if (pick == 2)
             {
+
                 particlePick(userNameStr);
+
                 break;
             }
             else if (pick == 3)
             {
-                readyForQuiz();
+
+                Quiz();
+
                 break;
             }
         }
