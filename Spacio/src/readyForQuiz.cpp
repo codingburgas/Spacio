@@ -9,8 +9,8 @@ void Quiz()
     Texture2D starYes = LoadTexture("../assets/images/starYes.png");
     Texture2D starNo = LoadTexture("../assets/images/starNo.png");
 
-    Rectangle buttonYes = { 800, 150, 384, 414 };
-    Rectangle buttonNo = { 800, 450, 384, 414 };
+    Rectangle buttonYes = { 850, 170, 300, 300 };
+    Rectangle buttonNo = { 850, 500, 300, 300 };
 
     while (!WindowShouldClose())
     {
@@ -26,14 +26,12 @@ void Quiz()
         DrawRectangleRec(buttonYes, GetColor(0x312b4700));
         DrawRectangleRec(buttonNo, GetColor(0x312b4700));
 
-        void mouseCursorOnRectangle(Rectangle buttonYes, Rectangle buttonNo);
-
         DrawTextEx(boldPoppins, "Are you ready for a quiz?", Vector2(450, 50), 50, 5, WHITE);
 
-        if (CheckCollisionPointRec(GetMousePosition(), buttonYes)) {
+        if (CheckCollisionPointRec(GetMousePosition(), buttonYes) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             getStation();
         }
-        else if (CheckCollisionPointRec(GetMousePosition(), buttonNo)) {
+        else if (CheckCollisionPointRec(GetMousePosition(), buttonNo) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             getStation();
         }
 
