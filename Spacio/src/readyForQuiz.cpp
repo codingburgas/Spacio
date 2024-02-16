@@ -1,18 +1,5 @@
 #include "readyForQuiz.h"
 
-void cursor(Rectangle buttonYes, Rectangle buttonNo)
-{
-    if (CheckCollisionPointRec(GetMousePosition(), buttonYes)) {
-        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-    }
-    else if (CheckCollisionPointRec(GetMousePosition(), buttonNo)) {
-        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-    }
-    else {
-        SetMouseCursor(MOUSE_CURSOR_ARROW);
-    }
-}
-
 void Quiz()
 {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
@@ -22,15 +9,13 @@ void Quiz()
     Texture2D starYes = LoadTexture("../assets/images/starYes.png");
     Texture2D starNo = LoadTexture("../assets/images/starNo.png");
 
-    Rectangle buttonYes = { 648, 500, 150, 40 };
-    Rectangle ButtonNo = { 648, 580, 180, 40 };
+    Rectangle buttonYes = { 800, 150, 384, 414 };
+    Rectangle buttonNo = { 800, 450, 384, 414 };
 
     while (!WindowShouldClose())
     {
 
         BeginDrawing();
-
-        void cursor(Rectangle buttonYes, Rectangle buttonNo);
 
         ClearBackground(RAYWHITE);
 
@@ -38,7 +23,19 @@ void Quiz()
         DrawTexture(starYes, 800, 150, RAYWHITE);
         DrawTexture(starNo, 800, 450, RAYWHITE);
 
-        DrawTextEx(boldPoppins, "Are you ready for a quiz", Vector2(450, 50), 50, 5, WHITE);
+        DrawRectangleRec(buttonYes, GetColor(0x312b4700));
+        DrawRectangleRec(buttonNo, GetColor(0x312b4700));
+
+        void mouseCursorOnRectangle(Rectangle buttonYes, Rectangle buttonNo);
+
+        DrawTextEx(boldPoppins, "Are you ready for a quiz?", Vector2(450, 50), 50, 5, WHITE);
+
+        if (CheckCollisionPointRec(GetMousePosition(), buttonYes)) {
+            getStation();
+        }
+        else if (CheckCollisionPointRec(GetMousePosition(), buttonNo)) {
+            getStation();
+        }
 
         EndDrawing();
     }
