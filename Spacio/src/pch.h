@@ -12,3 +12,4 @@
 #include "particlePick.h"
 #include "userName.h"
 #include "readyForQuiz.h"
+#include "higgsFieldGame.h"

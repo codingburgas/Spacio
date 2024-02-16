@@ -62,4 +62,6 @@ void particlePick() {
 
         EndDrawing();
     }
+    UnloadTexture(background);
+    UnloadFont(Poppins);
 }
