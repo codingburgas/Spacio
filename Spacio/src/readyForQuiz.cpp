@@ -1,6 +1,6 @@
 #include "readyForQuiz.h"
 
-void Quiz()
+void readyForQuiz()
 {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
@@ -20,13 +20,14 @@ void Quiz()
         ClearBackground(RAYWHITE);
 
         DrawTexture(background, 0, 0, RAYWHITE);
+        
+        DrawTextEx(boldPoppins, "Are you ready for a quiz?", Vector2(450, 50), 50, 5, WHITE);
+        
         DrawTexture(starYes, 800, 150, RAYWHITE);
         DrawTexture(starNo, 800, 450, RAYWHITE);
 
         DrawRectangleRec(buttonYes, GetColor(0x312b4700));
         DrawRectangleRec(buttonNo, GetColor(0x312b4700));
-
-        DrawTextEx(boldPoppins, "Are you ready for a quiz?", Vector2(450, 50), 50, 5, WHITE);
 
         if (CheckCollisionPointRec(GetMousePosition(), buttonYes) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             getStation();

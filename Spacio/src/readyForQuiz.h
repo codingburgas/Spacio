@@ -1,4 +1,4 @@
 #pragma once
 #include "pch.h"
 
-void Quiz();
+void readyForQuiz();

@@ -84,7 +84,7 @@ void userName(int pick) {
             else if (pick == 3)
             {
 
-                Quiz();
+                readyForQuiz();
 
                 break;
             }
