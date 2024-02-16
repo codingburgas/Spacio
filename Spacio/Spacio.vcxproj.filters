@@ -12,6 +12,7 @@
     <ClCompile Include="src\userConfirm.cpp" />
     <ClCompile Include="src\getStation.cpp" />
     <ClCompile Include="src\userName.cpp" />
+    <ClCompile Include="src\pickPlanet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\characterPick.h" />

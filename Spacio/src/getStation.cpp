@@ -64,6 +64,7 @@ void getStation() {
 
         if (IsKeyPressed(KEY_ENTER))
         {
+            pickPlanet();
             break;
         }
     }
