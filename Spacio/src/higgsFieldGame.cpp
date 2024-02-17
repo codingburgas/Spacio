@@ -9,6 +9,18 @@ void HiggsFieldGame(bool hasMass) {
 	Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, 0, 0);
 	Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 500, 0, 0);
 
+    const int verticalStep = 84;
+    const int lowest = 707;
+    const int highest = 539;
+    const int leftStart = -1272;
+    const int rightEnd = -60;
+    int particleVertical = 707;
+    int particleHorizontal = -1272;
+
+    if (hasMass){
+        particleVertical -= verticalStep;
+    }
+
     while (!WindowShouldClose())
     {
 
@@ -20,7 +32,17 @@ void HiggsFieldGame(bool hasMass) {
         DrawTextEx(boldPoppins, "Speed:", Vector2(117, 140), 48, 5, WHITE);
         DrawTextEx(boldPoppins, "Lorem ipsum dolor sit amet", Vector2(665, 59), 40, 5, WHITE);
 
-        DrawTexture(particle, -1272, 707, RAYWHITE);
+        if (IsKeyPressed(KEY_UP)) {
+            particleVertical -= verticalStep;
+        }
+        if (IsKeyPressed(KEY_DOWN)) {
+            particleVertical += verticalStep;
+        }
+
+        particleVertical = std::max(particleVertical, highest);
+        particleVertical = std::min(particleVertical, lowest);
+
+        DrawTexture(particle, particleHorizontal, particleVertical, RAYWHITE);
 
         ClearBackground(RAYWHITE);
 
