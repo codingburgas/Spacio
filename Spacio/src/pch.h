@@ -14,3 +14,4 @@
 #include "readyForQuiz.h"
 #include "higgsFieldGame.h"
 #include "pickPlanet.h"
+#include "gameQuiz.h"

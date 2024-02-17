@@ -1,8 +1,6 @@
 #include "getStation.h"
 #include <iostream>
 
-#define MAX_INPUT_CHARS     15
-
 void getStation() {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
@@ -10,7 +8,8 @@ void getStation() {
 
 
     Rectangle textBox = { 320, 420, 860, 120 };
-    char name[MAX_INPUT_CHARS + 1] = "\0";
+    const int maxChars = 15;
+    char name[maxChars + 1] = "\0";
     int letterCount = 0;
     bool mouseOnText = false;
     int framesCounter = 0;
@@ -24,7 +23,7 @@ void getStation() {
 
             int key = GetCharPressed();
             while (key > 0) {
-                if ((key >= 32) && (key <= 125) && (letterCount < MAX_INPUT_CHARS)) {
+                if ((key >= 32) && (key <= 125) && (letterCount < maxChars)) {
                     name[letterCount] = (char)key;
                     name[letterCount + 1] = '\0';
                     letterCount++;
@@ -50,14 +49,13 @@ void getStation() {
         if (mouseOnText) DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, PURPLE);
         else DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, DARKGRAY);
 
-        // Calculate the position to center the text
         int textWidth = MeasureText(name, 100);
         int textX = textBox.x + (textBox.width - textWidth) / 2;
         int textY = textBox.y + (textBox.height - 100) / 2;
 
         DrawText(name, textX, textY, 100, DARKPURPLE);
 
-        DrawText(TextFormat("INPUT CHARS: %i/%i", letterCount, MAX_INPUT_CHARS), 320, 550, 20, DARKGRAY);
+        DrawText(TextFormat("INPUT CHARS: %i/%i", letterCount, maxChars), 320, 550, 20, DARKGRAY);
         DrawTextEx(boldPoppins, "Press Enter to continue", Vector2{ 480, 660 }, 50, 5, WHITE);
 
         EndDrawing();

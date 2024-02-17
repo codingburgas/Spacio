@@ -15,6 +15,8 @@ void userName(int pick) {
     bool mouseOnText = false;
     int framesCounter = 0;
 
+    SetMouseCursor(MOUSE_CURSOR_ARROW);
+
     while (!WindowShouldClose())
     {
         if (CheckCollisionPointRec(GetMousePosition(), inputBox)) mouseOnText = true;
@@ -84,7 +86,7 @@ void userName(int pick) {
             else if (pick == 3)
             {
 
-                Quiz();
+                readyForQuiz();
 
                 break;
             }
