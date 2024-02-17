@@ -1,5 +1,7 @@
 #include "pickPlanet.h"
 
+int chosenPlanetIndex = -1;
+
 void ObjectsDraw(Texture2D sun, Texture2D mercury, Texture2D venus, Texture2D earth, Texture2D mars, Texture2D jupiter, Texture2D saturn, Texture2D uranus, Texture2D neptune, bool objectClicked[9], bool& madeChoice) {
     for (int i = 0; i < 9; i++) {
         switch (i) {
@@ -30,6 +32,7 @@ void ObjectsDraw(Texture2D sun, Texture2D mercury, Texture2D venus, Texture2D ea
         if (CheckCollisionPointRec(GetMousePosition(), objectRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             objectClicked[i] = true;
             madeChoice = true;
+            chosenPlanetIndex = i;
         }
 
     }
@@ -68,6 +71,7 @@ void pickPlanet()
 
         if (madeChoice)
         {
+            planetGame();
             break;
         }
 

@@ -151,6 +151,7 @@
     <ClCompile Include="src\mainMenu.cpp" />
     <ClCompile Include="src\particlePick.cpp" />
     <ClCompile Include="src\pickPlanet.cpp" />
+    <ClCompile Include="src\planetGame.cpp" />
     <ClCompile Include="src\questions.cpp" />
     <ClCompile Include="src\readyForQuiz.cpp" />
     <ClCompile Include="src\userConfirm.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="src\particlePick.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\pickPlanet.h" />
+    <ClInclude Include="src\planetGame.h" />
     <ClInclude Include="src\questions.h" />
     <ClInclude Include="src\readyForQuiz.h" />
     <ClInclude Include="src\userConfirm.h" />
