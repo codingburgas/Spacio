@@ -149,6 +149,7 @@
     <ClCompile Include="src\intro.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mainMenu.cpp" />
+    <ClCompile Include="src\natureScript.cpp" />
     <ClCompile Include="src\particlePick.cpp" />
     <ClCompile Include="src\pickPlanet.cpp" />
     <ClCompile Include="src\planetGame.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="src\higgsFieldGame.h" />
     <ClInclude Include="src\intro.h" />
     <ClInclude Include="src\mainMenu.h" />
+    <ClInclude Include="src\natureScript.h" />
     <ClInclude Include="src\particlePick.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\pickPlanet.h" />

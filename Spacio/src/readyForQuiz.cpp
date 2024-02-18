@@ -1,6 +1,19 @@
 #include "readyForQuiz.h"
 int pick;
 
+void Cursor(Rectangle buttonYes, Rectangle buttonNo)
+{
+    if (CheckCollisionPointRec(GetMousePosition(), buttonYes)) {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+    }
+    else SetMouseCursor(MOUSE_CURSOR_ARROW);
+
+    if (CheckCollisionPointRec(GetMousePosition(), buttonNo)) {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+    }
+}
+
+
 void readyForQuiz()
 {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
@@ -31,7 +44,7 @@ void readyForQuiz()
         DrawRectangleRec(buttonNo, GetColor(0x312b4700));
 
         if (CheckCollisionPointRec(GetMousePosition(), buttonYes) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            gameQuiz();
+            natureScript();
         }
         else if (CheckCollisionPointRec(GetMousePosition(), buttonNo) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             userConfirm(pick);

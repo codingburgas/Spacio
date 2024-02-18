@@ -14,7 +14,11 @@
     <ClCompile Include="src\userName.cpp" />
     <ClCompile Include="src\pickPlanet.cpp" />
     <ClCompile Include="src\gameQuiz.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="src\natureScript.cpp" />
+=======
     <ClCompile Include="src\planetGame.cpp" />
+>>>>>>> 90f427fae34be34ee3e8f688c99bf4af988c09a5
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\characterPick.h" />
@@ -30,6 +34,10 @@
     <ClInclude Include="src\userName.h" />
     <ClInclude Include="src\pickPlanet.h" />
     <ClInclude Include="src\gameQuiz.h" />
+<<<<<<< HEAD
+    <ClInclude Include="src\natureScript.h" />
+=======
     <ClInclude Include="src\planetGame.h" />
+>>>>>>> 90f427fae34be34ee3e8f688c99bf4af988c09a5
   </ItemGroup>
 </Project>

@@ -15,4 +15,5 @@
 #include "higgsFieldGame.h"
 #include "pickPlanet.h"
 #include "gameQuiz.h"
+#include "natureScript.h"
 #include "planetGame.h"
