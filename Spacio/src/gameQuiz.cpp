@@ -1,4 +1,5 @@
 #include "gameQuiz.h"
+#include <iostream>
 
 void gameQuiz()
 {
@@ -18,7 +19,7 @@ void gameQuiz()
     Texture2D background = LoadTexture("../assets/images/gameQuiz.png");
     Texture2D blackHole = LoadTexture("../assets/images/blackHole.png");
     Texture2D spaceShip = LoadTexture("../assets/images/rocket.png");
-    Texture2D footprints = LoadTexture("../assets/images/sledi.png");
+    Texture2D tracks = LoadTexture("../assets/images/tracks.png");
 
     const char* questions[8] = { "What is dark matter?",
     "How do black holes form?", "What role do magnetic fields play in shaping celestial bodies in space?",
@@ -64,11 +65,17 @@ void gameQuiz()
 
         DrawTexture(blackHole, 900, 50, RAYWHITE);
         DrawTexture(spaceShip, 250, 250, RAYWHITE);
-        DrawTexture(footprints, 50, 300, RAYWHITE);
+        DrawTexture(tracks, 50, 300, RAYWHITE);
 
         DrawRectangleRec(answer1, GetColor(342245));
+        DrawTextEx(boldPoppins, rightAnswers[questionCounter], Vector2{ 665, 500 }, 40, 5, WHITE);
+
         DrawRectangleRec(answer2, GetColor(342245));
+        DrawTextEx(boldPoppins, rightAnswers[questionCounter], Vector2{ 665, 500 }, 40, 5, WHITE);
+
         DrawRectangleRec(answer3, GetColor(342245));
+        DrawTextEx(boldPoppins, rightAnswers[questionCounter], Vector2{ 665, 500 }, 40, 5, WHITE);
+
 
         DrawTextEx(boldPoppins, questions[questionCounter], Vector2(450, 50), 50, 5, WHITE);
 
