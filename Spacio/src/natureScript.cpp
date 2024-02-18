@@ -40,6 +40,7 @@ void natureScript()
          DrawTexture(images[current],100, 250, WHITE);
 
          DrawTextEx(boldPoppins, script[counter], Vector2{ 665, 400 }, 40, 5, WHITE);
+         DrawTextEx(boldPoppins, "Press Enter to continue!", Vector2{900, 800}, 40, 5, DARKGRAY);
          
          if (IsKeyPressed(KEY_ENTER))
          {
