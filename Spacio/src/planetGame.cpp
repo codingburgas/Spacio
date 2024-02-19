@@ -293,6 +293,7 @@ void planetGame() {
                     okTextShown = true;
                 }
             }
+<<<<<<< HEAD
             else { 
 
                     if (badGuysLeftX < 0) {
@@ -352,6 +353,9 @@ void planetGame() {
                 }
             }
             else {
+=======
+            else{
+>>>>>>> e550e52196dddca8378b5844ab0529c0834beea4
                 frameCounter++;
                 if (frameCounter > firstTextDuration) {
                     DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
