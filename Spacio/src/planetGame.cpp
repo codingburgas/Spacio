@@ -79,7 +79,7 @@ void planetGame() {
                     okTextShown = true;
                 }
             }
-            else if{
+            else{
                 frameCounter++;
                 if (frameCounter > firstTextDuration) {
                     DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
