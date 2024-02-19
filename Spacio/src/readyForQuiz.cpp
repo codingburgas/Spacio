@@ -43,8 +43,10 @@ void readyForQuiz()
         DrawRectangleRec(buttonYes, GetColor(0x312b4700));
         DrawRectangleRec(buttonNo, GetColor(0x312b4700));
 
+        void Cursor(Rectangle buttonYes, Rectangle buttonNo);
+
         if (CheckCollisionPointRec(GetMousePosition(), buttonYes) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            natureScript();
+            gameQuiz();
         }
         else if (CheckCollisionPointRec(GetMousePosition(), buttonNo) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             userConfirm(pick);
