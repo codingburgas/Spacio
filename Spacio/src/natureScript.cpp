@@ -48,11 +48,19 @@ void natureScript()
              current = (current + 1) % (sizeof(images) / sizeof(images[0]));
          }
 
+         if (counter == 8)
+         {
+             readyForQuiz();
+             break;
+
+         }
+
+
          EndDrawing();
     }
 
     for (int i = 0; i < sizeof(images) / sizeof(images[0]); i++) {
         UnloadTexture(images[i]);
     }
-
+    
 }

@@ -3,12 +3,11 @@
 
 void gameQuiz()
 {
-	Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
-	Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
+    Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
+    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
-    Rectangle answer1 = { 500, 600, 400, 50 };
-    Rectangle answer2 = { 500, 700, 400, 50 };
-    Rectangle answer3 = { 500, 800, 400, 50 };
+    Vector2 position = { 250, 300 };
+    Vector2 velocity = { 200, 0};
 
     bool answer1Clicked = false;
     bool answer2Clicked = false;
@@ -19,33 +18,41 @@ void gameQuiz()
     Texture2D background = LoadTexture("../assets/images/gameQuiz.png");
     Texture2D blackHole = LoadTexture("../assets/images/blackHole.png");
     Texture2D spaceShip = LoadTexture("../assets/images/rocket.png");
-    Texture2D tracks = LoadTexture("../assets/images/tracks.png");
 
-    std::string questions[8] = { "What is dark matter?",
+    const char* questions[8] = { "What is dark matter?",
     "How do black holes form?", "What role do magnetic\nfields play in shaping\ncelestial bodies in space?",
     "How do astronomers detect\nand study exoplanets?", "What is cosmic microwave\nbackground radiation?",
     "How do gravitational\nwaves offer new insights\ninto astronomical phenomena?",
     "What is dark energy?", "How do phenomena like\nsupernovas impact the\ncomposition of galaxies\nand the formation of elements?"
     };
 
-    std::string rightAnswers[8] = {"Invisible, mysterious mass.", "Star collapse, supernova.",
+    const char* rightAnswers[8] = { "Invisible, mysterious mass.", "Star collapse, supernova.",
     "Guidance, alignment, protection.", "Observation, instruments, analysis.", "Ancient light echo.",
     "Space-time ripples, observations.", "Unknown cosmic force.", "Heavy element production."
     };
 
-    std::string wrongAnswers1[8] = {"Cosmic invisible shadows.", "Galactic phantom substance.",
+    const char* wrongAnswers1[8] = { "Cosmic invisible shadows.", "Galactic phantom substance.",
     "Cosmic doughnuts emerge.", "Stellar confetti formation.", "Celestial body puppetry.", "Galactic hairdressers' influence.",
     "Psychic star-gazing.", "Tea leag reading."
     };
 
-    std::string wrongAnswers2[8] = {
+    const char* wrongAnswers2[8] = {
         "Galactic disco glow.", "Microwave oven residue.", "Alien dance signals.",
-        "Celestial taco waves.", "Galactic happiness field.", "Cosmic rainbow essence.", 
+        "Celestial taco waves.", "Galactic happiness field.", "Cosmic rainbow essence.",
         "Celestial spice mixing.", "Galactic confetti party."
     };
 
     int num = GetRandomValue(0, 2);
     int questionCounter = 0;
+    
+    bool moveOnce = true;
+    Vector2 targetPosition = {400, 400};
+
+    Rectangle answer1 = { 270, 600, 830, 50 };
+    Rectangle answer2 = { 270, 700, 830, 50 };
+    Rectangle answer3 = { 270, 800, 830, 50 };
+
+    SetTextLineSpacing(45);
 
     while (!WindowShouldClose())
     {
@@ -57,40 +64,68 @@ void gameQuiz()
         DrawTexture(background, 0, 0, RAYWHITE);
 
         DrawTexture(blackHole, 900, 50, RAYWHITE);
-        DrawTexture(spaceShip, 250, 250, RAYWHITE);
-        DrawTexture(tracks, 50, 300, RAYWHITE);
+        DrawTexture(spaceShip, position.x, 250, RAYWHITE);
 
-        DrawTextEx(boldPoppins, questions[questionCounter].c_str(), Vector2(500, 50), 50, 5, WHITE);
+        int textWidthQ = MeasureText(questions[questionCounter], 50);
+        int xPosQ = (1440 - textWidthQ) / 2;
+
+        int textWidthR = MeasureText(rightAnswers[questionCounter], 50);
+        int xPosR = (1440 - textWidthR) / 2;
+
+        int textWidthW1 = MeasureText(wrongAnswers1[questionCounter], 50);
+        int xPosW1 = (1440 - textWidthW1) / 2;
+
+        int textWidthW2 = MeasureText(wrongAnswers2[questionCounter], 50);
+        int xPosW2 = (1440 - textWidthW2) / 2;
+
         
-        DrawRectangleRec(answer1, GetColor(0x312b4700));
-        DrawRectangleRec(answer2, GetColor(0x312b4700));
-        DrawRectangleRec(answer3, GetColor(0x312b4700));
+        DrawTextEx(boldPoppins, questions[questionCounter], Vector2(xPosQ, 50), 50, 5, WHITE);
+        DrawRectangleRec(answer1, DARKPURPLE);
+        DrawRectangleRec(answer2, DARKPURPLE);
+        DrawRectangleRec(answer3, DARKPURPLE);
 
         if (num == 0)
         {
-            DrawTextEx(boldPoppins, rightAnswers[questionCounter].c_str(), Vector2(500, 600), 50, 5, WHITE);
-            DrawTextEx(boldPoppins, wrongAnswers1[questionCounter].c_str(), Vector2(500, 700), 50, 5, WHITE);
-            DrawTextEx(boldPoppins, wrongAnswers2[questionCounter].c_str(), Vector2(500, 800), 50, 5, WHITE);
+            DrawTextEx(boldPoppins, rightAnswers[questionCounter], Vector2(xPosR, 600), 50, 5, WHITE);
+            DrawTextEx(boldPoppins, wrongAnswers1[questionCounter], Vector2(xPosW1, 700), 50, 5, WHITE);
+            DrawTextEx(boldPoppins, wrongAnswers2[questionCounter], Vector2(xPosW2, 800), 50, 5, WHITE);
 
-            if ((CheckCollisionPointRec(GetMousePosition(), answer2) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) || (CheckCollisionPointRec(GetMousePosition(), answer3) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)))
-            {
-                wrongCounter++;
-                DrawTexture(spaceShip, 450, 250, RAYWHITE);
-            }
+            if (CheckCollisionPointRec(GetMousePosition(), answer2) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || CheckCollisionPointRec(GetMousePosition(), answer3) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+          
+                position.x += velocity.x;
+            if ((velocity.x > 0 && position.x > targetPosition.x) || (velocity.x < 0 && position.x < targetPosition.x)) {
+                moveOnce = false;
+                wrongCounter += 1; 
+            }  
+                   
         }
 
         if (num == 1)
         {
-            DrawTextEx(boldPoppins, wrongAnswers1[questionCounter].c_str(), Vector2(500, 600), 50, 5, WHITE);
-            DrawTextEx(boldPoppins, rightAnswers[questionCounter].c_str(), Vector2(500, 700), 50, 5, WHITE);
-            DrawTextEx(boldPoppins, wrongAnswers2[questionCounter].c_str(), Vector2(500, 800), 50, 5, WHITE);
+            DrawTextEx(boldPoppins, wrongAnswers1[questionCounter], Vector2(xPosW1, 600), 50, 5, WHITE);
+            DrawTextEx(boldPoppins, rightAnswers[questionCounter], Vector2(xPosR, 700), 50, 5, WHITE);
+            DrawTextEx(boldPoppins, wrongAnswers2[questionCounter], Vector2(xPosW2, 800), 50, 5, WHITE);
+
+            if (CheckCollisionPointRec(GetMousePosition(), answer1) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || CheckCollisionPointRec(GetMousePosition(), answer3) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                position.x += velocity.x;
+            if ((velocity.x > 0 && position.x > targetPosition.x) || (velocity.x < 0 && position.x < targetPosition.x)) {
+                moveOnce = false;
+                wrongCounter += 1;
+            }
         }
 
         if (num == 2)
         {
-            DrawTextEx(boldPoppins, wrongAnswers1[questionCounter].c_str(), Vector2(500, 600), 50, 5, WHITE);
-            DrawTextEx(boldPoppins, wrongAnswers2[questionCounter].c_str(), Vector2(500, 700), 50, 5, WHITE);
-            DrawTextEx(boldPoppins, rightAnswers[questionCounter].c_str(), Vector2(500, 800), 50, 5, WHITE);
+            DrawTextEx(boldPoppins, wrongAnswers1[questionCounter], Vector2(xPosW1, 600), 50, 5, WHITE);
+            DrawTextEx(boldPoppins, wrongAnswers2[questionCounter], Vector2(xPosW2, 700), 50, 5, WHITE);
+            DrawTextEx(boldPoppins, rightAnswers[questionCounter], Vector2(xPosR, 800), 50, 5, WHITE);
+
+            if (CheckCollisionPointRec(GetMousePosition(), answer1) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || CheckCollisionPointRec(GetMousePosition(), answer2) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                position.x += velocity.x;
+            if ((velocity.x > 0 && position.x > targetPosition.x) || (velocity.x < 0 && position.x < targetPosition.x)) {
+                moveOnce = false;
+                wrongCounter += 1;
+            }
         }
 
         if (answer1Clicked || answer2Clicked || answer3Clicked)
@@ -115,6 +150,12 @@ void gameQuiz()
         if (CheckCollisionPointRec(GetMousePosition(), answer3) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             answer3Clicked = true;
+        }
+
+        if (questionCounter == 8 || wrongCounter == 4)
+        {
+                readyForQuiz();
+                break;
         }
 
         EndDrawing();

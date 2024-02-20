@@ -86,8 +86,8 @@ void userName(int pick) {
             else if (pick == 3)
             {
 
-                readyForQuiz();
-
+                natureScript();
+                
                 break;
             }
         }
