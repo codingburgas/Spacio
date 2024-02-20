@@ -21,5 +21,12 @@ void endScreen() {
         ClearBackground(RAYWHITE);
 
         EndDrawing();
+
+        if (IsKeyPressed(KEY_SPACE))
+        {
+            intro();
+            break;
+        }
     }
+    
 }
