@@ -17,3 +17,4 @@
 #include "gameQuiz.h"
 #include "natureScript.h"
 #include "planetGame.h"
+#include "endScreen.h"

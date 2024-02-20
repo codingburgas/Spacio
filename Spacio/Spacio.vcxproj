@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\characterPick.cpp" />
+    <ClCompile Include="src\endScreen.cpp" />
     <ClCompile Include="src\gameQuiz.cpp" />
     <ClCompile Include="src\higgsFieldGame.cpp" />
     <ClCompile Include="src\intro.cpp" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\characterPick.h" />
+    <ClInclude Include="src\endScreen.h" />
     <ClInclude Include="src\gameQuiz.h" />
     <ClInclude Include="src\getStation.h" />
     <ClInclude Include="src\higgsFieldGame.h" />
