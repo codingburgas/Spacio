@@ -293,7 +293,6 @@ void planetGame() {
                     okTextShown = true;
                 }
             }
-<<<<<<< HEAD
             else { 
 
                     if (badGuysLeftX < 0) {
@@ -311,11 +310,11 @@ void planetGame() {
                         if (!dialogShown) {
                             DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
                             DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
-                                if (IsKeyPressed(KEY_ENTER)) {
-                                    dialogShown = true;
-                                }
+                            if (IsKeyPressed(KEY_ENTER)) {
+                                dialogShown = true;
+                            }
                         }
-                   
+
                         else if (!dialogShown2) {
                             DrawTextEx(Poppins, "You need to answer some questions if you want to survive...", Vector2(230, 400), 40, 2, RED);
 
@@ -325,7 +324,7 @@ void planetGame() {
                             }
                         }
 
-                    }
+                    };
 
                     
                     
@@ -353,9 +352,6 @@ void planetGame() {
                 }
             }
             else {
-=======
-            else{
->>>>>>> e550e52196dddca8378b5844ab0529c0834beea4
                 frameCounter++;
                 if (frameCounter > firstTextDuration) {
                     DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
