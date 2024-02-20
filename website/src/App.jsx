@@ -14,9 +14,9 @@ function App() {
           <img src={gradientCircleTopLeft} alt="Background gradient" className='top-0 absolute select-none'/>
       </div>
 
-      <div className="flex items-center text-white">
-        <img src={logo} alt="Spacio's logo" className="w-16 h-auto select-none z-0" />
-        <h2 className="ml-2 font-bold z-0">Spacio</h2>
+      <div className="flex items-center text-white cursor-pointer">
+        <img src={logo} alt="Spacio's logo" className="w-16 h-auto select-none z-0 ml-1" />
+        <h1 className="ml-3 font-bold z-0 text-2xl">Spacio</h1>
       </div>
         
       <div className='text-center my-40 mt-60 text-white'>
