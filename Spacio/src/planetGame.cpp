@@ -3,6 +3,9 @@
 void planetGame() {
     Texture2D background = LoadTexture("../assets/images/spaceGameBackground.png");
 
+    Rectangle left{ 120, 500, 480, 94 };
+    Rectangle right = { 800, 500, 480, 94 };
+
     Texture2D rocket = LoadTexture("../assets/images/rocket.png");
     Texture2D badGuysLeft = LoadTexture("../assets/images/badGuysLeft.png");
     Texture2D badGuysRight = LoadTexture("../assets/images/badGuysRight.png");
@@ -17,6 +20,20 @@ void planetGame() {
     Texture2D uranus = LoadTexture("../assets/images/objects/uranus.png");
     Texture2D neptune = LoadTexture("../assets/images/objects/neptune.png");
 
+    Texture2D starsRocket[3];
+    starsRocket[0]= LoadTexture("../assets/images/star.png");
+    starsRocket[1] = LoadTexture("../assets/images/star.png");
+    starsRocket[2] = LoadTexture("../assets/images/star.png");
+    Texture2D starsBadGuys[3];
+    starsBadGuys[0] = LoadTexture("../assets/images/star.png");
+    starsBadGuys[1] = LoadTexture("../assets/images/star.png");
+    starsBadGuys[2] = LoadTexture("../assets/images/star.png");
+    Texture2D deadStar = LoadTexture("../assets/images/deadStar.png");
+    Texture2D fireLeft = LoadTexture("../assets/images/fireLeft.png");
+    Texture2D fireRight = LoadTexture("../assets/images/fireRight.png");
+    Texture2D fireLeftWin = LoadTexture("../assets/images/fireLeftWin.png");
+    Texture2D fireRightWin = LoadTexture("../assets/images/fireRightWin.png");
+
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
@@ -27,12 +44,26 @@ void planetGame() {
     int firstTextDuration = 120;
     int frameCounter = 0;
     int posY = (GetScreenHeight() - mercury.height) / 5;
+    int wrongAnswerCounter = 0;
+    int rightAnswerCounter = 0;
+
 
     bool firstTextShown = false;
     bool dialogShown = false;
     bool dialogShown2 = false;
     bool okTextShown = false; 
-    // make info less
+    bool givenAnwerOne = false;
+    bool givenAnwerTwo = false;
+    bool givenAnwerThree = false;
+    bool givenAnwerFour = false;
+    bool givenAnwerFive = false;
+    bool givenAnwerSix = false;
+    bool quizGame = false;
+    bool correctAnswer = false;
+    bool wrongAnswer = false;
+
+    
+    
     const char* leftInformation[9] = {
     "Mass: 1.989 Ч 10^30 kilograms\n Diameter: Approximately 1.4 million km\nSurface temperature : Around 5,500 °C\nAge : Approximately 4.6 billion years\nComposition : Hydrogen(74 %) and helium (24 %) \nComposition : Hydrogen(74 %) and helium (24 %) \nLuminosity : Approximately 3.8 Ч 10 ^ 26 watts\nDistance from Earth : Between 147 and 152 million kilometers\nClass : G - type main - sequence star(G2V)",
     "Mass: 3.285 × 10^23 kilograms\nDiameter: Approximately 4,880 km\nSurface temperature: Between -173°C to 427°C\nAge: Approximately 4.5 billion years\nComposition: Mostly silicate rock and metals\nDistance from Sun: Between 46 and 70 million kilometers\nClass: Terrestrial planet",
@@ -256,6 +287,7 @@ void planetGame() {
         "Absorbs and releases sunlight",
         "Absorbs and releases sunlight",
     };
+    
 
     int infoCounter = 0;
 
@@ -270,6 +302,7 @@ void planetGame() {
         if (rocketY > GetScreenHeight() / 1.5) {
             rocketY -= 10;
         }
+
 
         DrawTexture(rocket, GetScreenWidth() / 2 - rocket.width / 2, rocketY, RAYWHITE);
 
@@ -320,14 +353,165 @@ void planetGame() {
 
                             if (IsKeyPressed(KEY_ENTER)) {
                                 dialogShown2 = true;
-                                dialogShown2 = true;
+
+                             
                             }
+                        } 
+                      
+                        
+
+                    }
+
+                   
+                    if (IsKeyPressed(KEY_ENTER)&& dialogShown2 == true) {
+                        givenAnwerOne = true;
+                        quizGame = true;
+
+                    }
+                    if (quizGame) {
+                        DrawTextureEx(starsRocket[0], Vector2(80, 790), 0, 0.15, RAYWHITE);
+                        DrawTextureEx(starsRocket[1], Vector2(160, 790), 0, 0.15, RAYWHITE);
+                        DrawTextureEx(starsRocket[2], Vector2(240, 790), 0, 0.15, RAYWHITE);
+
+                        DrawTextureEx(starsBadGuys[0], Vector2(880, 20), 0, 0.15, RAYWHITE);
+                        DrawTextureEx(starsBadGuys[1], Vector2(960, 20), 0, 0.15, RAYWHITE);
+                        DrawTextureEx(starsBadGuys[2], Vector2(1040, 20), 0, 0.15, RAYWHITE);
+                         if (givenAnwerOne) {
+                            DrawTextEx(Poppins, firstQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
+
+                            DrawRectangleRec(left, GetColor(0X2C2C2Cff));
+                            DrawTextEx(boldPoppins, wrongAnswer1[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
+
+                            DrawRectangleRec(right, GetColor(0X2C2C2Cff));
+                            DrawTextEx(boldPoppins, rightAnswer1[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
+                            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                                if (CheckCollisionPointRec(GetMousePosition(), left)) {
+                                    wrongAnswer = true;
+                                    wrongAnswerCounter++;
+                                    givenAnwerOne = false;
+                                    
+                                }
+                                if (CheckCollisionPointRec(GetMousePosition(), right)) {
+                                    correctAnswer = true;
+                                    rightAnswerCounter++;
+                                    givenAnwerOne = false;
+                                }
+                            }
+                           
+
+                           
                         }
+                         if (wrongAnswer) {
+                             DrawTexture(fireLeft, 380, 420, RAYWHITE);
+                             DrawTexture(fireRight, 820, 420, RAYWHITE);
+                             if (wrongAnswerCounter == 1) {
+                                 starsRocket[0] = deadStar;
+                           
 
-                    };
 
-                    
-                    
+
+                             }
+                             if (wrongAnswerCounter == 2) {
+                                 starsRocket[1] = deadStar;
+
+                             }
+                             if (wrongAnswerCounter == 3) {
+                                 starsRocket[2] = deadStar;
+
+                             }
+                             
+                         }
+                         if (correctAnswer) {
+                             DrawTexture(fireLeftWin, 380, 420, RAYWHITE);
+                             DrawTexture(fireRightWin, 820, 420, RAYWHITE);
+                             if (rightAnswerCounter == 1) {
+                                 starsBadGuys[0] = deadStar;
+
+
+                             }
+                             if (rightAnswerCounter == 2) {
+                                 starsBadGuys[1] = deadStar;
+
+                             }
+                             if (rightAnswerCounter == 3) {
+                                 starsBadGuys[2] = deadStar;
+                                
+
+                             }
+                         }
+                         /*
+                         if (IsKeyPressed(KEY_ENTER)&& givenAnwerOne == false) {
+                           
+                             givenAnwerTwo = true;
+                             
+                         }
+                         if (givenAnwerTwo) {
+                             DrawTextEx(Poppins, secondQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
+
+                             DrawRectangleRec(left, GetColor(0X2C2C2Cff));
+                             DrawTextEx(boldPoppins, wrongAnswer2[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
+
+                             DrawRectangleRec(right, GetColor(0X2C2C2Cff));
+                             DrawTextEx(boldPoppins, rightAnswer2[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
+                             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                                 if (CheckCollisionPointRec(GetMousePosition(), left)) {
+                                     wrongAnswer = true;
+                                     wrongAnswerCounter++;
+                                     givenAnwerOne = false;
+
+                                 }
+                                 if (CheckCollisionPointRec(GetMousePosition(), right)) {
+                                     correctAnswer = true;
+                                     rightAnswerCounter++;
+                                     givenAnwerOne = false;
+                                 }
+                             }
+
+
+
+                         }
+                         if (wrongAnswer) {
+                             DrawTexture(fireLeft, 380, 420, RAYWHITE);
+                             DrawTexture(fireRight, 820, 420, RAYWHITE);
+                             if (wrongAnswerCounter == 1) {
+                                 starsRocket[0] = deadStar;
+
+
+
+
+                             }
+                             if (wrongAnswerCounter == 2) {
+                                 starsRocket[1] = deadStar;
+
+                             }
+                             if (wrongAnswerCounter == 3) {
+                                 starsRocket[2] = deadStar;
+
+                             }
+
+                         }
+                         if (correctAnswer) {
+                             DrawTexture(fireLeftWin, 380, 420, RAYWHITE);
+                             DrawTexture(fireRightWin, 820, 420, RAYWHITE);
+                             if (rightAnswerCounter == 1) {
+                                 starsBadGuys[0] = deadStar;
+
+
+                             }
+                             if (rightAnswerCounter == 2) {
+                                 starsBadGuys[1] = deadStar;
+
+                             }
+                             if (rightAnswerCounter == 3) {
+                                 starsBadGuys[2] = deadStar;
+
+                             }
+                         }
+                         if (IsKeyPressed(KEY_ENTER)) {
+                             wrongAnswer = false;
+                         }
+                       */ 
+                    }  
             }
             break;
         case 1:
