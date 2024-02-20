@@ -6,6 +6,7 @@ import smallCircleTopLeft from './assets/smallGradientCircleTopLeft.png';
 import gradientCircleTopLeft from './assets/gradientCircleTopLeft.png';
 import middleRightCircleGradient from './assets/middleRightCircleGradient.png';
 import astronaut from './assets/astronaut.png';
+import star from './assets/star.png';
 
 function App() {
   return (
@@ -67,6 +68,13 @@ function App() {
         </div>
 
         <img src={astronaut} alt="Astronaut's image" className="w-6/12 h-2/4 select-none" />
+        
+          <div>
+            <img src={star} alt="Stars" className='-rotate-45 absolute right-[45%] select-none scale-75'/>
+            <img src={star} alt="Stars" className='rotate-[120deg] absolute right-1/2 top-[140vh] scale-[0.8] select-none'/>
+            <img src={star} alt="Stars" className='rotate-[15deg] absolute right-[20%] top-[160vh] select-none'/>
+            <img src={star} alt="Stars" className='-rotate-[27deg] absolute right-[5%] select-none'/>
+          </div>
         </div>
 
 
