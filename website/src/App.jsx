@@ -77,6 +77,11 @@ function App() {
           </div>
         </div>
 
+        <div className='flex text-white text-5xl mt-24'>
+          <h1 className='ml-48 font-extralight z-0'>You can download our app from here</h1>
+          <button className='z-0 ring-4 bg-[#81689D] rounded-3xl p-6 ml-12 mb-5 ring-[#81689D] font-semibold shadow-lg shadow-[#81689D]'>Download</button>
+        </div>
+
 
       </div>
     </div>
