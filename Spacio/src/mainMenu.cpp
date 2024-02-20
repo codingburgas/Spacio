@@ -13,7 +13,7 @@ void mainMenu()
 
     SetTargetFPS(60);
 
-    endScreen();
+    
     //pickPlanet();
      intro();
 }
