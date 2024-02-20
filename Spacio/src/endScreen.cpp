@@ -13,6 +13,9 @@ void endScreen() {
 
         DrawTexture(background, 0, 0, RAYWHITE);
 
+        DrawTextEx(boldPoppins, "Good job, you did really great!", Vector2(150, 114), 55, 5, WHITE);
+        DrawTextEx(Poppins, "Press Space to return home", Vector2(150, 470), 40, 5, GRAY);
+
         ClearBackground(RAYWHITE);
 
         EndDrawing();
