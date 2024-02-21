@@ -57,12 +57,12 @@ void HiggsFieldGame(bool hasMass) {
 		case 0:
 			massText += "0";
 			speedText += "speed of light";
-			infoText = "Photons don't interact with the higgsField so they are really fast.";
+			infoText = "Photons don't interact with the higgsField so they are very fast.";
 			break;
 		case 1:
 			massText += "0.511 MeV/c^2";
 			speedText += "There is a certain speed.";
-			infoText = "Electrons interact a little so they are fast.";
+			infoText = "Electrons interact with the field a little so they are fast.";
 			break;
 		case 2:
 			massText += "125.11 GeV/c^2";
@@ -73,12 +73,18 @@ void HiggsFieldGame(bool hasMass) {
 		}
 
 		DrawTextEx(boldPoppins, massText.c_str(), Vector2(114, 68), 48, 5, WHITE);
-		DrawTextEx(boldPoppins, speedText.c_str(), Vector2(117, 140), 48, 5, WHITE);
-		DrawTextEx(boldPoppins, infoText.c_str(), Vector2(125, 247), 40, 5, WHITE);
+		DrawTextEx(boldPoppins, speedText.c_str(), Vector2(114, 140), 48, 5, WHITE);
+		DrawTextEx(boldPoppins, infoText.c_str(), Vector2(114, 247), 40, 5, WHITE);
+		DrawTextEx(Poppins, "Press Space to return home", Vector2(114, 460), 40, 5, GRAY);
 
 		ClearBackground(RAYWHITE);
 
 		EndDrawing();
+		if (IsKeyPressed(KEY_SPACE))
+		{
+			endScreen();
+			break;
+		}
 	}
 	UnloadTexture(background);
 	UnloadFont(Poppins);
