@@ -6,7 +6,7 @@ void gameQuiz()
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
-    Vector2 position = { 250, 300 };
+    Vector2 position = { 150, 300 };
     Vector2 velocity = { 200, 0};
 
     bool answer1Clicked = false;
@@ -52,6 +52,8 @@ void gameQuiz()
     Rectangle answer2 = { 270, 700, 830, 50 };
     Rectangle answer3 = { 270, 800, 830, 50 };
 
+    Color Purple = { 52, 34, 69, 1500 };
+
     SetTextLineSpacing(45);
 
     while (!WindowShouldClose())
@@ -80,9 +82,9 @@ void gameQuiz()
 
         
         DrawTextEx(boldPoppins, questions[questionCounter], Vector2(xPosQ, 50), 50, 5, WHITE);
-        DrawRectangleRec(answer1, DARKPURPLE);
-        DrawRectangleRec(answer2, DARKPURPLE);
-        DrawRectangleRec(answer3, DARKPURPLE);
+        DrawRectangleRec(answer1, Purple);
+        DrawRectangleRec(answer2, Purple);
+        DrawRectangleRec(answer3, Purple);
 
         if (num == 0)
         {
@@ -91,12 +93,15 @@ void gameQuiz()
             DrawTextEx(boldPoppins, wrongAnswers2[questionCounter], Vector2(xPosW2, 800), 50, 5, WHITE);
 
             if (CheckCollisionPointRec(GetMousePosition(), answer2) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || CheckCollisionPointRec(GetMousePosition(), answer3) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-          
+            {
                 position.x += velocity.x;
             if ((velocity.x > 0 && position.x > targetPosition.x) || (velocity.x < 0 && position.x < targetPosition.x)) {
                 moveOnce = false;
                 wrongCounter += 1; 
             }  
+
+            }
+               
                    
         }
 
@@ -107,11 +112,15 @@ void gameQuiz()
             DrawTextEx(boldPoppins, wrongAnswers2[questionCounter], Vector2(xPosW2, 800), 50, 5, WHITE);
 
             if (CheckCollisionPointRec(GetMousePosition(), answer1) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || CheckCollisionPointRec(GetMousePosition(), answer3) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
                 position.x += velocity.x;
             if ((velocity.x > 0 && position.x > targetPosition.x) || (velocity.x < 0 && position.x < targetPosition.x)) {
                 moveOnce = false;
                 wrongCounter += 1;
             }
+
+            }
+                
         }
 
         if (num == 2)
@@ -121,11 +130,15 @@ void gameQuiz()
             DrawTextEx(boldPoppins, rightAnswers[questionCounter], Vector2(xPosR, 800), 50, 5, WHITE);
 
             if (CheckCollisionPointRec(GetMousePosition(), answer1) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || CheckCollisionPointRec(GetMousePosition(), answer2) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
                 position.x += velocity.x;
             if ((velocity.x > 0 && position.x > targetPosition.x) || (velocity.x < 0 && position.x < targetPosition.x)) {
                 moveOnce = false;
                 wrongCounter += 1;
             }
+
+            }
+                
         }
 
         if (answer1Clicked || answer2Clicked || answer3Clicked)
@@ -152,10 +165,13 @@ void gameQuiz()
             answer3Clicked = true;
         }
 
-        if (questionCounter == 8 || wrongCounter == 4)
+        if (wrongCounter == 3)
         {
                 readyForQuiz();
                 break;
+        }
+        else if (questionCounter == 8) {
+            endScreen();
         }
 
         EndDrawing();
