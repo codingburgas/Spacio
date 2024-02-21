@@ -11,6 +11,8 @@ import vectorBackground from './assets/vectorBackground.png';
 import astronomyIcon from './assets/astronomyIcon.png';
 import higgsFieldIcon from './assets/higgsFieldIcon.png';
 import universeIcon from './assets/universeIcon.png';
+import circleGradientLeft from './assets/circleGradientLeft.png';
+import circleGradientRight from './assets/circleGradientRight.png';
  
 function App() {
   return (
@@ -122,24 +124,33 @@ function App() {
           <div>
           <div className="left-0 top-0 w-[25vw] h-px bg-white"></div>
             <div className="absolute inset-0 flex items-center justify-center mt-[255vh]">
-              <div id="here" className="flex flex-row items-center space-x-28 font-light">
+              <div id="here" className="flex flex-row items-center space-x-28 font-light z-10">
                 <div className="relative">
-                  <img src={astronomyIcon} className='relative w-40 h-40' alt="astronomy's Icon" />
+                  <img src={astronomyIcon} className='relative w-40 h-40 select-none' alt="astronomy's Icon" />
                   <p className="text-white text-center text-4xl">Astronomy</p>
                 </div>
                 <div className="relative">
-                  <img src={higgsFieldIcon} className='relative w-40 h-40' alt="Higgs field's icon" />
+                  <img src={higgsFieldIcon} className='relative w-40 h-40 select-none' alt="Higgs field's icon" />
                   <p className="text-white text-center text-4xl max-md:text-2xl">Higgs field</p>
                 </div>
                 <div className="relative">
-                  <img src={universeIcon} className='relative w-40 h-40' alt="Universe's icon" />
+                  <img src={universeIcon} className='relative w-40 h-40 select-none' alt="Universe's icon" />
                   <p className="text-white text-center text-4xl">Universe</p>
                 </div>
               </div>
             </div>
           </div>
+
           <div className="absolute -right-0 top-[120] w-[25vw] h-px bg-white"></div>
+
         </div>
+        <img src={circleGradientLeft} alt="Background decoration" className='absolute top-[200vh] left-0 select-none'/>
+        <img src={circleGradientRight} alt="Background decoration" className='absolute top-[220vh] right-0 select-none'/>
+      
+        <div>
+
+        </div>
+
       </div>
     </div>
   );
