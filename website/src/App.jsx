@@ -7,7 +7,11 @@ import gradientCircleTopLeft from './assets/gradientCircleTopLeft.png';
 import middleRightCircleGradient from './assets/middleRightCircleGradient.png';
 import astronaut from './assets/astronaut.png';
 import star from './assets/star.png';
-
+import vectorBackground from './assets/vectorBackground.png';
+import astronomyIcon from './assets/astronomyIcon.png';
+import higgsFieldIcon from './assets/higgsFieldIcon.png';
+import universeIcon from './assets/universeIcon.png';
+ 
 function App() {
   return (
     <div className="bg-[#080310] min-h-screen w-screen overflow-x-hidden">
@@ -46,12 +50,6 @@ function App() {
         </div>
 
         <div className="flex text-white mt-96">
-          <img
-            src={middleRightCircleGradient}
-            alt="Background gradient"
-            className="right-0 absolute select-none"
-          />
-
           <div className="ml-48 z-0">
             <h1 className="text-6xl font-extralight z-0 mb-20">
               About{" "}
@@ -61,31 +59,90 @@ function App() {
             </h1>
 
             <p className="text-5xl font-light z-0 max-w-2xl">
-              A one-of-a-kind educational application that offers endless excitement
-              and knowledge for your brain. Download it and challenge yourself to learn
-              as much as possible!
+              A one-of-a-kind educational application that offers endless
+              excitement and knowledge for your brain. Download it and challenge
+              yourself to learn as much as possible!
             </p>
-        </div>
+          </div>
 
-        <img src={astronaut} alt="Astronaut's image" className="w-6/12 h-2/4 select-none" />
-        
+          <img
+            src={astronaut}
+            alt="Astronaut's image"
+            className="w-6/12 h-2/4 select-none z-10"
+          />
+
           <div>
-            <img src={star} alt="Stars" className='-rotate-45 absolute right-[45%] select-none scale-75'/>
-            <img src={star} alt="Stars" className='rotate-[120deg] absolute right-1/2 top-[140vh] scale-[0.8] select-none'/>
-            <img src={star} alt="Stars" className='rotate-[15deg] absolute right-[20%] top-[160vh] select-none'/>
-            <img src={star} alt="Stars" className='-rotate-[27deg] absolute right-[5%] select-none'/>
+            <img
+              src={star}
+              alt="Stars"
+              className="-rotate-45 absolute right-[45%] select-none scale-75"
+            />
+            <img
+              src={star}
+              alt="Stars"
+              className="rotate-[120deg] absolute right-1/2 top-[140vh] scale-[0.8] select-none"
+            />
+            <img
+              src={star}
+              alt="Stars"
+              className="rotate-[15deg] absolute right-[20%] top-[160vh] select-none z-10"
+            />
+            <img
+              src={star}
+              alt="Stars"
+              className="-rotate-[27deg] absolute right-[5%] select-none z-10"
+            />
           </div>
         </div>
 
-        <div className='flex text-white text-5xl mt-24'>
-          <h1 className='ml-48 font-extralight z-0'>You can download our app from here</h1>
-          <button className='z-0 ring-4 bg-[#81689D] rounded-3xl p-6 ml-12 mb-5 ring-[#81689D] font-semibold shadow-lg shadow-[#81689D]'>Download</button>
+        <div className="flex text-white text-5xl mt-24">
+          <h1 className="ml-48 font-extralight z-10 mt-5">
+            You can download our app from here
+          </h1>
+          <button className="z-10 ring-4 bg-[#81689D] rounded-3xl p-6 ml-12 mb-5 ring-[#81689D] font-semibold shadow-lg shadow-[#81689D] cursor-pointer">
+            Download
+          </button>
         </div>
+        <img
+          src={vectorBackground}
+          alt="Background"
+          className="absolute select-none"
+        />
 
+        <div>
+          <img
+            src={middleRightCircleGradient}
+            alt="Background gradient"
+            className="right-[-1rem] absolute top-[70vh] select-none"
+          />
+          <h1 className="text-white z-10 text-5xl max-g:text-3xl font-thin mt-[20%] mb-[15%] relative inset-0 flex items-center justify-center">
+            Enhance your skills in these areas.
+          </h1>
 
+          <div>
+          <div className="left-0 top-0 w-[25vw] h-px bg-white"></div>
+            <div className="absolute inset-0 flex items-center justify-center mt-[255vh]">
+              <div id="here" className="flex flex-row items-center space-x-28 font-light">
+                <div className="relative">
+                  <img src={astronomyIcon} className='relative w-40 h-40' alt="astronomy's Icon" />
+                  <p className="text-white text-center text-4xl">Astronomy</p>
+                </div>
+                <div className="relative">
+                  <img src={higgsFieldIcon} className='relative w-40 h-40' alt="Higgs field's icon" />
+                  <p className="text-white text-center text-4xl max-md:text-2xl">Higgs field</p>
+                </div>
+                <div className="relative">
+                  <img src={universeIcon} className='relative w-40 h-40' alt="Universe's icon" />
+                  <p className="text-white text-center text-4xl">Universe</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute -right-0 top-[120] w-[25vw] h-px bg-white"></div>
+        </div>
       </div>
     </div>
   );
 }
-
+ 
 export default App;
