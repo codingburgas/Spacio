@@ -18,3 +18,4 @@
 #include "natureScript.h"
 #include "planetGame.h"
 #include "endScreen.h"
+#include "SpaceShip.h"

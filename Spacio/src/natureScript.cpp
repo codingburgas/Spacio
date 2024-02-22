@@ -29,6 +29,8 @@ void natureScript()
          int counter = 0;
          int current = 0;
 
+         SetTextLineSpacing(45);
+
          while (!WindowShouldClose())
          {
 

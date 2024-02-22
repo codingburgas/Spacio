@@ -156,6 +156,7 @@
     <ClCompile Include="src\planetGame.cpp" />
     <ClCompile Include="src\questions.cpp" />
     <ClCompile Include="src\readyForQuiz.cpp" />
+    <ClCompile Include="src\SpaceShip.cpp" />
     <ClCompile Include="src\userConfirm.cpp" />
     <ClCompile Include="src\getStation.cpp" />
     <ClCompile Include="src\userName.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="src\planetGame.h" />
     <ClInclude Include="src\questions.h" />
     <ClInclude Include="src\readyForQuiz.h" />
+    <ClInclude Include="src\SpaceShip.h" />
     <ClInclude Include="src\userConfirm.h" />
     <ClInclude Include="src\userName.h" />
   </ItemGroup>

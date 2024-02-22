@@ -15,5 +15,7 @@ void mainMenu()
     //SetTargetFPS(60);
     //HiggsFieldGame(false);
     //pickPlanet();
-    intro();
+
+    //intro();
+    SpaceShip();
 }
