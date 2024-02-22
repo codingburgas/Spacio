@@ -15,6 +15,8 @@ import circleGradientLeft from './assets/circleGradientLeft.png';
 import circleGradientRight from './assets/circleGradientRight.png';
 import higgsPreview from './assets/higgsBosonPreview.png';
 import naturePreview from './assets/naturePreview.png';
+import github from './assets/gitHubLogo.png';
+import pgkpi from './assets/PGKPIlogo.png';
  
 function App() {
   return (
@@ -107,10 +109,10 @@ function App() {
             Download
           </button>
         </div>
-        <img
+         <img
           src={vectorBackground}
           alt="Background"
-          className="absolute right-0 select-none"
+          className="absolute right-0 select-none h-3/6"
         />
 
         <div>
@@ -194,8 +196,27 @@ function App() {
 
         <div>
         <img src={star} className='absolute right-[18vw] top-[465vh] w-[6vw] rotate-12 select-none'/>
-        <h1 className='text-center relative z-10 text-white font-thin text-[2.4vw] mt-[30vh]'>If <span className='font-bold text-[#81689D]'>you like</span> our application - Give us a <span className='font-bold text-[#81689D]'>star </span> in <a href="https://github.com/codingburgas/2324-space-sprint-project-spacio/tree/main"><span className='font-bold text-[#81689D]'>Github</span></a>!</h1>
+        <h1 className='text-center relative z-10 text-white font-thin text-[2.4vw] mb-[20vh] mt-[30vh]'>If <span className='font-bold text-[#81689D]'>you like</span> our application - Give us a <span className='font-bold text-[#81689D]'>star </span> in <a href="https://github.com/codingburgas/2324-space-sprint-project-spacio/tree/main"><span className='font-bold text-[#81689D]'>Github</span></a>!</h1>
       </div>
+
+      <div className='absolute w-screen bg-[#606060] bg-opacity-[12%] h-[35vh] flex flex-row pt-[4vh] space-x-[25vw]'>
+        <div className='flex flex-col pl-[10vw] space-y-3'>
+          <h1 className='text-[#81689D] font-bold text-[2.2vw]'>Contact Us</h1>
+          <h2 className='text-white font-light text-[1vw]'>089 845 5433</h2>
+          <h2 className='text-white font-light text-[1vw] underline'>spacio@abv.bg</h2>
+          <h2 className='text-white font-light text-[1vw]'>Burgas, Meden Rudnik</h2>
+        </div>
+        <div>
+        <h1 className='text-[#81689D] font-bold text-[2.2vw]'>Our School</h1>
+        <a href="https://codingburgas.bg/"><img src={pgkpi} className='w-[7vw] block ml-auto mr-auto'/></a>
+        </div>
+        <div>
+        <h1 className='text-[#81689D] font-bold text-[2.2vw]'>GitHub</h1>
+        <a href="https://github.com/codingburgas/2324-space-sprint-project-spacio"><img src={github}/></a>
+        </div>
+      </div> 
+
+
       </div>
     </div>
   );
