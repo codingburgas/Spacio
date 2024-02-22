@@ -173,7 +173,7 @@ function App() {
           className="absolute top-[220vh] right-0 select-none"
         />
 
-        <div class="flex items-center justify-center h-screen mt-36">
+        <div class="flex items-center justify-center h-screen mt-[35vh]">
           <div class="space-y-24 text-[3.5vw] z-10 relative font-thin">
             <div class="flex flex-row">
               <p class="text-white mt-[10%] mr-[10vw]">Dynamic Learning.</p>
@@ -181,8 +181,8 @@ function App() {
             </div>
 
             <div class="flex flex-row">
-              <p class="text-white">Skill assesment.</p>
-              <img src={star} alt="Star" />
+              <p class="text-white mt-[10%] mr-[14.8vw]">Skill assesment.</p>
+              <img src={naturePreview} alt="Nature's preview" className='w-auto h-[20vw]' />
             </div>
 
             <div class="flex flex-row">
