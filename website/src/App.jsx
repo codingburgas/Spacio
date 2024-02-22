@@ -72,7 +72,7 @@ function App() {
           <img
             src={astronaut}
             alt="Astronaut's image"
-            className="w-6/12 h-2/4 select-none z-10"
+            className="w-[45vw] h-2/4 select-none z-10 overflow-x-hidden overflow-y-hidden"
           />
 
           <div>
@@ -96,8 +96,8 @@ function App() {
               alt="Stars"
               className="-rotate-[27deg] absolute right-[5%] select-none z-10"
             />
-          </div>
-        </div>
+  </div>
+        </div> 
 
         <div className="flex text-white text-[2.5vw] mt-24">
           <h1 className="ml-48 font-extralight z-10 mt-5">
@@ -110,7 +110,7 @@ function App() {
         <img
           src={vectorBackground}
           alt="Background"
-          className="absolute select-none"
+          className="absolute right-0 select-none"
         />
 
         <div>
@@ -122,15 +122,23 @@ function App() {
           <h1 className="text-white z-10 text-[2.5vw] max-g:text-3xl font-thin mt-[20%] mb-[15%] relative inset-0 flex items-center justify-center">
             Enhance your skills in these areas.
           </h1>
-
+          <img
+          src={circleGradientLeft}
+          alt="Background decoration"
+          className="absolute top-[200vh] left-0 select-none"
+        />
+        <img
+          src={circleGradientRight}
+          alt="Background decoration"
+          className="absolute top-[220vh] right-0 select-none"
+        />
           <div>
             <div className="left-0 top-0 w-[25vw] h-px bg-white"></div>
             <div className="absolute inset-0 flex items-center justify-center mt-[265vh] text-[1.8vw]">
               <div
-                id="here"
                 className="flex flex-row items-center space-x-28 font-light z-10"
               >
-                <div className="relative">
+                <div className="relative overflow-x-hidden overflow-y-hidden">
                   <img
                     src={astronomyIcon}
                     className="relative w-[8vw] h-auto select-none"
@@ -161,36 +169,33 @@ function App() {
           </div>
 
           <div className="absolute -right-0 top-[120] w-[25vw] h-px bg-white"></div>
+        
         </div>
-        <img
-          src={circleGradientLeft}
-          alt="Background decoration"
-          className="absolute top-[200vh] left-0 select-none"
-        />
-        <img
-          src={circleGradientRight}
-          alt="Background decoration"
-          className="absolute top-[220vh] right-0 select-none"
-        />
+      
 
-        <div class="flex items-center justify-center h-screen mt-[35vh]">
-          <div class="space-y-24 text-[3.5vw] z-10 relative font-thin">
+        <div className="flex items-center justify-center h-maxscreen mt-[35vh]">
+        <div class="space-y-24 text-[3.5vw] z-10 relative font-thin">
             <div class="flex flex-row">
-              <p class="text-white mt-[10%] mr-[10vw]">Dynamic Learning.</p>
+              <p class="text-white mr-[10vw] mt-20">Dynamic Learning.</p>
               <img src={higgsPreview} alt="Higgs Boson preview" className='w-auto h-[20vw]' />
             </div>
 
             <div class="flex flex-row">
-              <p class="text-white mt-[10%] mr-[14.8vw]">Skill assesment.</p>
+              <p class="text-white mr-[14.8vw] mt-20">Skill assesment.</p>
               <img src={naturePreview} alt="Nature's preview" className='w-auto h-[20vw]' />
             </div>
 
             <div class="flex flex-row">
-              <p class="text-white">Fun experience.</p>
-              <img src={star} alt="Star" />
+              <p class="text-white mr-[14.2vw] mt-20">Fun experience.</p>
+              <img src={naturePreview} alt="Nature's preview" className='w-auto h-[20vw]' />
             </div>
           </div>
         </div>
+
+        <div>
+        <img src={star} className='absolute right-[18vw] top-[465vh] w-[6vw] rotate-12 select-none'/>
+        <h1 className='text-center relative z-10 text-white font-thin text-[2.4vw] mt-[30vh]'>If <span className='font-bold text-[#81689D]'>you like</span> our application - Give us a <span className='font-bold text-[#81689D]'>star </span> in <a href="https://github.com/codingburgas/2324-space-sprint-project-spacio/tree/main"><span className='font-bold text-[#81689D]'>Github</span></a>!</h1>
+      </div>
       </div>
     </div>
   );
