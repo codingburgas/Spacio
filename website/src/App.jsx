@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import './App.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init();
+
 import logo from './assets/logo.png';
 import arrowDown from './assets/arrow.png';
 import smallCircleTopLeft from './assets/smallGradientCircleTopLeft.png';
@@ -45,7 +49,7 @@ function App() {
         </div>
 
         <div className="text-center my-40 mt-60 text-white">
-          <h1 className="text-[8vw] font-bold z-0 relative">SPACIO</h1>
+          <h1 className="text-[8vw] font-bold z-0 relative" data-aos="fade-up">SPACIO</h1>
           <div className="flex justify-center">
             <img
               src={arrowDown}
@@ -56,7 +60,7 @@ function App() {
         </div>
 
         <div className="flex text-white mt-96">
-          <div className="ml-48 z-0">
+          <div className="ml-48 z-0" data-aos="fade-right">
             <h1 className="text-[3.3vw] font-extralight z-0 mb-20">
               About{" "}
               <span className="font-semibold" style={{ color: "#81689D" }}>
@@ -75,6 +79,7 @@ function App() {
             src={astronaut}
             alt="Astronaut's image"
             className="w-[45vw] h-2/4 select-none z-10 overflow-x-hidden overflow-y-hidden"
+            data-aos="fade-down-left"
           />
 
           <div>
@@ -82,26 +87,30 @@ function App() {
               src={star}
               alt="Stars"
               className="-rotate-45 absolute right-[45%] select-none scale-75"
+              data-aos="fade-up-left"
             />
             <img
               src={star}
               alt="Stars"
               className="rotate-[120deg] absolute right-1/2 top-[140vh] scale-[0.8] select-none"
+              data-aos="fade-up-left"
             />
             <img
               src={star}
               alt="Stars"
               className="rotate-[15deg] absolute right-[20%] top-[160vh] select-none z-10"
+              data-aos="fade-up-left"
             />
             <img
               src={star}
               alt="Stars"
               className="-rotate-[27deg] absolute right-[5%] select-none z-10"
+              data-aos="fade-up-left"
             />
   </div>
         </div> 
 
-        <div className="flex text-white text-[2.5vw] mt-24">
+        <div className="flex text-white text-[2.5vw] mt-24" data-aos="fade-down-right">
           <h1 className="ml-48 font-extralight z-10 mt-5">
             You can download our app from here
           </h1>
@@ -121,7 +130,7 @@ function App() {
             alt="Background gradient"
             className="right-[-1rem] absolute top-[70vh] select-none"
           />
-          <h1 className="text-white z-10 text-[2.5vw] max-g:text-3xl font-thin mt-[20%] mb-[15%] relative inset-0 flex items-center justify-center">
+          <h1 className="text-white z-10 text-[2.5vw] max-g:text-3xl font-thin mt-[20%] mb-[15%] relative inset-0 flex items-center justify-center" data-aos="zoom-in">
             Enhance your skills in these areas.
           </h1>
           <img
@@ -138,7 +147,7 @@ function App() {
             <div className="left-0 top-0 w-[25vw] h-px bg-white"></div>
             <div className="absolute inset-0 flex items-center justify-center mt-[265vh] text-[1.8vw]">
               <div
-                className="flex flex-row items-center space-x-28 font-light z-10"
+                className="flex flex-row items-center space-x-28 font-light z-10" data-aos="zoom-in"
               >
                 <div className="relative overflow-x-hidden overflow-y-hidden">
                   <img
@@ -178,31 +187,31 @@ function App() {
         <div className="flex items-center justify-center h-maxscreen mt-[35vh]">
         <div class="space-y-24 text-[3.5vw] z-10 relative font-thin">
             <div class="flex flex-row">
-              <p class="text-white mr-[10vw] mt-20">Dynamic Learning.</p>
-              <img src={higgsPreview} alt="Higgs Boson preview" className='w-auto h-[20vw]' />
+              <p class="text-white mr-[10vw] mt-20" data-aos="zoom-in-right">Dynamic Learning.</p>
+              <img src={higgsPreview} alt="Higgs Boson preview" className='w-auto h-[20vw]' data-aos="zoom-in-left" />
             </div>
 
             <div class="flex flex-row">
-              <p class="text-white mr-[14.8vw] mt-20">Skill assesment.</p>
-              <img src={naturePreview} alt="Nature's preview" className='w-auto h-[20vw]' />
+              <p class="text-white mr-[14.8vw] mt-20" data-aos="zoom-in-right">Skill assesment.</p>
+              <img src={naturePreview} alt="Nature's preview" className='w-auto h-[20vw]' data-aos="zoom-in-left" />
             </div>
 
             <div class="flex flex-row">
-              <p class="text-white mr-[14.2vw] mt-20">Fun experience.</p>
-              <img src={naturePreview} alt="Nature's preview" className='w-auto h-[20vw]' />
+              <p class="text-white mr-[14.2vw] mt-20" data-aos="zoom-in-right">Fun experience.</p>
+              <img src={naturePreview} alt="Nature's preview" className='w-auto h-[20vw]' data-aos="zoom-in-left" />
             </div>
           </div>
         </div>
 
         <div>
-        <img src={star} className='absolute right-[18vw] top-[465vh] w-[6vw] rotate-12 select-none'/>
+        <img src={star} className='absolute right-[18vw] top-[465vh] w-[6vw] rotate-12 select-none' data-aos="fade-down-left"/>
         <h1 className='text-center relative z-10 text-white font-thin text-[2.4vw] mb-[20vh] mt-[30vh]'>If <span className='font-bold text-[#81689D]'>you like</span> our application - Give us a <span className='font-bold text-[#81689D]'>star </span> in <a href="https://github.com/codingburgas/2324-space-sprint-project-spacio/tree/main"><span className='font-bold text-[#81689D]'>Github</span></a>!</h1>
       </div>
 
-      <div className='absolute w-screen bg-[#606060] bg-opacity-[12%] h-[35vh] flex flex-row pt-[4vh] space-x-[25vw]'>
+      <div className='absolute w-screen bg-[#606060] bg-opacity-[12%] h-[35vh] flex flex-row pt-[4vh] space-x-[25vw] '>
         <div className='flex flex-col pl-[10vw] space-y-3'>
           <h1 className='text-[#81689D] font-bold text-[2.2vw]'>Contact Us</h1>
-          <h2 className='text-white font-light text-[1vw]'>089 845 5433</h2>
+          <h2 className='text-white font-light text-[1vw]'>089 845 1437</h2>
           <h2 className='text-white font-light text-[1vw] underline'>spacio@abv.bg</h2>
           <h2 className='text-white font-light text-[1vw]'>Burgas, Meden Rudnik</h2>
         </div>
