@@ -13,6 +13,8 @@ import higgsFieldIcon from './assets/higgsFieldIcon.png';
 import universeIcon from './assets/universeIcon.png';
 import circleGradientLeft from './assets/circleGradientLeft.png';
 import circleGradientRight from './assets/circleGradientRight.png';
+import higgsPreview from './assets/higgsBosonPreview.png';
+import naturePreview from './assets/naturePreview.png';
  
 function App() {
   return (
@@ -41,7 +43,7 @@ function App() {
         </div>
 
         <div className="text-center my-40 mt-60 text-white">
-          <h1 className="text-9xl font-bold z-0 relative">SPACIO</h1>
+          <h1 className="text-[8vw] font-bold z-0 relative">SPACIO</h1>
           <div className="flex justify-center">
             <img
               src={arrowDown}
@@ -53,14 +55,14 @@ function App() {
 
         <div className="flex text-white mt-96">
           <div className="ml-48 z-0">
-            <h1 className="text-6xl font-extralight z-0 mb-20">
+            <h1 className="text-[3.3vw] font-extralight z-0 mb-20">
               About{" "}
               <span className="font-semibold" style={{ color: "#81689D" }}>
                 Spacio
               </span>
             </h1>
 
-            <p className="text-5xl font-light z-0 max-w-2xl">
+            <p className="text-[2.4vw] font-light z-0 max-w-2xl">
               A one-of-a-kind educational application that offers endless
               excitement and knowledge for your brain. Download it and challenge
               yourself to learn as much as possible!
@@ -97,7 +99,7 @@ function App() {
           </div>
         </div>
 
-        <div className="flex text-white text-5xl mt-24">
+        <div className="flex text-white text-[2.5vw] mt-24">
           <h1 className="ml-48 font-extralight z-10 mt-5">
             You can download our app from here
           </h1>
@@ -117,40 +119,78 @@ function App() {
             alt="Background gradient"
             className="right-[-1rem] absolute top-[70vh] select-none"
           />
-          <h1 className="text-white z-10 text-5xl max-g:text-3xl font-thin mt-[20%] mb-[15%] relative inset-0 flex items-center justify-center">
+          <h1 className="text-white z-10 text-[2.5vw] max-g:text-3xl font-thin mt-[20%] mb-[15%] relative inset-0 flex items-center justify-center">
             Enhance your skills in these areas.
           </h1>
 
           <div>
-          <div className="left-0 top-0 w-[25vw] h-px bg-white"></div>
-            <div className="absolute inset-0 flex items-center justify-center mt-[255vh]">
-              <div id="here" className="flex flex-row items-center space-x-28 font-light z-10">
+            <div className="left-0 top-0 w-[25vw] h-px bg-white"></div>
+            <div className="absolute inset-0 flex items-center justify-center mt-[265vh] text-[1.8vw]">
+              <div
+                id="here"
+                className="flex flex-row items-center space-x-28 font-light z-10"
+              >
                 <div className="relative">
-                  <img src={astronomyIcon} className='relative w-40 h-40 select-none' alt="astronomy's Icon" />
-                  <p className="text-white text-center text-4xl">Astronomy</p>
+                  <img
+                    src={astronomyIcon}
+                    className="relative w-[8vw] h-auto select-none"
+                    alt="astronomy's Icon"
+                  />
+                  <p className="text-white text-center">Astronomy</p>
                 </div>
                 <div className="relative">
-                  <img src={higgsFieldIcon} className='relative w-40 h-40 select-none' alt="Higgs field's icon" />
-                  <p className="text-white text-center text-4xl max-md:text-2xl">Higgs field</p>
+                  <img
+                    src={higgsFieldIcon}
+                    className="relative w-[8vw] h-auto select-none"
+                    alt="Higgs field's icon"
+                  />
+                  <p className="text-white text-center">
+                    Higgs field
+                  </p>
                 </div>
                 <div className="relative">
-                  <img src={universeIcon} className='relative w-40 h-40 select-none' alt="Universe's icon" />
-                  <p className="text-white text-center text-4xl">Universe</p>
+                  <img
+                    src={universeIcon}
+                    className="relative w-[8vw] h-auto select-none"
+                    alt="Universe's icon"
+                  />
+                  <p className="text-white text-center">Universe</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="absolute -right-0 top-[120] w-[25vw] h-px bg-white"></div>
-
         </div>
-        <img src={circleGradientLeft} alt="Background decoration" className='absolute top-[200vh] left-0 select-none'/>
-        <img src={circleGradientRight} alt="Background decoration" className='absolute top-[220vh] right-0 select-none'/>
-      
-        <div>
+        <img
+          src={circleGradientLeft}
+          alt="Background decoration"
+          className="absolute top-[200vh] left-0 select-none"
+        />
+        <img
+          src={circleGradientRight}
+          alt="Background decoration"
+          className="absolute top-[220vh] right-0 select-none"
+        />
 
+        <div class="flex items-center justify-center h-screen mt-36">
+          <div class="space-y-24 text-[3.5vw] z-10 relative font-thin">
+            <div class="flex flex-row">
+              <p class="text-white mt-[10%] mr-[10vw]">Dynamic Learning.</p>
+              <img src={higgsPreview} alt="Higgs Boson preview" className='w-auto h-[20vw]' />
+            </div>
+
+            <div class="flex flex-row">
+              <p class="text-white">Skill assesment.</p>
+              <img src={star} alt="Star" />
+            </div>
+
+            <div class="flex flex-row">
+              <p class="text-white">Fun experience.</p>
+              <img src={star} alt="Star" />
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
   );

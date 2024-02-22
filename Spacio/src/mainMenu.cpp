@@ -11,9 +11,9 @@ void mainMenu()
 
     InitWindow(screenWidth, screenHeight, "Spacio");
 
-    gameQuiz();
+    //gameQuiz();
     //SetTargetFPS(60);
     //HiggsFieldGame(false);
     //pickPlanet();
-    // intro();
+    intro();
 }
