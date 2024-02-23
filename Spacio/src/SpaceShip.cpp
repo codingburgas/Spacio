@@ -18,7 +18,7 @@
                             static_cast<float>(player.width),
                             static_cast<float>(player.height) };
 
-    int characterSpeed = 2;
+    intyh characterSpeed = 1;
 
     Rectangle place1 = { 750, 480, 100, 50 };
     Rectangle place2 = { 560, 320, 50, 100 };
@@ -30,13 +30,13 @@
         if (IsKeyDown(KEY_RIGHT) && (character.x + character.width) < (spaceship.x + spaceship.width))
             character.x += characterSpeed;
 
-        if (IsKeyDown(KEY_LEFT) && character.x > spaceship.x)
+        if (IsKeyDown(KEY_LEFT) && (character.x + character.width) < (spaceship.x + spaceship.width))
             character.x -= characterSpeed;
 
         if (IsKeyDown(KEY_DOWN) && (character.y + character.height) < (spaceship.y + spaceship.height))
             character.y += characterSpeed;
 
-        if (IsKeyDown(KEY_UP) && character.y > spaceship.y)
+        if (IsKeyDown(KEY_UP) && (character.y + character.height) < (spaceship.y + spaceship.height))
             character.y -= characterSpeed;
 
         BeginDrawing();
