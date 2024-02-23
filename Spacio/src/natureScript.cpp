@@ -18,7 +18,7 @@ void natureScript()
              "Currently, dark energy accelerates\nthe universe's expansion,\nchallenging earlier beliefs and\nprompting ongoing research for\nnew insights into its perpetual\ngrowth."
          };
 
-         const char* astronauts[8] = { "../assets/images/astronaut.png", "../assets/images/goodJobAstronautt.png", "../assets/images/astronaut.png", "../assets/images/goodJobAstronaut.png", "../assets/images/astronaut.png", "../assets/images/goodJobAstronaut.png", "../assets/images/astronaut.png", "../assets/images/goodJobAstronaut.png" };
+         const char* astronauts[8] = { "../assets/images/astronaut.png", "../assets/images/goodJobAstronaut.png", "../assets/images/astronaut.png", "../assets/images/goodJobAstronaut.png", "../assets/images/astronaut.png", "../assets/images/goodJobAstronaut.png", "../assets/images/astronaut.png", "../assets/images/goodJobAstronaut.png" };
 
          Texture2D images[sizeof(astronauts) / sizeof(astronauts[0])];
 

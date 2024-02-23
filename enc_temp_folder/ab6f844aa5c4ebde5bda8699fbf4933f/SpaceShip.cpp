@@ -27,6 +27,7 @@ void spaceShip()
     while (!WindowShouldClose())
     {
 
+<<<<<<< HEAD
         if (IsKeyDown(KEY_RIGHT))
         {
             player = LoadTexture("../assets/images/gameCharacterRotated.png");
@@ -39,6 +40,13 @@ void spaceShip()
             if (character.x > spaceship.x)
                 character.x -= characterSpeed;
         }
+=======
+        if (IsKeyDown(KEY_RIGHT) && (character.x + character.width) < (spaceship.x + spaceship.width))
+            character.x += characterSpeed;
+
+        if (IsKeyDown(KEY_LEFT) && (character.x + character.width) < (spaceship.x + spaceship.width))
+            character.x -= characterSpeed;
+>>>>>>> ba6db0c631217c0f04a2e150bd5336f6194bb864
 
         if (IsKeyDown(KEY_DOWN) && (character.y + character.height) < (spaceship.y + spaceship.height))
             character.y += characterSpeed;
