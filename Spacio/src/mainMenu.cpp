@@ -10,8 +10,8 @@ void mainMenu()
     SetWindowIcon(logo);
 
     InitWindow(screenWidth, screenHeight, "Spacio");
-
-    HiggsFieldGame(true);
+    chooseLearningStyle();
+    //HiggsFieldGame(true);
     //intro();
     //spaceShip();
 }
