@@ -11,8 +11,8 @@ void mainMenu()
 
     InitWindow(screenWidth, screenHeight, "Spacio");
 
-    chooseLearningStyle();
+    //chooseLearningStyle();
     //HiggsFieldGame(true);
-    //intro();
+    intro();
     //spaceShip();
 }
