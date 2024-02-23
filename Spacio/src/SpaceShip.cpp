@@ -56,7 +56,7 @@ void spaceShip()
 
         if (CheckCollisionRecs(character, natureLocation))
         {
-            DrawTextEx(boldPoppins, "Press E for nature!", Vector2(680, 440), 20, 5, BLACK);
+            DrawTextEx(boldPoppins, "Press E for nature!", Vector2(680, 440), 20, 5, WHITE);
         }
 
         if (CheckCollisionRecs(character, natureLocation) && IsKeyDown(KEY_E))
@@ -67,7 +67,7 @@ void spaceShip()
 
         if (CheckCollisionRecs(character, bosonLocation))
         {
-            DrawTextEx(boldPoppins, "Press E for higgs boson!", Vector2(550, 300), 20, 5, BLACK);
+            DrawTextEx(boldPoppins, "Press E for higgs boson!", Vector2(550, 300), 20, 5, WHITE);
         }
 
         if (CheckCollisionRecs(character, bosonLocation) && IsKeyDown(KEY_E))
@@ -79,7 +79,7 @@ void spaceShip()
 
         if (CheckCollisionRecs(character, planetsLocation))
         {
-            DrawTextEx(boldPoppins, "Press E for planets!", Vector2(550, 620), 20, 5, BLACK);
+            DrawTextEx(boldPoppins, "Press E for planets!", Vector2(550, 620), 20, 5, WHITE);
         }
 
         if (CheckCollisionRecs(character, planetsLocation) && IsKeyDown(KEY_E))
