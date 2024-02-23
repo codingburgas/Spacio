@@ -1,8 +1,8 @@
-#include "SpaceShip.h"
+#include "spaceShip.h"
     
     std::string userNameStr;
 
-    void SpaceShip()
+    void spaceShip()
     {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
@@ -13,12 +13,12 @@
 
     Texture2D player = LoadTexture("../assets/images/gameCharacter.png");
 
-    Rectangle character = { static_cast<float>(1440) / 2 - player.width / 2,
-                            static_cast<float>(900) / 2 - player.height / 2,
-                            static_cast<float>(player.width),
-                            static_cast<float>(player.height) };
+    Rectangle character = { 720 - player.width / 2,
+                            450 - player.height / 2,
+                            (player.width),
+                            (player.height) };
 
-    intyh characterSpeed = 1;
+    float characterSpeed = 2;
 
     Rectangle place1 = { 750, 480, 100, 50 };
     Rectangle place2 = { 560, 320, 50, 100 };
@@ -45,7 +45,7 @@
 
         DrawTexture(background, 0, 0, RAYWHITE);
 
-        DrawTexture(player, static_cast<int>(character.x), static_cast<int>(character.y), WHITE);
+        DrawTexture(player, (character.x), (character.y), WHITE);
 
         if (CheckCollisionRecs(character, place1))
         {

@@ -10,18 +10,13 @@ void HiggsFieldGame(bool hasMass) {
 	Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 500, 0, 0);
 
 	const int verticalStep = 84;
-	int horizontalStep = 16;
+	int horizontalStep = 10;
 	const int lowest = 707;
 	const int highest = 539;
 	const int leftStart = -1272;
 	const int rightEnd = -60;
 	int particleVertical = 707;
 	int particleHorizontal = -1272;
-
-	if (hasMass) {
-		particleVertical -= verticalStep;
-		horizontalStep /= 2;
-	}
 
 	while (!WindowShouldClose())
 	{

@@ -8,14 +8,11 @@ void mainMenu()
     Image logo = LoadImage("./assets/images/logo.png");
 
     SetWindowIcon(logo);
-
+    SetTargetFPS(60);
     InitWindow(screenWidth, screenHeight, "Spacio");
 
-    //gameQuiz();
-    //SetTargetFPS(60);
-    //HiggsFieldGame(false);
-    //pickPlanet();
-
+    //chooseLearningStyle();
+    //HiggsFieldGame(true);
     intro();
-    //SpaceShip();
+    //spaceShip();
 }

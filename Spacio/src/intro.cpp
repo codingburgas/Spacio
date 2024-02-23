@@ -61,7 +61,7 @@ void intro() {
 
         if (buttonActions(digIn, quit, buttonTypes::DIGIN))
         {
-            characterPick(Poppins, boldPoppins);
+            chooseLearningStyle();
             break;
         }
 
