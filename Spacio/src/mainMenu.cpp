@@ -11,11 +11,7 @@ void mainMenu()
 
     InitWindow(screenWidth, screenHeight, "Spacio");
 
-    //gameQuiz();
-    //SetTargetFPS(60);
-    //HiggsFieldGame(false);
-    //pickPlanet();
-
-    //intro();
-    spaceShip();
+    //HiggsFieldGame(true);
+    intro();
+    //spaceShip();
 }
