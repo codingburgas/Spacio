@@ -45,7 +45,7 @@ void getStation() {
         DrawTextEx(boldPoppins, "Which station are you launching from?", Vector2{ 280, 260 }, 50, 5, WHITE);
 
 
-        DrawRectangleRec(textBox, LIGHTGRAY);
+        DrawRectangleRec(textBox, GetColor(0x332244ff));
         if (mouseOnText) DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, PURPLE);
         else DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, DARKGRAY);
 
@@ -53,9 +53,8 @@ void getStation() {
         int textX = textBox.x + (textBox.width - textWidth) / 2;
         int textY = textBox.y + (textBox.height - 100) / 2;
 
-        DrawText(name, textX, textY, 100, DARKPURPLE);
+        DrawTextEx(boldPoppins, name, Vector2(textX, textY), 100, 5, RAYWHITE);
 
-        DrawText(TextFormat("INPUT CHARS: %i/%i", letterCount, maxChars), 320, 550, 20, DARKGRAY);
         DrawTextEx(boldPoppins, "Press Enter to continue", Vector2{ 480, 660 }, 50, 5, WHITE);
 
         EndDrawing();

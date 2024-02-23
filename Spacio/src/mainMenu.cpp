@@ -17,5 +17,5 @@ void mainMenu()
     //pickPlanet();
 
     //intro();
-    SpaceShip();
+    spaceShip();
 }

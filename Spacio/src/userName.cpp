@@ -49,10 +49,8 @@ void userName(int pick) {
         ClearBackground(RAYWHITE);
 
 
-        DrawText("Test", 190, 200, 20, LIGHTGRAY);
         DrawTexture(background, 0, 0, RAYWHITE);
 
-        DrawTexture(background, 0, 0, RAYWHITE);
         DrawTextEx(boldPoppins, "What's your name", Vector2(480, 190), 60, 5, RAYWHITE);
 
         DrawRectangleRec(inputBox, GetColor(0x332244ff));

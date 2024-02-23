@@ -1,8 +1,8 @@
-#include "SpaceShip.h"
+#include "spaceShip.h"
     
     std::string userNameStr;
 
-    void SpaceShip()
+    void spaceShip()
     {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
@@ -18,7 +18,7 @@
                             (player.width),
                             (player.height) };
 
-    float characterSpeed = 0.1;
+    float characterSpeed = 0.5;
 
     Rectangle place1 = { 750, 480, 100, 50 };
     Rectangle place2 = { 560, 320, 50, 100 };
