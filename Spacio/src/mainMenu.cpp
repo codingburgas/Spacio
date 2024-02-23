@@ -8,7 +8,7 @@ void mainMenu()
     Image logo = LoadImage("./assets/images/logo.png");
 
     SetWindowIcon(logo);
-
+    SetTargetFPS(60);
     InitWindow(screenWidth, screenHeight, "Spacio");
 
     //chooseLearningStyle();

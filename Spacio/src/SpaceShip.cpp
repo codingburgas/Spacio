@@ -18,7 +18,7 @@
                             (player.width),
                             (player.height) };
 
-    float characterSpeed = 0.5;
+    float characterSpeed = 2;
 
     Rectangle place1 = { 750, 480, 100, 50 };
     Rectangle place2 = { 560, 320, 50, 100 };
