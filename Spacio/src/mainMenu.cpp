@@ -11,7 +11,7 @@ void mainMenu()
 
     InitWindow(screenWidth, screenHeight, "Spacio");
 
-    //HiggsFieldGame(true);
-    intro();
+    HiggsFieldGame(true);
+    //intro();
     //spaceShip();
 }

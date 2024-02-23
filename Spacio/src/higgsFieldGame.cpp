@@ -20,7 +20,11 @@ void HiggsFieldGame(bool hasMass) {
 
 	if (hasMass) {
 		particleVertical -= verticalStep;
-		horizontalStep /= 2;
+		horizontalStep /= 5;
+	}
+	else
+	{
+		horizontalStep = 10;
 	}
 
 	while (!WindowShouldClose())
