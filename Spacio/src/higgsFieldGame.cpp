@@ -82,7 +82,7 @@ void HiggsFieldGame(bool hasMass) {
 		EndDrawing();
 		if (IsKeyPressed(KEY_SPACE))
 		{
-			endScreen();
+			SpaceShip();
 			break;
 		}
 	}

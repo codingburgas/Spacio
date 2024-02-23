@@ -49,7 +49,7 @@ void readyForQuiz()
             gameQuiz();
         }
         else if (CheckCollisionPointRec(GetMousePosition(), buttonNo) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            userConfirm(pick);
+            SpaceShip();
         }
 
         EndDrawing();

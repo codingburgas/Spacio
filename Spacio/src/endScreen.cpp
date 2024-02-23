@@ -24,7 +24,7 @@ void endScreen() {
 
         if (IsKeyPressed(KEY_SPACE))
         {
-            intro();
+            SpaceShip();
             break;
         }
     }
