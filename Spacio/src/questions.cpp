@@ -113,7 +113,7 @@ void questions(bool boyVoice, bool girlVoice)
 
         if (questionCounter == 8)
         {
-            SpaceShip();
+            spaceShip();
             break;
         }
 
