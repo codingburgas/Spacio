@@ -19,6 +19,7 @@
     <ClCompile Include="src\endScreen.cpp" />
     <ClCompile Include="src\SpaceShip.cpp" />
     <ClCompile Include="src\chooseLearningStyle.cpp" />
+    <ClCompile Include="src\endPlanetGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\characterPick.h" />
@@ -39,5 +40,6 @@
     <ClInclude Include="src\endScreen.h" />
     <ClInclude Include="src\SpaceShip.h" />
     <ClInclude Include="src\chooseLearningStyle.h" />
+    <ClInclude Include="src\endPlanetGame.h" />
   </ItemGroup>
 </Project>
