@@ -17,7 +17,8 @@ void endScreen(std::string userNameStr, bool girlVoice, bool boyVoice) {
         if(boyVoice) DrawTexture(boyAstronaut, 740, 222, RAYWHITE);
         if(girlVoice) DrawTexture(girlAstronaut, 740, 222, RAYWHITE);
 
-        DrawTextEx(boldPoppins, "Good job, you did really great!", Vector2(150, 114), 55, 5, WHITE);
+        std::string message = "Good job " + userNameStr + ", you did really great!";
+        DrawTextEx(boldPoppins, message.c_str(), Vector2(150, 114), 55, 5, WHITE);
         DrawTextEx(Poppins, "Press Space to return home", Vector2(150, 470), 40, 5, GRAY);
 
         ClearBackground(RAYWHITE);
