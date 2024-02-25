@@ -34,7 +34,8 @@ void questions(bool boyVoice, bool girlVoice, std::string userNameStr)
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
     Texture2D background = LoadTexture("../assets/images/questionsBackground.png");
-    Texture2D companion = LoadTexture("../assets/images/boyCompanion.png");
+    Texture2D boyCompanion = LoadTexture("../assets/images/boyCompanion.png");
+    Texture2D girlCompanion = LoadTexture("../assets/images/girlCompanion.png");
 
     Rectangle planetButton = { 648, 500, 150, 40 };
     Rectangle higgsButton = { 648, 580, 180, 40 };
@@ -81,7 +82,8 @@ void questions(bool boyVoice, bool girlVoice, std::string userNameStr)
         ClearBackground(RAYWHITE);
 
         DrawTexture(background, 0, 0, RAYWHITE);
-        if(boyVoice) DrawTexture(companion, 50, 250, RAYWHITE);
+        if(boyVoice) DrawTexture(boyCompanion, 50, 250, RAYWHITE);
+        if (girlVoice) DrawTexture(girlCompanion, 50, 250, RAYWHITE);
 
         DrawTextEx(boldPoppins, "Welcome, choose what you want to learn about", Vector2{ 250, 160 }, 50, 5, WHITE);
 
