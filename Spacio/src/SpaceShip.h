@@ -1,5 +1,5 @@
 #pragma once
 #include "pch.h"
 
-void spaceShip();
+void spaceShip(std::string userNameStr);
 

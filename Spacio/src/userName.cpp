@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 
-void userName(int pick) {
+void userName() {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
     Texture2D background = LoadTexture("../assets/images/userNameBackground.png");
@@ -69,25 +69,7 @@ void userName(int pick) {
 
         if (IsKeyPressed(KEY_ENTER))
         {
-            if (pick == 1)
-            {
-                getStation();
-                break;
-            }
-            else if (pick == 2)
-            {
-
-                particlePick(userNameStr);
-
-                break;
-            }
-            else if (pick == 3)
-            {
-
-                natureScript();
-                
-                break;
-            }
+            characterPick(Poppins, boldPoppins, userNameStr);
         }
     }
 }

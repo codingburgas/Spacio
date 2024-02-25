@@ -2,4 +2,4 @@
 
 #include "pch.h"
 
-void gameQuiz();
+void gameQuiz(std::string userNameStr);

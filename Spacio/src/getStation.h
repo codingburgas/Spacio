@@ -1,6 +1,6 @@
 #pragma once
 #include "pch.h"
 
-void getStation();
+void getStation(std::string userNameStr);
 
 

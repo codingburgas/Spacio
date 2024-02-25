@@ -1,6 +1,6 @@
 #include "higgsFieldGame.h"
 
-void HiggsFieldGame(bool hasMass) {
+void HiggsFieldGame(bool hasMass, std::string userNameStr) {
 	Texture2D background = LoadTexture("../assets/images/higgsfieldBg.png");
 	Texture2D particle = LoadTexture("../assets/images/particle.png");
 
@@ -10,7 +10,7 @@ void HiggsFieldGame(bool hasMass) {
 	Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 500, 0, 0);
 
 	const int verticalStep = 84;
-	int horizontalStep = 10;
+	int horizontalStep = 16;
 	const int lowest = 707;
 	const int highest = 539;
 	const int leftStart = -1272;
@@ -77,7 +77,7 @@ void HiggsFieldGame(bool hasMass) {
 		EndDrawing();
 		if (IsKeyPressed(KEY_SPACE))
 		{
-			spaceShip();
+			spaceShip(userNameStr);
 			break;
 		}
 	}

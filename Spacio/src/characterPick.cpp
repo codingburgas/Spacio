@@ -32,7 +32,7 @@ bool pickVoice(Rectangle boyBox, Rectangle girlBox)
     return girlVoice || boyVoice;
 }
 
-void characterPick(Font Poppins, Font boldPoppins)
+void characterPick(Font Poppins, Font boldPoppins, std::string userNameStr)
 {
     Texture2D background = LoadTexture("../assets/images/characterPickBackground.png");
     
@@ -58,9 +58,15 @@ void characterPick(Font Poppins, Font boldPoppins)
 
         pickVoice(boyBox, girlBox);
 
-        if (pickVoice(boyBox, girlBox))
+        if (boyVoice)
         {
-            questions(boyVoice, girlVoice);
+            chooseLearningStyle(boyVoice, girlVoice, userNameStr);
+            break;
+        }
+
+        if (girlVoice)
+        {
+            chooseLearningStyle(boyVoice, girlVoice, userNameStr);
             break;
         }
 

@@ -20,3 +20,4 @@
 #include "endScreen.h"
 #include "spaceShip.h"
 #include "chooseLearningStyle.h"
+#include "endPlanetGame.h"

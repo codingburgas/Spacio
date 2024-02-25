@@ -3,4 +3,4 @@
 
 void Cursor(Rectangle buttonYes, Rectangle buttonNo);
 
-void readyForQuiz();
+void readyForQuiz(std::string userNameStr);

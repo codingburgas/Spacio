@@ -1,7 +1,7 @@
 #include "userConfirm.h"
 #include <iostream>
 
-void userConfirm(int pick)
+void userConfirm(int pick, std::string userNameStr)
 {
     Texture2D background = LoadTexture("../assets/images/userConfirmBackground.png");
     std::string choice;
@@ -37,25 +37,24 @@ void userConfirm(int pick)
 
         if (IsKeyPressed(KEY_ENTER))
         {
-            userName(pick);
+            if (pick == 1) getStation(userNameStr);
+            else if (pick == 2) particlePick(userNameStr);
+            else if (pick == 3) natureScript(userNameStr);
             break;
         }
         else if (IsKeyPressed(KEY_ONE))
         {
-            pick = 1;
-            userName(pick);
+            getStation(userNameStr);
             break;
         }
         else if (IsKeyPressed(KEY_TWO))
         {
-            pick = 2;
-            userName(pick);
+            particlePick(userNameStr);
             break;
         }
         else if (IsKeyPressed(KEY_THREE))
         {
-            pick = 3;
-            userName(pick);
+            natureScript(userNameStr);
             break;
         }
 
