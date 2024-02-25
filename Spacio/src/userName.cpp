@@ -7,7 +7,6 @@ void userName() {
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
     Texture2D background = LoadTexture("../assets/images/userNameBackground.png");
 
-
     Rectangle inputBox = { 320, 380, 860, 120 };
     const int maxChars = 15;
     char name[maxChars + 1] = "\0";
@@ -15,10 +14,24 @@ void userName() {
     bool mouseOnText = false;
     int framesCounter = 0;
 
+    InitAudioDevice();
+
+    Music audio = LoadMusicStream("../assets/audios/userName.mp3");
+    PlayMusicStream(audio);
+
+    float audioSecond = GetMusicTimeLength(audio);
+    float audioTime = 0.0;
+
     SetMouseCursor(MOUSE_CURSOR_ARROW);
 
     while (!WindowShouldClose())
     {
+        if (IsMusicStreamPlaying(audio) and audioTime < 3.2)
+        {
+            UpdateMusicStream(audio);
+            audioTime += GetFrameTime();
+        }
+
         if (CheckCollisionPointRec(GetMousePosition(), inputBox)) mouseOnText = true;
         else mouseOnText = false;
 
