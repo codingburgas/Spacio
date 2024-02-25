@@ -20,6 +20,9 @@ void readyForQuiz(std::string userNameStr, bool girlVoice, bool boyVoice)
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
     Texture2D background = LoadTexture("../assets/images/readyBackground.png");
+    Texture2D girlAstronaut = LoadTexture("../assets/images/readyForQuizGirlAstronaut.png");
+    Texture2D boyAstronaut = LoadTexture("../assets/images/astronaut.png");
+
     Texture2D starYes = LoadTexture("../assets/images/starYes.png");
     Texture2D starNo = LoadTexture("../assets/images/starNo.png");
 
@@ -34,6 +37,7 @@ void readyForQuiz(std::string userNameStr, bool girlVoice, bool boyVoice)
         ClearBackground(RAYWHITE);
 
         DrawTexture(background, 0, 0, RAYWHITE);
+        if(girlVoice) DrawTexture(girlAstronaut, 50, 250, RAYWHITE);
         
         DrawTextEx(boldPoppins, "Are you ready for a quiz?", Vector2(450, 50), 50, 5, WHITE);
         
