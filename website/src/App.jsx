@@ -21,6 +21,7 @@ import higgsPreview from './assets/higgsBosonPreview.png';
 import naturePreview from './assets/naturePreview.png';
 import github from './assets/gitHubLogo.png';
 import pgkpi from './assets/PGKPIlogo.png';
+import planetPreview from './assets/planetsPreview.png';
  
 function App() {
   return (
@@ -198,7 +199,7 @@ function App() {
 
             <div class="flex flex-row">
               <p class="text-white mr-[14.2vw] mt-20" data-aos="zoom-in-right">Fun experience.</p>
-              <img src={naturePreview} alt="Nature's preview" className='w-auto h-[20vw]' data-aos="zoom-in-left" />
+              <img src={planetPreview} alt="Planet's preview" className='w-auto h-[20vw]' data-aos="zoom-in-left" />
             </div>
           </div>
         </div>
