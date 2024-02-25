@@ -26,7 +26,7 @@ void endPlanetGame()
                     pickPlanet();
                     break;
                 }
-                if (CheckCollisionPointRec(GetMousePosition(), tryAgain)) {
+                if (CheckCollisionPointRec(GetMousePosition(), quit)) {
                     break;
                 }
             }
@@ -43,7 +43,7 @@ void endPlanetGame()
                     pickPlanet();
                     break;
                 }
-                if (CheckCollisionPointRec(GetMousePosition(), tryAgain)) {
+                if (CheckCollisionPointRec(GetMousePosition(), quit)) {
                     break;
                 }
             }
