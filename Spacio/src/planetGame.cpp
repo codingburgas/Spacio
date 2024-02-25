@@ -604,6 +604,7 @@ void planetGame() {
     InitAudioDevice();
     Sound haltInturder = LoadSound("../assets/audios/haltIntruder.mp3");
     Sound youNeedToAnswer = LoadSound("../assets/audios/youNeedToAnswerSomeQuestions.mp3");
+    Sound captainSpeaking = LoadSound("../assets/audios/captainSpeaking.mp3");
 
     while (!WindowShouldClose()) {
 
@@ -633,7 +634,7 @@ void planetGame() {
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here the sun is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
-
+                PlaySound(captainSpeaking);
                 frameCounter++;
 
                 if (frameCounter > firstTextDuration) {
@@ -653,6 +654,7 @@ void planetGame() {
                
                 DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 700), 40, 2, BLUE);
                 PlaySound(haltInturder);
+                
                 if (IsKeyPressed(KEY_ENTER)) {
 
                     okTextShown = true;
@@ -958,6 +960,7 @@ void planetGame() {
                 DrawTexture(mercury, GetScreenWidth() / 2 - mercury.width / 2, posY, RAYWHITE);
             if (!firstTextShown) {
                 DrawTextEx(Poppins, "Wow! Here Mercury is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
+                PlaySound(captainSpeaking);
                 frameCounter++;
                 if (frameCounter > firstTextDuration) {
 
@@ -1275,7 +1278,7 @@ void planetGame() {
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Venus is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
-
+                PlaySound(captainSpeaking);
                 frameCounter++;
 
                 if (frameCounter > firstTextDuration) {
@@ -1591,7 +1594,7 @@ void planetGame() {
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Earth is! We are back!", Vector2(420, 500), 48, 2, RAYWHITE);
-
+                PlaySound(captainSpeaking);
                 frameCounter++;
 
                 if (frameCounter > firstTextDuration) {
@@ -1906,7 +1909,7 @@ void planetGame() {
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Mars is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
-
+                PlaySound(captainSpeaking);
 
                 frameCounter++;
 
@@ -2265,7 +2268,7 @@ void planetGame() {
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Jupiter is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
-
+                PlaySound(captainSpeaking);
 
                 frameCounter++;
 
@@ -2624,7 +2627,7 @@ void planetGame() {
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Saturn is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
-
+                PlaySound(captainSpeaking);
 
                 frameCounter++;
 
@@ -2973,7 +2976,7 @@ void planetGame() {
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Uranus is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
-
+                PlaySound(captainSpeaking);
 
                 frameCounter++;
 
@@ -3332,7 +3335,7 @@ void planetGame() {
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Neptune is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
-
+                PlaySound(captainSpeaking);
 
                 frameCounter++;
 
