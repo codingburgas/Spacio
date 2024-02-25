@@ -37,7 +37,8 @@ void readyForQuiz(std::string userNameStr, bool girlVoice, bool boyVoice)
         ClearBackground(RAYWHITE);
 
         DrawTexture(background, 0, 0, RAYWHITE);
-        if(girlVoice) DrawTexture(girlAstronaut, 50, 250, RAYWHITE);
+        if (boyVoice) DrawTexture(boyAstronaut, 50, 250, RAYWHITE);
+        if (girlVoice) DrawTexture(girlAstronaut, 50, 250, RAYWHITE);
         
         DrawTextEx(boldPoppins, "Are you ready for a quiz?", Vector2(450, 50), 50, 5, WHITE);
         
