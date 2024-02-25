@@ -1,7 +1,7 @@
 #include "gameQuiz.h"
 #include <iostream>
 
-void gameQuiz(std::string userNameStr)
+void gameQuiz(std::string userNameStr, bool girlVoice, bool boyVoice)
 {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
@@ -167,11 +167,11 @@ void gameQuiz(std::string userNameStr)
 
         if (wrongCounter == 3)
         {
-                readyForQuiz(userNameStr);
+                readyForQuiz(userNameStr, girlVoice, boyVoice);
                 break;
         }
         else if (questionCounter == 8) {
-            endScreen(userNameStr);
+            endScreen(userNameStr, girlVoice, boyVoice);
         }
 
         EndDrawing();

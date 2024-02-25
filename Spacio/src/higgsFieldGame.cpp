@@ -1,6 +1,6 @@
 #include "higgsFieldGame.h"
 
-void HiggsFieldGame(bool hasMass, std::string userNameStr) {
+void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool boyVoice) {
 	Texture2D background = LoadTexture("../assets/images/higgsfieldBg.png");
 	Texture2D particle = LoadTexture("../assets/images/particle.png");
 
@@ -77,7 +77,7 @@ void HiggsFieldGame(bool hasMass, std::string userNameStr) {
 		EndDrawing();
 		if (IsKeyPressed(KEY_SPACE))
 		{
-			spaceShip(userNameStr);
+			endScreen(userNameStr, girlVoice, boyVoice);
 			break;
 		}
 	}

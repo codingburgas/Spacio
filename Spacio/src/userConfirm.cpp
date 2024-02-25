@@ -43,8 +43,8 @@ void userConfirm(int pick, std::string userNameStr, bool boyVoice, bool girlVoic
         if (IsKeyPressed(KEY_ENTER))
         {
             if (pick == 1) getStation(userNameStr);
-            else if (pick == 2) particlePick(userNameStr);
-            else if (pick == 3) natureScript(userNameStr);
+            else if (pick == 2) particlePick(userNameStr, girlVoice, boyVoice);
+            else if (pick == 3) natureScript(userNameStr, girlVoice, boyVoice);
             break;
         }
         else if (IsKeyPressed(KEY_ONE))
@@ -54,12 +54,12 @@ void userConfirm(int pick, std::string userNameStr, bool boyVoice, bool girlVoic
         }
         else if (IsKeyPressed(KEY_TWO))
         {
-            particlePick(userNameStr);
+            particlePick(userNameStr, girlVoice, boyVoice);
             break;
         }
         else if (IsKeyPressed(KEY_THREE))
         {
-            natureScript(userNameStr);
+            natureScript(userNameStr, girlVoice, boyVoice);
             break;
         }
 

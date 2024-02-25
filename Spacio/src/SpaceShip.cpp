@@ -1,7 +1,7 @@
 #include "spaceShip.h"
 
 
-void spaceShip(std::string userNameStr)
+void spaceShip(std::string userNameStr, bool girlVoice, bool boyVoice)
 {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
@@ -65,7 +65,7 @@ void spaceShip(std::string userNameStr)
 
         if (CheckCollisionRecs(character, natureLocation) && IsKeyDown(KEY_E))
         {
-            natureScript(userNameStr);
+            natureScript(userNameStr, girlVoice, boyVoice);
             break;
         }
 
@@ -77,7 +77,7 @@ void spaceShip(std::string userNameStr)
         if (CheckCollisionRecs(character, bosonLocation) && IsKeyDown(KEY_E))
         {
 
-            particlePick(userNameStr);
+            particlePick(userNameStr, girlVoice, boyVoice);
             break;
         }
 

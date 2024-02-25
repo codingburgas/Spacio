@@ -23,7 +23,7 @@ void mouseCursorParticles(Rectangle masslessParticle, Rectangle massParticle)
     }
 }
 
-void particlePick(std::string userNameStr) {
+void particlePick(std::string userNameStr, bool girlVoice, bool boyVoice) {
 	Texture2D background = LoadTexture("../assets/images/chooseParticleBg.png");
 	
 
@@ -49,11 +49,11 @@ void particlePick(std::string userNameStr) {
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             if (mouseCursorOnRectangle(masslessParticle)) {
-                HiggsFieldGame(false, userNameStr);
+                HiggsFieldGame(false, userNameStr, girlVoice, boyVoice);
                 break;
             }
             if (mouseCursorOnRectangle(massParticle)) {
-                HiggsFieldGame(true, userNameStr);
+                HiggsFieldGame(true, userNameStr, girlVoice, boyVoice);
                 break;
             }
         }

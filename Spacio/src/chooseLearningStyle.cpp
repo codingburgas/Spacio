@@ -49,7 +49,7 @@ void chooseLearningStyle(bool boyVoice, bool girlVoice, std::string userNameStr)
                 break;
             }
             if (cursorOnRectangle(playing)) {
-                spaceShip(userNameStr);
+                spaceShip(userNameStr, girlVoice, boyVoice);
                 break;
             }
         }
