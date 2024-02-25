@@ -42,10 +42,21 @@ void characterPick(Font Poppins, Font boldPoppins, std::string userNameStr)
     Rectangle boyBox = { 285, 200, 161, 204 };
     Rectangle girlBox = { 1018, 180, 214, 214 };
 
+    Music audio = LoadMusicStream("../assets/audios/characterPick.mp3");
+    PlayMusicStream(audio);
+
+    float audioSecond = GetMusicTimeLength(audio);
+    float audioTime = 0.0;
+
     while (!WindowShouldClose())
     {
-
         BeginDrawing();
+
+        if (IsMusicStreamPlaying(audio) and audioTime < 1.1)
+        {
+            UpdateMusicStream(audio);
+            audioTime += GetFrameTime();
+        }
 
         DrawTexture(background, 0, 0, RAYWHITE);
 
@@ -75,4 +86,5 @@ void characterPick(Font Poppins, Font boldPoppins, std::string userNameStr)
         EndDrawing();
     }
 
+    StopMusicStream(audio);
 }

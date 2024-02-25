@@ -14,8 +14,6 @@ void userName() {
     bool mouseOnText = false;
     int framesCounter = 0;
 
-    InitAudioDevice();
-
     Music audio = LoadMusicStream("../assets/audios/userName.mp3");
     PlayMusicStream(audio);
 
@@ -85,4 +83,7 @@ void userName() {
             characterPick(Poppins, boldPoppins, userNameStr);
         }
     }
+    StopMusicStream(audio);
+
+    CloseAudioDevice();
 }

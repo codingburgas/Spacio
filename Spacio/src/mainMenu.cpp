@@ -11,10 +11,9 @@ void mainMenu()
     SetTargetFPS(60);
     InitWindow(screenWidth, screenHeight, "Spacio");
 
-    //chooseLearningStyle();
-    //HiggsFieldGame(true);
-    //intro();
-    //intro();
-    pickPlanet();
+    InitAudioDevice();
+
+    intro();
+    //pickPlanet();
     //spaceShip();
 }
