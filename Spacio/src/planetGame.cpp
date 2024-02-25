@@ -65,9 +65,9 @@ void planetGame() {
 
     Texture2D background = LoadTexture("../assets/images/spaceGameBackground.png");
 
-    Rectangle left{ 120, 500, 500, 94 };
+    Rectangle left{ 120, 500, 520, 94 };
 
-    Rectangle right = { 800, 500, 500, 94 };
+    Rectangle right = { 800, 500, 520, 94 };
 
     Texture2D rocket = LoadTexture("../assets/images/rocket.png");
 
@@ -189,15 +189,15 @@ void planetGame() {
 
 
     const char* rightInformation[9] = {
-        "Energy production: Converting hydrogen\n into helium\nAge : Approximately 4.6 billion years\nComposition : Hydrogen(74 %) and helium (24 %)",
-        "Energy production: Primarily reflects\n sunlight\nAge: Approximately 4.5 billion years\nComposition: Mostly silicate rock and metals",
-        "Energy production: Reflects and \nabsorbs sunlight\nAge: Approximately 4.5 billion years\nComposition: Carbon dioxide (96.5%), nitrogen (3.5%)",
-        "Energy production: Various sources, \nincluding solar radiation\nAge: Approximately 4.5 billion years\nComposition: Iron (32.1%), oxygen (30.1%), silicon (15.1%), magnesium (13.9%)",
-        "Energy production: Receives sunlight\nAge: Approximately 4.6 billion years\nComposition: Iron oxide (88.8%), silicon dioxide (7.2%)",
-        "Energy production: Releases more heat \nthan it receives from the Sun\nAge: Approximately 4.5 billion years\nComposition: Hydrogen (89.8%), helium (10.2%)",
-        "Energy production: Primarily reflects\n sunlight\nAge: Approximately 4.5 billion years\nComposition: Hydrogen (96.3%), helium (3.3%)",
-        "Energy production: Absorbs and \nreflects sunlight\nAge: Approximately 4.5 billion years\nComposition: Hydrogen (83%), helium (15%), methane (2%)",
-        "Energy production: Absorbs and \nreflects sunlight\nAge: Approximately 4.5 billion years\nComposition: Hydrogen (80%), helium (19%), methane (1.5%)"
+        "Energy production: Converting hydrogen\n into helium\nAge : Approximately 4.6 billion years\nComposition : Hydrogen(74 %)\n and helium (24 %)",
+        "Energy production: Primarily reflects\n sunlight\nAge: Approximately 4.5 billion years\nComposition: Mostly silicate\n rock and metals",
+        "Energy production: Reflects and \nabsorbs sunlight\nAge: Approximately 4.5 billion years\nComposition: Carbon dioxide\n (96.5%), nitrogen (3.5%)",
+        "Energy production: Various sources, \nincluding solar radiation\nAge: Approximately 4.5 billion years\nComposition: Iron\n (32.1%), oxygen (30.1%), silicon (15.1%), magnesium (13.9%)",
+        "Energy production: Receives sunlight\nAge: Approximately 4.6 billion years\nComposition: Iron oxide (88.8%), \nsilicon dioxide (7.2%)",
+        "Energy production: Releases more heat \nthan it receives from the Sun\nAge: Approximately 4.5 billion years\nComposition: Hydrogen \n(89.8%), helium (10.2%)",
+        "Energy production: Primarily reflects\n sunlight\nAge: Approximately 4.5 billion years\nComposition: Hydrogen (96.3%), \nhelium (3.3%)",
+        "Energy production: Absorbs and \nreflects sunlight\nAge: Approximately 4.5 billion years\nComposition: Hydrogen (83%),\n helium (15%), methane (2%)",
+        "Energy production: Absorbs and \nreflects sunlight\nAge: Approximately 4.5 billion years\nComposition: Hydrogen (80%),\n helium (19%), methane (1.5%)"
     };
 
 
@@ -601,6 +601,9 @@ void planetGame() {
 
     int infoCounter = 0;
 
+    InitAudioDevice();
+    Sound haltInturder = LoadSound("../assets/audios/haltIntruder.mp3");
+    Sound youNeedToAnswer = LoadSound("../assets/audios/youNeedToAnswerSomeQuestions.mp3");
 
     while (!WindowShouldClose()) {
 
@@ -647,9 +650,9 @@ void planetGame() {
 
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
-
+               
                 DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 700), 40, 2, BLUE);
-
+                PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
 
                     okTextShown = true;
@@ -659,7 +662,7 @@ void planetGame() {
             }
 
             else {
-
+                
                 if (badGuysLeftX < 0) {
 
                     badGuysLeftX += badGuysSpeed;
@@ -677,20 +680,22 @@ void planetGame() {
                 DrawTexture(badGuysRight, badGuysRightX, 0, RAYWHITE);
 
                 if (!dialogShown2) {
-
+                   
                     DrawTextEx(Poppins, "press ENTER to continue", Vector2(120, 840), 30, 2, BLUE);
 
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
+                        PlaySound(youNeedToAnswer);
 
                         DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
-
+                      
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown = true;
 
                         }
+
 
                     }
 
@@ -968,7 +973,7 @@ void planetGame() {
 
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
-
+                PlaySound(haltInturder);
                 DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
 
                 if (IsKeyPressed(KEY_ENTER)) {
@@ -1004,7 +1009,7 @@ void planetGame() {
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
-
+                        PlaySound(youNeedToAnswer);
                         DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
                         if (IsKeyPressed(KEY_ENTER)) {
@@ -1287,7 +1292,7 @@ void planetGame() {
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
-
+                PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
                         okTextShown = true;
 
@@ -1320,7 +1325,7 @@ void planetGame() {
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
-
+                        PlaySound(youNeedToAnswer);
                         DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
                         if (IsKeyPressed(KEY_ENTER)) {
@@ -1605,7 +1610,7 @@ void planetGame() {
                 DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
 
                 if (IsKeyPressed(KEY_ENTER)) {
-
+                    PlaySound(haltInturder);
                     okTextShown = true;
 
                 }
@@ -1637,7 +1642,7 @@ void planetGame() {
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
-
+                        PlaySound(youNeedToAnswer);
                         DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
                         if (IsKeyPressed(KEY_ENTER)) {
@@ -1919,7 +1924,7 @@ void planetGame() {
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
-
+                PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
 
                     okTextShown = true;
@@ -1956,7 +1961,7 @@ void planetGame() {
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
-
+                        PlaySound(youNeedToAnswer);
                         DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
                         if (IsKeyPressed(KEY_ENTER)) {
@@ -2278,7 +2283,7 @@ void planetGame() {
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
-
+                PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
 
                     okTextShown = true;
@@ -2315,7 +2320,7 @@ void planetGame() {
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
-
+                        PlaySound(youNeedToAnswer);
                         DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
                         if (IsKeyPressed(KEY_ENTER)) {
@@ -2637,7 +2642,7 @@ void planetGame() {
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
-
+                PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
 
                     okTextShown = true;
@@ -2674,7 +2679,7 @@ void planetGame() {
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
-
+                        PlaySound(youNeedToAnswer);
                         DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
                         if (IsKeyPressed(KEY_ENTER)) {
@@ -2986,7 +2991,7 @@ void planetGame() {
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
-
+                PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
 
                     okTextShown = true;
@@ -3023,7 +3028,7 @@ void planetGame() {
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
-
+                        PlaySound(youNeedToAnswer);
                         DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
                         if (IsKeyPressed(KEY_ENTER)) {
@@ -3345,7 +3350,7 @@ void planetGame() {
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
-
+                PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
 
                     okTextShown = true;
@@ -3382,7 +3387,7 @@ void planetGame() {
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
-
+                        PlaySound(youNeedToAnswer);
                         DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
                         if (IsKeyPressed(KEY_ENTER)) {

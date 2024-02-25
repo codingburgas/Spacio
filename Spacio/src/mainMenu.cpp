@@ -14,6 +14,7 @@ void mainMenu()
     //chooseLearningStyle();
     //HiggsFieldGame(true);
     //intro();
-    intro();
+    //intro();
+    pickPlanet();
     //spaceShip();
 }
