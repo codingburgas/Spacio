@@ -14,7 +14,7 @@ void Cursor(Rectangle buttonYes, Rectangle buttonNo)
 }
 
 
-void readyForQuiz()
+void readyForQuiz(std::string userNameStr)
 {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
@@ -46,10 +46,12 @@ void readyForQuiz()
         void Cursor(Rectangle buttonYes, Rectangle buttonNo);
 
         if (CheckCollisionPointRec(GetMousePosition(), buttonYes) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            gameQuiz();
+            gameQuiz(userNameStr);
+            break;
         }
         else if (CheckCollisionPointRec(GetMousePosition(), buttonNo) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            spaceShip();
+            spaceShip(userNameStr);
+            break;
         }
 
         EndDrawing();

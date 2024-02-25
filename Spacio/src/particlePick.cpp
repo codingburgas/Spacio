@@ -49,11 +49,11 @@ void particlePick(std::string userNameStr) {
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             if (mouseCursorOnRectangle(masslessParticle)) {
-                HiggsFieldGame(false);
+                HiggsFieldGame(false, userNameStr);
                 break;
             }
             if (mouseCursorOnRectangle(massParticle)) {
-                HiggsFieldGame(true);
+                HiggsFieldGame(true, userNameStr);
                 break;
             }
         }

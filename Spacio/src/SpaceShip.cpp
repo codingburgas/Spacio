@@ -2,7 +2,7 @@
 
 std::string userNameStr;
 
-void spaceShip()
+void spaceShip(std::string userNameStr)
 {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
@@ -26,6 +26,7 @@ void spaceShip()
 
     while (!WindowShouldClose())
     {
+
 
         if (IsKeyDown(KEY_RIGHT))
         {
@@ -61,7 +62,7 @@ void spaceShip()
 
         if (CheckCollisionRecs(character, natureLocation) && IsKeyDown(KEY_E))
         {
-            natureScript();
+            natureScript(userNameStr);
             break;
         }
 
@@ -85,7 +86,7 @@ void spaceShip()
         if (CheckCollisionRecs(character, planetsLocation) && IsKeyDown(KEY_E))
         {
 
-            getStation();
+            getStation(userNameStr);
             break;
         }
 

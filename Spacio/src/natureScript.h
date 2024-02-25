@@ -2,4 +2,4 @@
 
 #include "pch.h"
 
-void natureScript();
+void natureScript(std::string userNameStr);

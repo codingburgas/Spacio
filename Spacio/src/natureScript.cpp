@@ -1,6 +1,6 @@
 #include "natureScript.h"
 
-void natureScript()
+void natureScript(std::string userNameStr)
 {
          Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
          Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
@@ -52,7 +52,7 @@ void natureScript()
 
          if (counter == 8)
          {
-             readyForQuiz();
+             readyForQuiz(userNameStr);
              break;
 
          }

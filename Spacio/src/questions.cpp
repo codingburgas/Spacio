@@ -28,7 +28,7 @@ void confirmReady(int higgs, int planets, int& pick) {
     }
 }
 
-void questions(bool boyVoice, bool girlVoice)
+void questions(bool boyVoice, bool girlVoice, std::string userNameStr)
 {
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
@@ -113,7 +113,7 @@ void questions(bool boyVoice, bool girlVoice)
 
         if (questionCounter == 8)
         {
-            spaceShip();
+            userConfirm(pick, userNameStr);
             break;
         }
 

@@ -21,7 +21,7 @@ void mouseCursorLearningStyle(Rectangle reading, Rectangle playing)
     }
 }
 
-void chooseLearningStyle() {
+void chooseLearningStyle(bool boyVoice, bool girlVoice, std::string userNameStr) {
 	Texture2D background = LoadTexture("../assets/images/chooseLearningStyleBg.png");
 
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, 0, 0);
@@ -45,11 +45,11 @@ void chooseLearningStyle() {
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             if (cursorOnRectangle(reading)) {
-                characterPick(Poppins, boldPoppins);
+                questions(boyVoice, girlVoice, userNameStr);
                 break;
             }
             if (cursorOnRectangle(playing)) {
-                spaceShip();
+                spaceShip(userNameStr);
                 break;
             }
         }

@@ -61,7 +61,7 @@ void intro() {
 
         if (buttonActions(digIn, quit, buttonTypes::DIGIN))
         {
-            chooseLearningStyle();
+            userName();
             break;
         }
 
