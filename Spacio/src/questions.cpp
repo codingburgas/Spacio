@@ -115,7 +115,7 @@ void questions(bool boyVoice, bool girlVoice, std::string userNameStr)
 
         if (questionCounter == 8)
         {
-            userConfirm(pick, userNameStr);
+            userConfirm(pick, userNameStr, boyVoice, girlVoice);
             break;
         }
 

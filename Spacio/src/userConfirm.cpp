@@ -1,9 +1,10 @@
 #include "userConfirm.h"
 #include <iostream>
 
-void userConfirm(int pick, std::string userNameStr)
+void userConfirm(int pick, std::string userNameStr, bool boyVoice, bool girlVoice)
 {
     Texture2D background = LoadTexture("../assets/images/userConfirmBackground.png");
+    Texture2D girlAstronaut = LoadTexture("../assets/images/girlAstronautSure.png");
     std::string choice;
 
     Font poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
@@ -31,6 +32,7 @@ void userConfirm(int pick, std::string userNameStr)
         ClearBackground(RAYWHITE);
 
         DrawTexture(background, 0, 0, RAYWHITE);
+        if (girlVoice) DrawTexture(girlAstronaut, 50, 250, RAYWHITE);
         DrawTextEx(boldPoppins, ("It seems like you're interested in " + choice + "\nWould you like to change the subject?").c_str(), Vector2(400, 120), 50, 3, RAYWHITE);
 
         DrawTextEx(poppins, "Press Enter to continue\n\nPress 1 to learn about Planets\nPress 2 for Higgs Boson\nPress 3 for Nature", Vector2(675, 420), 50, 3, GetColor(0xBABABAff));
