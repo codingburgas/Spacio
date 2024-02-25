@@ -87,26 +87,22 @@ function App() {
             <img
               src={star}
               alt="Stars"
-              className="-rotate-45 absolute right-[45%] select-none scale-75"
-              data-aos="fade-up-left"
+              className="-rotate-45 absolute right-[45%] select-none scale-75 max-2xl:opacity-0"
             />
             <img
               src={star}
               alt="Stars"
-              className="rotate-[120deg] absolute right-1/2 top-[140vh] scale-[0.8] select-none"
-              data-aos="fade-up-left"
+              className="rotate-[120deg] absolute right-1/2 top-[140vh] scale-[0.8] select-none max-2xl:opacity-0"
             />
             <img
               src={star}
               alt="Stars"
-              className="rotate-[15deg] absolute right-[20%] top-[160vh] select-none z-10"
-              data-aos="fade-up-left"
+              className="rotate-[15deg] absolute right-[20%] top-[160vh] select-none z-10 max-2xl:opacity-0"
             />
             <img
               src={star}
               alt="Stars"
-              className="-rotate-[27deg] absolute right-[5%] select-none z-10"
-              data-aos="fade-up-left"
+              className="-rotate-[27deg] absolute right-[5%] select-none z-10 max-2xl:opacity-0"
             />
   </div>
         </div> 
@@ -205,7 +201,7 @@ function App() {
         </div>
 
         <div>
-        <img src={star} className='absolute right-[18vw] top-[465vh] w-[6vw] rotate-12 select-none' data-aos="fade-down-left"/>
+        <img src={star} className='absolute right-[18vw] top-[465vh] w-[6vw] rotate-12 select-none max-2xl:opacity-0'/>
         <h1 className='text-center relative z-10 text-white font-thin text-[2.4vw] mb-[20vh] mt-[30vh]'>If <span className='font-bold text-[#81689D]'>you like</span> our application - Give us a <span className='font-bold text-[#81689D]'>star </span> in <a href="https://github.com/codingburgas/2324-space-sprint-project-spacio/tree/main"><span className='font-bold text-[#81689D]'>Github</span></a>!</h1>
       </div>
 
