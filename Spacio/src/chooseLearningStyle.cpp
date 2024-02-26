@@ -50,6 +50,15 @@ void chooseLearningStyle(bool boyVoice, bool girlVoice, std::string userNameStr)
                 audioTime += GetFrameTime();
             }
         }
+        else if (boyVoice)
+        {
+            PlayMusicStream(boy);
+            if (IsMusicStreamPlaying(boy) and audioTime < boySecond)
+            {
+                UpdateMusicStream(boy);
+                audioTime += GetFrameTime();
+            }
+        }
 
         DrawTexture(background, 0, 0, RAYWHITE);
 
