@@ -25,8 +25,6 @@ void spaceShip(std::string userNameStr, bool girlVoice, bool boyVoice)
 
     while (!WindowShouldClose())
     {
-
-
         if (IsKeyDown(KEY_RIGHT))
         {
             player = LoadTexture("../assets/images/gameCharacterRotated.png");

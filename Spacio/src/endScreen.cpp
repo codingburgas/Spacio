@@ -22,7 +22,7 @@ void endScreen(std::string userNameStr, bool girlVoice, bool boyVoice) {
         if (girlVoice)
         {
             PlayMusicStream(girl);
-            if (IsMusicStreamPlaying(girl) and audioTime <= girlSecond)
+            if (IsMusicStreamPlaying(girl) and audioTime <= 2.7)
             {
                 UpdateMusicStream(girl);
                 audioTime += GetFrameTime();
@@ -31,7 +31,7 @@ void endScreen(std::string userNameStr, bool girlVoice, bool boyVoice) {
         else if (boyVoice)
         {
             PlayMusicStream(boy);
-            if (IsMusicStreamPlaying(boy) and audioTime <= boySecond)
+            if (IsMusicStreamPlaying(boy) and audioTime <= 2.7)
             {
                 UpdateMusicStream(boy);
                 audioTime += GetFrameTime();
