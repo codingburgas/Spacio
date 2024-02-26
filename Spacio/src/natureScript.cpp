@@ -71,7 +71,7 @@ void natureScript(std::string userNameStr, bool girlVoice, bool boyVoice)
         if (girlVoice)
         {
             DrawTexture(imagesGirl[current], 60, 250, WHITE);
-            if (IsMusicStreamPlaying(audioGirl) and audioTime < 65)
+            if (IsMusicStreamPlaying(audioGirl) and audioTime < 73)
             {
                 UpdateMusicStream(audioGirl);
                 audioTime += GetFrameTime();
