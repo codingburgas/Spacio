@@ -29,36 +29,63 @@ void readyForQuiz(std::string userNameStr, bool girlVoice, bool boyVoice)
     Rectangle buttonYes = { 850, 170, 300, 300 };
     Rectangle buttonNo = { 850, 500, 300, 300 };
 
+    Music audioBoy = LoadMusicStream("../assets/audios/readyMale.mp3");
+    PlayMusicStream(audioBoy);
+
+    Music audioGirl = LoadMusicStream("../assets/audios/readyFemale.mp3");
+    PlayMusicStream(audioGirl);
+
+    float audioTime = 0.0;
+
     while (!WindowShouldClose())
     {
 
-        BeginDrawing();
+        BeginDrawing(); 
 
-        ClearBackground(RAYWHITE);
+                if (boyVoice)
+                {
+                    if (IsMusicStreamPlaying(audioBoy) and audioTime < 1.7)
+                    {
+                        UpdateMusicStream(audioBoy);
+                        audioTime += GetFrameTime();
+                    }
+                }
 
-        DrawTexture(background, 0, 0, RAYWHITE);
-        if (boyVoice) DrawTexture(boyAstronaut, 50, 250, RAYWHITE);
-        if (girlVoice) DrawTexture(girlAstronaut, 50, 250, RAYWHITE);
-        
-        DrawTextEx(boldPoppins, "Are you ready for a quiz?", Vector2(450, 50), 50, 5, WHITE);
-        
-        DrawTexture(starYes, 800, 150, RAYWHITE);
-        DrawTexture(starNo, 800, 450, RAYWHITE);
+                if (girlVoice)
+                {
+                    if (IsMusicStreamPlaying(audioGirl) and audioTime < 2.3)
+                    {
+                        UpdateMusicStream(audioGirl);
+                        audioTime += GetFrameTime();
+                    }
+                }
 
-        DrawRectangleRec(buttonYes, GetColor(0x312b4700));
-        DrawRectangleRec(buttonNo, GetColor(0x312b4700));
+                ClearBackground(RAYWHITE);
 
-        void Cursor(Rectangle buttonYes, Rectangle buttonNo);
+                DrawTexture(background, 0, 0, RAYWHITE);
 
-        if (CheckCollisionPointRec(GetMousePosition(), buttonYes) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            gameQuiz(userNameStr, girlVoice, boyVoice);
-            break;
+                DrawTextEx(boldPoppins, "Are you ready for a quiz?", Vector2(450, 50), 50, 5, WHITE);
+
+                if (boyVoice) DrawTexture(boyAstronaut, 50, 250, RAYWHITE);
+                if (girlVoice) DrawTexture(girlAstronaut, 50, 250, RAYWHITE);
+
+                DrawTexture(starYes, 800, 150, RAYWHITE);
+                DrawTexture(starNo, 800, 450, RAYWHITE);
+
+                DrawRectangleRec(buttonYes, GetColor(0x312b4700));
+                DrawRectangleRec(buttonNo, GetColor(0x312b4700));
+
+                void Cursor(Rectangle buttonYes, Rectangle buttonNo);
+
+                if (CheckCollisionPointRec(GetMousePosition(), buttonYes) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                    gameQuiz(userNameStr, girlVoice, boyVoice);
+                    break;
+                }
+                else if (CheckCollisionPointRec(GetMousePosition(), buttonNo) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                    spaceShip(userNameStr, girlVoice, boyVoice);
+                    break;
+                }
+
+                EndDrawing();
+            }
         }
-        else if (CheckCollisionPointRec(GetMousePosition(), buttonNo) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            spaceShip(userNameStr, girlVoice, boyVoice);
-            break;
-        }
-
-        EndDrawing();
-    }
-}
