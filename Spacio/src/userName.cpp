@@ -81,6 +81,7 @@ void userName() {
         if (IsKeyPressed(KEY_ENTER))
         {
             characterPick(Poppins, boldPoppins, userNameStr);
+            break;
         }
     }
     StopMusicStream(audio);
