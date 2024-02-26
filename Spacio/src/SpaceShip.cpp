@@ -21,19 +21,19 @@ void spaceShip(std::string userNameStr, bool girlVoice, bool boyVoice)
     Rectangle bosonLocation = { 560, 320, 50, 100 };
     Rectangle planetsLocation = { 570, 650, 50, 50 };
 
-    Texture2D player = LoadTexture("../assets/images/gameCharacterLeft.png");
+    Texture2D player = LoadTexture("../assets/images/gameCharacter.png");
 
     while (!WindowShouldClose())
     {
         if (IsKeyDown(KEY_RIGHT))
         {
-            player = LoadTexture("../assets/images/gameCharacterRight.png");
+            player = LoadTexture("../assets/images/gameCharacterRotated.png");
             if ((character.x + character.width) < (spaceship.x + spaceship.width))
                 character.x += characterSpeed;
         }
         else if (IsKeyDown(KEY_LEFT))
         {
-            player = LoadTexture("../assets/images/gameCharacterLeft.png");
+            player = LoadTexture("../assets/images/gameCharacter.png");
             if (character.x > spaceship.x)
                 character.x -= characterSpeed;
         }
@@ -93,6 +93,7 @@ void spaceShip(std::string userNameStr, bool girlVoice, bool boyVoice)
         if (IsKeyDown(KEY_BACKSPACE))
         {
             intro();
+            break;
         }
 
         DrawRectangleRec(spaceship, GetColor(0x312b4700));
