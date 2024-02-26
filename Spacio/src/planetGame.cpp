@@ -601,7 +601,6 @@ void planetGame() {
 
     int infoCounter = 0;
 
-    InitAudioDevice();
     Sound haltInturder = LoadSound("../assets/audios/haltIntruder.mp3");
     Sound youNeedToAnswer = LoadSound("../assets/audios/youNeedToAnswerSomeQuestions.mp3");
     Sound captainSpeaking = LoadSound("../assets/audios/captainSpeaking.mp3");
