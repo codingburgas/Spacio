@@ -1,9 +1,13 @@
 #include "pickPlanet.h"
 
+// Global variable to store the index of the chosen planet
 int chosenPlanetIndex = -1;
 
+// Function to draw celestial objects on the screen and handle user clicks
 void ObjectsDraw(Texture2D sun, Texture2D mercury, Texture2D venus, Texture2D earth, Texture2D mars, Texture2D jupiter, Texture2D saturn, Texture2D uranus, Texture2D neptune, bool objectClicked[9], bool& madeChoice) {
+    // Loop through each celestial object
     for (int i = 0; i < 9; i++) {
+        // Draw the celestial object at its designated position
         switch (i) {
         case 0: DrawTexture(sun, -10, 250, WHITE); break;
         case 1: DrawTexture(mercury, 345, 420, WHITE); break;
@@ -16,6 +20,7 @@ void ObjectsDraw(Texture2D sun, Texture2D mercury, Texture2D venus, Texture2D ea
         case 8: DrawTexture(neptune, 1280, 380, WHITE); break;
         }
 
+        // Define a rectangle representing the current object's clickable area
         Rectangle objectRect;
         switch (i) {
         case 0: objectRect = { -10, 250, (float)sun.width, (float)sun.height }; break;
@@ -29,17 +34,18 @@ void ObjectsDraw(Texture2D sun, Texture2D mercury, Texture2D venus, Texture2D ea
         case 8: objectRect = { 1280, 380, (float)neptune.width, (float)neptune.height }; break;
         }
 
+        // Check if the mouse is hovering over the current object and if left mouse button is pressed
         if (CheckCollisionPointRec(GetMousePosition(), objectRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             objectClicked[i] = true;
             madeChoice = true;
-            chosenPlanetIndex = i;
+            chosenPlanetIndex = i; // Set the chosen planet index
         }
-
     }
 }
 
-void pickPlanet()
-{
+// Function to handle picking a planet
+void pickPlanet() {
+    // Load textures and fonts
     Texture2D sun = LoadTexture("../assets/images/objects/sun.png");
     Texture2D mercury = LoadTexture("../assets/images/objects/mercury.png");
     Texture2D venus = LoadTexture("../assets/images/objects/venus.png");
@@ -49,36 +55,37 @@ void pickPlanet()
     Texture2D saturn = LoadTexture("../assets/images/objects/saturn.png");
     Texture2D uranus = LoadTexture("../assets/images/objects/uranus.png");
     Texture2D neptune = LoadTexture("../assets/images/objects/neptune.png");
-
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
+    // Array to track clicked objects and flag for indicating choice made
     bool objectClicked[9] = { false };
     bool madeChoice = false;
 
+    // Load background image and sound
     Texture2D background = LoadTexture("../assets/images/pickPlanetBackground.png");
     Sound whichCelestialObject = LoadSound("../assets/audios/whichCelestialObject.mp3");
     PlaySound(whichCelestialObject);
-    while (!WindowShouldClose())
-    {
-       
-        BeginDrawing();
 
+    // Main loop to pick a planet
+    while (!WindowShouldClose()) {
+        BeginDrawing();
         ClearBackground(RAYWHITE);
-       
+
+        // Draw background and instruction text
         DrawTexture(background, 0, 0, RAYWHITE);
         DrawTextEx(Poppins, "Which celestial object are you visiting today?", Vector2(250, 150), 48, 2, RAYWHITE);
 
+        // Draw celestial objects and handle user clicks
         ObjectsDraw(sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, objectClicked, madeChoice);
 
-        if (madeChoice)
-        {
+        // If choice made, transition to planet game and exit loop
+        if (madeChoice) {
             planetGame();
             break;
         }
 
         EndDrawing();
     }
-
 }
 

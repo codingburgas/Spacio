@@ -33,16 +33,40 @@ void particlePick(std::string userNameStr, bool girlVoice, bool boyVoice) {
 	Rectangle masslessParticle = { 283, 302, 295, 295 };
 	Rectangle massParticle = { 830,304 ,295 ,295 };
 
+    Music girl = LoadMusicStream("../assets/audios/chooseParticleFemale.mp3");
+    Music boy = LoadMusicStream("../assets/audios/chooseParticleMale.mp3");
+
+    float audioTime = 0.0;
+
     while (!WindowShouldClose())
     {
 
         BeginDrawing();
 
+        if (girlVoice)
+        {
+            PlayMusicStream(girl);
+            if (IsMusicStreamPlaying(girl) and audioTime <= 5.0)
+            {
+                UpdateMusicStream(girl);
+                audioTime += GetFrameTime();
+            }
+        }
+        else if (boyVoice)
+        {
+            PlayMusicStream(boy);
+            if (IsMusicStreamPlaying(boy) and audioTime <= 4.0)
+            {
+                UpdateMusicStream(boy);
+                audioTime += GetFrameTime();
+            }
+        }
+
         DrawTexture(background, 0, 0, RAYWHITE);
 
         DrawTextEx(boldPoppins, "What do you want to be?", Vector2(336, 118), 64, 5, WHITE);
         DrawTextEx(boldPoppins, "Massless particle ", Vector2(294, 605), 32, 5, WHITE);
-        DrawTextEx(boldPoppins, "Particle with mass", Vector2(835, 595), 32, 5, WHITE);
+        DrawTextEx(boldPoppins, "Particle with mass", Vector2(835, 605), 32, 5, WHITE);
 
 
         mouseCursorParticles(masslessParticle, massParticle);
@@ -64,4 +88,6 @@ void particlePick(std::string userNameStr, bool girlVoice, bool boyVoice) {
     }
     UnloadTexture(background);
     UnloadFont(Poppins);
+    StopMusicStream(girl);
+    StopMusicStream(boy);
 }
