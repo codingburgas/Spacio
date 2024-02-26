@@ -30,10 +30,26 @@ void chooseLearningStyle(bool boyVoice, bool girlVoice, std::string userNameStr)
     Rectangle reading = { 283, 302, 295, 295 };
     Rectangle playing = { 830,304 ,295 ,295 };
 
+    Music girl = LoadMusicStream("../assets/audios/learningStyleFemale.mp3");
+    Music boy = LoadMusicStream("../assets/audios/learningStyleMale.mp3");
+
+    float girlSecond = GetMusicTimeLength(girl);
+    float boySecond = GetMusicTimeLength(boy);
+    float audioTime = 0.0;
+
     while (!WindowShouldClose())
     {
-
         BeginDrawing();
+
+        if (girlVoice)
+        {
+            PlayMusicStream(girl);
+            if (IsMusicStreamPlaying(girl) and audioTime < girlSecond)
+            {
+                UpdateMusicStream(girl);
+                audioTime += GetFrameTime();
+            }
+        }
 
         DrawTexture(background, 0, 0, RAYWHITE);
 
@@ -58,4 +74,6 @@ void chooseLearningStyle(bool boyVoice, bool girlVoice, std::string userNameStr)
 
         EndDrawing();
     }
+    StopMusicStream(girl);
+    StopMusicStream(boy);
 }
