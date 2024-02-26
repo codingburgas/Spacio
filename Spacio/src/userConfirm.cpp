@@ -42,14 +42,14 @@ void userConfirm(int pick, std::string userNameStr, bool boyVoice, bool girlVoic
 
         if (IsKeyPressed(KEY_ENTER))
         {
-            if (pick == 1) getStation(userNameStr);
+            if (pick == 1) getStation(userNameStr, girlVoice, boyVoice);
             else if (pick == 2) particlePick(userNameStr, girlVoice, boyVoice);
             else if (pick == 3) natureScript(userNameStr, girlVoice, boyVoice);
             break;
         }
         else if (IsKeyPressed(KEY_ONE))
         {
-            getStation(userNameStr);
+            getStation(userNameStr, girlVoice, boyVoice);
             break;
         }
         else if (IsKeyPressed(KEY_TWO))

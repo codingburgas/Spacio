@@ -88,7 +88,7 @@ void spaceShip(std::string userNameStr, bool girlVoice, bool boyVoice)
 
         if (CheckCollisionRecs(character, planetsLocation) && IsKeyDown(KEY_E))
         {
-            getStation(userNameStr);
+            getStation(userNameStr, girlVoice, boyVoice);
             break;
         }
 

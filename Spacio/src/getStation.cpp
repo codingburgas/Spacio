@@ -1,7 +1,7 @@
 #include "getStation.h"
 #include <iostream>
 
-void getStation(std::string userNameStr) {
+void getStation(std::string userNameStr, bool girlVoice, bool boyVoice){
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
     Texture2D background = LoadTexture("../assets/images/getStationBackground.png");
@@ -13,6 +13,11 @@ void getStation(std::string userNameStr) {
     int letterCount = 0;
     bool mouseOnText = false;
     int framesCounter = 0;
+
+    Music girl = LoadMusicStream("../assets/audios/getStationFemale.mp3");
+    Music boy = LoadMusicStream("../assets/audios/getStationMale.mp3");
+
+    float audioTime = 0.0;
 
     while (!WindowShouldClose()) {
 
@@ -40,6 +45,25 @@ void getStation(std::string userNameStr) {
 
         BeginDrawing();
 
+        if (girlVoice)
+        {
+            PlayMusicStream(girl);
+            if (IsMusicStreamPlaying(girl) and audioTime <=3.5)
+            {
+                UpdateMusicStream(girl);
+                audioTime += GetFrameTime();
+            }
+        }
+        else if (boyVoice)
+        {
+            PlayMusicStream(boy);
+            if (IsMusicStreamPlaying(boy) and audioTime <=3.5)
+            {
+                UpdateMusicStream(boy);
+                audioTime += GetFrameTime();
+            }
+        }
+
         ClearBackground(RAYWHITE);
         DrawTexture(background, 0, 0, RAYWHITE);
         DrawTextEx(boldPoppins, "Which station are you launching from?", Vector2{ 280, 260 }, 50, 5, WHITE);
@@ -65,4 +89,6 @@ void getStation(std::string userNameStr) {
             break;
         }
     }
+    StopMusicStream(girl);
+    StopMusicStream(boy);
 }
