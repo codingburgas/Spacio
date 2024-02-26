@@ -1,15 +1,13 @@
 ﻿#include "planetGame.h"
 #include<iostream>
 
-
+// Global variable to track whether the game has been won or lost
 int wonOrLostGame = 0;
-
+// Function to update stars based on correct or wrong answers
 void checkStars(bool correctAnswer, bool wrongAnswer, int wrongAnswerCounter, int rightAnswerCounter, Texture2D starsRocket[], Texture2D starsBadGuys[], Texture2D deadStar, Texture2D fireLeft, Texture2D fireRight, Texture2D fireLeftWin, Texture2D fireRightWin) {
-
- 
-
+    // If the answer is wrong, update stars for the rocket
     if (wrongAnswer) {
-
+        // Update starsRocket based on the number of wrong answers
         if (wrongAnswerCounter == 1) {
 
             starsRocket[0] = deadStar;
@@ -33,9 +31,9 @@ void checkStars(bool correctAnswer, bool wrongAnswer, int wrongAnswerCounter, in
 
 
     }
-
+    // If the answer is correct, update stars for the intruders
     if (correctAnswer) {
-
+        // Update starsBadGuys based on the number of right answers
         if (rightAnswerCounter == 1) {
 
             starsBadGuys[0] = deadStar;
@@ -60,9 +58,9 @@ void checkStars(bool correctAnswer, bool wrongAnswer, int wrongAnswerCounter, in
     }
 
 }
-
+// Main game function
 void planetGame() {
-
+    // Load textures and fonts
     Texture2D background = LoadTexture("../assets/images/spaceGameBackground.png");
 
     Rectangle left{ 120, 500, 520, 94 };
@@ -174,7 +172,7 @@ void planetGame() {
     bool lostGame = false;
 
     bool wonGame = false;
-
+    // Define arrays for questions and answers
     const char* leftInformation[9] = {
     "Mass: 1.989 * 10^30 kilograms\n Diameter: Approximately 1.4 million km\nSurface temperature : Around 5,500 C",
     "Mass: 3.285 * 10^23 kilograms\nDiameter: Approximately 4,880 km\nSurface temperature: Between -173°C to 427 C",
@@ -600,25 +598,25 @@ void planetGame() {
     SetTextLineSpacing(30);
 
     int infoCounter = 0;
-
+    // Add sound effects and voice-overs
     Sound haltInturder = LoadSound("../assets/audios/haltIntruder.mp3");
     Sound youNeedToAnswer = LoadSound("../assets/audios/youNeedToAnswerSomeQuestions.mp3");
     Sound captainSpeaking = LoadSound("../assets/audios/captainSpeaking.mp3");
-
+    // Main game loop
     while (!WindowShouldClose()) {
 
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
-
+        // Draw the background texture
         DrawTexture(background, 0, 0, RAYWHITE);
-
+        // Move the rocket upwards if it's above the stopping Y position
         if (rocketY > stoppingY) {
 
             rocketY -= 1;
 
         }
-
+        // Draw the rocket texture
         DrawTextureEx(rocket, Vector2(GetScreenWidth() / 2 - rocket.width / 2, rocketY), 270, 1, RAYWHITE);
 
 
@@ -627,43 +625,34 @@ void planetGame() {
             //The sun
 
         case 0:
-
+            // Draw the Sun texture
             DrawTexture(sun, GetScreenWidth() / 2 - sun.width / 2, 0, RAYWHITE);
-
+            // Draw first dialog
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here the sun is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
                 PlaySound(captainSpeaking);
                 frameCounter++;
-
+                // if statement, responsible for the rocket's movement
                 if (frameCounter > firstTextDuration) {
-
                     firstTextShown = true;
-
                     frameCounter = 0;
-
                 }
-
             }
-
+            // Draw second dialog
             else if (!okTextShown) {
-
+                // Draw the information around the planet
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
-               
                 DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 700), 40, 2, BLUE);
                 PlaySound(haltInturder);
-                
                 if (IsKeyPressed(KEY_ENTER)) {
-
                     okTextShown = true;
-
                 }
-
             }
 
             else {
-                
+                // Display the Intruders with an animation
                 if (badGuysLeftX < 0) {
 
                     badGuysLeftX += badGuysSpeed;
@@ -679,18 +668,18 @@ void planetGame() {
                 }
 
                 DrawTexture(badGuysRight, badGuysRightX, 0, RAYWHITE);
-
+                // if statement, responsible for the "press ENTER to continue" to be displayed for a certain amount of time
                 if (!dialogShown2) {
                    
                     DrawTextEx(Poppins, "press ENTER to continue", Vector2(120, 840), 30, 2, BLUE);
-
+                    // Display dialog
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
                         PlaySound(youNeedToAnswer);
 
                         DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
-                      
+                      // Quit displaying dialog if the Enter key is pressed
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown = true;
@@ -699,11 +688,11 @@ void planetGame() {
 
 
                     }
-
+                    // Display dialog
                     else if (!dialogShown2) {
 
                         DrawTextEx(Poppins, "You need to answer some questions if you want to survive...", Vector2(230, 400), 40, 2, RED);
-
+                        // if statement, responsible for the whole dialog piece using enter
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown2 = true;
@@ -715,7 +704,7 @@ void planetGame() {
 
 
                 }
-
+                // Start the quiz game
                 if (IsKeyPressed(KEY_ENTER) && dialogShown2 == true) {
 
                     quizGame = true;
@@ -723,25 +712,21 @@ void planetGame() {
                 }
 
                 if (quizGame) {
-
+                    // Draw stars representing remaining lives for the rocket and the Intruders
                     DrawTextureEx(starsRocket[0], Vector2(80, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[1], Vector2(160, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[2], Vector2(240, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[0], Vector2(880, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[1], Vector2(960, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[2], Vector2(1040, 20), 0, 0.15, RAYWHITE);
 
+                    // Questions
                     switch (currentQuestionIndex) {
-
+                     //First quetsion
                     case 0:
-
+                        // Draw the first question text
                         DrawTextEx(Poppins, firstQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
 
                         DrawTextEx(boldPoppins, wrongAnswer1[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
@@ -749,11 +734,11 @@ void planetGame() {
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
 
                         DrawTextEx(boldPoppins, rightAnswer1[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
-
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
 
                                 wrongAnswerCounter++;
@@ -765,7 +750,7 @@ void planetGame() {
                             }
 
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
 
                                 rightAnswerCounter++;
@@ -781,170 +766,136 @@ void planetGame() {
 
 
                         break;
-
+                        // Case 1: Second question
                     case 1:
-
+                        // Draw the second question text
                         DrawTextEx(Poppins, secondQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer2[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer2[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
 
+                        // Case 2: Third question (similar structure as Case 1)
                     case 2:
-
+                        // Draw the third question text
                         DrawTextEx(Poppins, thirdQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer3[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer3[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                                 checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                                 checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
                             }
-
                         }
-
 
                         break;
 
+                        // Case 3: Fourth question (similar structure as Case 1)
                     case 3:
-
+                        // Draw the fourth question text
                         DrawTextEx(Poppins, forthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer4[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer4[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
 
+                        // Case 4: Fifth question (similar structure as Case 1)
                     case 4:
-
+                        // Draw the fifth question text
                         DrawTextEx(Poppins, fifthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer5[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer5[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
-
                     }
 
                 }
@@ -961,33 +912,26 @@ void planetGame() {
                 DrawTextEx(Poppins, "Wow! Here Mercury is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
                 PlaySound(captainSpeaking);
                 frameCounter++;
+                // if statement, responsible for the rocket's movement
                 if (frameCounter > firstTextDuration) {
-
                     firstTextShown = true;
-
                     frameCounter = 0;
-
                 }
-
             }
-
+            // Draw second dialog
             else if (!okTextShown) {
-
+                // Draw the information around the planet
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
+                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 700), 40, 2, BLUE);
                 PlaySound(haltInturder);
-                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
-
                 if (IsKeyPressed(KEY_ENTER)) {
-
                     okTextShown = true;
-
                 }
-
             }
 
             else {
-
+                // Display the Intruders with an animation
                 if (badGuysLeftX < 0) {
 
                     badGuysLeftX += badGuysSpeed;
@@ -1003,29 +947,31 @@ void planetGame() {
                 }
 
                 DrawTexture(badGuysRight, badGuysRightX, 0, RAYWHITE);
-
+                // if statement, responsible for the "press ENTER to continue" to be displayed for a certain amount of time
                 if (!dialogShown2) {
 
                     DrawTextEx(Poppins, "press ENTER to continue", Vector2(120, 840), 30, 2, BLUE);
-
+                    // Display dialog
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
                         PlaySound(youNeedToAnswer);
-                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
+                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
+                        // Quit displaying dialog if the Enter key is pressed
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown = true;
 
                         }
 
-                    }
 
+                    }
+                    // Display dialog
                     else if (!dialogShown2) {
 
                         DrawTextEx(Poppins, "You need to answer some questions if you want to survive...", Vector2(230, 400), 40, 2, RED);
-
+                        // if statement, responsible for the whole dialog piece using enter
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown2 = true;
@@ -1037,7 +983,7 @@ void planetGame() {
 
 
                 }
-
+                // Start the quiz game
                 if (IsKeyPressed(KEY_ENTER) && dialogShown2 == true) {
 
                     quizGame = true;
@@ -1045,25 +991,21 @@ void planetGame() {
                 }
 
                 if (quizGame) {
-
+                    // Draw stars representing remaining lives for the rocket and the Intruders
                     DrawTextureEx(starsRocket[0], Vector2(80, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[1], Vector2(160, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[2], Vector2(240, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[0], Vector2(880, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[1], Vector2(960, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[2], Vector2(1040, 20), 0, 0.15, RAYWHITE);
 
+                    // Questions
                     switch (currentQuestionIndex) {
-
+                        //First quetsion
                     case 0:
-
+                        // Draw the first question text
                         DrawTextEx(Poppins, firstQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
 
                         DrawTextEx(boldPoppins, wrongAnswer1[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
@@ -1071,24 +1013,28 @@ void planetGame() {
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
 
                         DrawTextEx(boldPoppins, rightAnswer1[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
-
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
 
                                 wrongAnswerCounter++;
+
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                                 currentQuestionIndex++;
 
                             }
 
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
 
                                 rightAnswerCounter++;
+
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                                 currentQuestionIndex++;
 
@@ -1096,169 +1042,141 @@ void planetGame() {
 
                         }
 
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
+
 
                         break;
 
+                        // Case 1: Second question
                     case 1:
-
+                        // Draw the second question text
                         DrawTextEx(Poppins, secondQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer2[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer2[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
 
+                        // Case 2: Third question (similar structure as Case 1)
                     case 2:
-
+                        // Draw the third question text
                         DrawTextEx(Poppins, thirdQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer3[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer3[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                         }
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
 
+                        // Case 3: Fourth question (similar structure as Case 1)
                     case 3:
-
+                        // Draw the fourth question text
                         DrawTextEx(Poppins, forthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer4[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer4[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
 
+                        // Case 4: Fifth question (similar structure as Case 1)
                     case 4:
-
+                        // Draw the fifth question text
                         DrawTextEx(Poppins, fifthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer5[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer5[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
+
 
                     }
 
@@ -1279,31 +1197,26 @@ void planetGame() {
                 DrawTextEx(Poppins, "Wow! Here Venus is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
                 PlaySound(captainSpeaking);
                 frameCounter++;
-
+                // if statement, responsible for the rocket's movement
                 if (frameCounter > firstTextDuration) {
-
                     firstTextShown = true;
-
                     frameCounter = 0;
-
                 }
-
             }
-
+            // Draw second dialog
             else if (!okTextShown) {
+                // Draw the information around the planet
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
-                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
+                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 700), 40, 2, BLUE);
                 PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
-                        okTextShown = true;
-
+                    okTextShown = true;
                 }
-
             }
 
             else {
-
+                // Display the Intruders with an animation
                 if (badGuysLeftX < 0) {
 
                     badGuysLeftX += badGuysSpeed;
@@ -1319,29 +1232,31 @@ void planetGame() {
                 }
 
                 DrawTexture(badGuysRight, badGuysRightX, 0, RAYWHITE);
-
+                // if statement, responsible for the "press ENTER to continue" to be displayed for a certain amount of time
                 if (!dialogShown2) {
 
                     DrawTextEx(Poppins, "press ENTER to continue", Vector2(120, 840), 30, 2, BLUE);
-
+                    // Display dialog
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
                         PlaySound(youNeedToAnswer);
-                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
+                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
+                        // Quit displaying dialog if the Enter key is pressed
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown = true;
 
                         }
 
-                    }
 
+                    }
+                    // Display dialog
                     else if (!dialogShown2) {
 
                         DrawTextEx(Poppins, "You need to answer some questions if you want to survive...", Vector2(230, 400), 40, 2, RED);
-
+                        // if statement, responsible for the whole dialog piece using enter
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown2 = true;
@@ -1353,7 +1268,7 @@ void planetGame() {
 
 
                 }
-
+                // Start the quiz game
                 if (IsKeyPressed(KEY_ENTER) && dialogShown2 == true) {
 
                     quizGame = true;
@@ -1361,25 +1276,21 @@ void planetGame() {
                 }
 
                 if (quizGame) {
-
+                    // Draw stars representing remaining lives for the rocket and the Intruders
                     DrawTextureEx(starsRocket[0], Vector2(80, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[1], Vector2(160, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[2], Vector2(240, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[0], Vector2(880, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[1], Vector2(960, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[2], Vector2(1040, 20), 0, 0.15, RAYWHITE);
 
+                    // Questions
                     switch (currentQuestionIndex) {
-
+                        //First quetsion
                     case 0:
-
+                        // Draw the first question text
                         DrawTextEx(Poppins, firstQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
 
                         DrawTextEx(boldPoppins, wrongAnswer1[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
@@ -1387,24 +1298,28 @@ void planetGame() {
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
 
                         DrawTextEx(boldPoppins, rightAnswer1[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
-
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
 
                                 wrongAnswerCounter++;
+
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                                 currentQuestionIndex++;
 
                             }
 
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
 
                                 rightAnswerCounter++;
+
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                                 currentQuestionIndex++;
 
@@ -1412,169 +1327,140 @@ void planetGame() {
 
                         }
 
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
+
 
                         break;
-
+                        // Case 1: Second question
                     case 1:
-
+                        // Draw the second question text
                         DrawTextEx(Poppins, secondQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer2[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer2[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
 
+                        // Case 2: Third question (similar structure as Case 1)
                     case 2:
-
+                        // Draw the third question text
                         DrawTextEx(Poppins, thirdQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer3[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer3[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                         }
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
 
+                        // Case 3: Fourth question (similar structure as Case 1)
                     case 3:
-
+                        // Draw the fourth question text
                         DrawTextEx(Poppins, forthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer4[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer4[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
 
+                        // Case 4: Fifth question (similar structure as Case 1)
                     case 4:
-
+                        // Draw the fifth question text
                         DrawTextEx(Poppins, fifthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer5[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer5[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
+
 
                     }
 
@@ -1595,32 +1481,26 @@ void planetGame() {
                 DrawTextEx(Poppins, "Wow! Here Earth is! We are back!", Vector2(420, 500), 48, 2, RAYWHITE);
                 PlaySound(captainSpeaking);
                 frameCounter++;
-
+                // if statement, responsible for the rocket's movement
                 if (frameCounter > firstTextDuration) {
-
                     firstTextShown = true;
-
                     frameCounter = 0;
-
                 }
-
             }
-
+            // Draw second dialog
             else if (!okTextShown) {
+                // Draw the information around the planet
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
-                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
-
+                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 700), 40, 2, BLUE);
+                PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
-                    PlaySound(haltInturder);
                     okTextShown = true;
-
                 }
-
             }
 
             else {
-
+                // Display the Intruders with an animation
                 if (badGuysLeftX < 0) {
 
                     badGuysLeftX += badGuysSpeed;
@@ -1636,29 +1516,31 @@ void planetGame() {
                 }
 
                 DrawTexture(badGuysRight, badGuysRightX, 0, RAYWHITE);
-
+                // if statement, responsible for the "press ENTER to continue" to be displayed for a certain amount of time
                 if (!dialogShown2) {
 
                     DrawTextEx(Poppins, "press ENTER to continue", Vector2(120, 840), 30, 2, BLUE);
-
+                    // Display dialog
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
                         PlaySound(youNeedToAnswer);
-                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
+                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
+                        // Quit displaying dialog if the Enter key is pressed
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown = true;
 
                         }
 
-                    }
 
+                    }
+                    // Display dialog
                     else if (!dialogShown2) {
 
                         DrawTextEx(Poppins, "You need to answer some questions if you want to survive...", Vector2(230, 400), 40, 2, RED);
-
+                        // if statement, responsible for the whole dialog piece using enter
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown2 = true;
@@ -1670,7 +1552,7 @@ void planetGame() {
 
 
                 }
-
+                // Start the quiz game
                 if (IsKeyPressed(KEY_ENTER) && dialogShown2 == true) {
 
                     quizGame = true;
@@ -1678,25 +1560,21 @@ void planetGame() {
                 }
 
                 if (quizGame) {
-
+                    // Draw stars representing remaining lives for the rocket and the Intruders
                     DrawTextureEx(starsRocket[0], Vector2(80, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[1], Vector2(160, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[2], Vector2(240, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[0], Vector2(880, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[1], Vector2(960, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[2], Vector2(1040, 20), 0, 0.15, RAYWHITE);
 
+                    // Questions
                     switch (currentQuestionIndex) {
-
+                        //First quetsion
                     case 0:
-
+                        // Draw the first question text
                         DrawTextEx(Poppins, firstQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
 
                         DrawTextEx(boldPoppins, wrongAnswer1[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
@@ -1704,24 +1582,28 @@ void planetGame() {
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
 
                         DrawTextEx(boldPoppins, rightAnswer1[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
-
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
 
                                 wrongAnswerCounter++;
+
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                                 currentQuestionIndex++;
 
                             }
 
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
 
                                 rightAnswerCounter++;
+
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                                 currentQuestionIndex++;
 
@@ -1729,169 +1611,140 @@ void planetGame() {
 
                         }
 
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
+
 
                         break;
-
+                        // Case 1: Second question
                     case 1:
-
+                        // Draw the second question text
                         DrawTextEx(Poppins, secondQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer2[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer2[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
 
+                        // Case 2: Third question (similar structure as Case 1)
                     case 2:
-
+                        // Draw the third question text
                         DrawTextEx(Poppins, thirdQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer3[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer3[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                         }
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
 
+                        // Case 3: Fourth question (similar structure as Case 1)
                     case 3:
-
+                        // Draw the fourth question text
                         DrawTextEx(Poppins, forthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer4[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer4[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
 
+                        // Case 4: Fifth question (similar structure as Case 1)
                     case 4:
-
+                        // Draw the fifth question text
                         DrawTextEx(Poppins, fifthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer5[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer5[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
                         break;
+
 
                     }
 
@@ -2065,190 +1918,137 @@ void planetGame() {
 
 
                         break;
-
+                        // Case 1: Second question
                     case 1:
-
-
+                        // Draw the second question text
                         DrawTextEx(Poppins, secondQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer2[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer2[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 2: Third question (similar structure as Case 1)
                     case 2:
-
-
+                        // Draw the third question text
                         DrawTextEx(Poppins, thirdQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer3[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer3[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                         }
-
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 3: Fourth question (similar structure as Case 1)
                     case 3:
-
-
+                        // Draw the fourth question text
                         DrawTextEx(Poppins, forthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer4[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer4[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 4: Fifth question (similar structure as Case 1)
                     case 4:
-
-
+                        // Draw the fifth question text
                         DrawTextEx(Poppins, fifthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer5[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer5[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
-
                         break;
+
 
                     }
 
@@ -2425,189 +2225,137 @@ void planetGame() {
 
                         break;
 
+                        // Case 1: Second question
                     case 1:
-
-
+                        // Draw the second question text
                         DrawTextEx(Poppins, secondQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer2[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer2[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 2: Third question (similar structure as Case 1)
                     case 2:
-
-
+                        // Draw the third question text
                         DrawTextEx(Poppins, thirdQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer3[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer3[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                         }
-
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 3: Fourth question (similar structure as Case 1)
                     case 3:
-
-
+                        // Draw the fourth question text
                         DrawTextEx(Poppins, forthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer4[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer4[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 4: Fifth question (similar structure as Case 1)
                     case 4:
-
-
+                        // Draw the fifth question text
                         DrawTextEx(Poppins, fifthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer5[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer5[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
-
                         break;
+
 
                     }
 
@@ -2783,180 +2531,137 @@ void planetGame() {
 
 
                         break;
-
+                        // Case 1: Second question
                     case 1:
-                            DrawTextEx(Poppins, secondQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
+                        // Draw the second question text
+                        DrawTextEx(Poppins, secondQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
+
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
                         DrawTextEx(boldPoppins, wrongAnswer2[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
+
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
                         DrawTextEx(boldPoppins, rightAnswer2[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
+
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 2: Third question (similar structure as Case 1)
                     case 2:
-
-
+                        // Draw the third question text
                         DrawTextEx(Poppins, thirdQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer3[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer3[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                         }
-
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 3: Fourth question (similar structure as Case 1)
                     case 3:
-
-
+                        // Draw the fourth question text
                         DrawTextEx(Poppins, forthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer4[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer4[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 4: Fifth question (similar structure as Case 1)
                     case 4:
-
-
+                        // Draw the fifth question text
                         DrawTextEx(Poppins, fifthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer5[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer5[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
-
                         break;
+
 
                     }
 
@@ -3133,190 +2838,136 @@ void planetGame() {
 
                         break;
 
+                        // Case 1: Second question
                     case 1:
-
-
+                        // Draw the second question text
                         DrawTextEx(Poppins, secondQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer2[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer2[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 2: Third question (similar structure as Case 1)
                     case 2:
-
-
+                        // Draw the third question text
                         DrawTextEx(Poppins, thirdQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer3[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer3[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                         }
-
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 3: Fourth question (similar structure as Case 1)
                     case 3:
-
-
+                        // Draw the fourth question text
                         DrawTextEx(Poppins, forthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer4[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer4[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 4: Fifth question (similar structure as Case 1)
                     case 4:
-
-
+                        // Draw the fifth question text
                         DrawTextEx(Poppins, fifthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer5[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer5[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
-
                         break;
-
                     }
 
                 }
@@ -3492,189 +3143,137 @@ void planetGame() {
 
                         break;
 
+                        // Case 1: Second question
                     case 1:
-
-
+                        // Draw the second question text
                         DrawTextEx(Poppins, secondQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer2[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer2[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 2: Third question (similar structure as Case 1)
                     case 2:
-
-
+                        // Draw the third question text
                         DrawTextEx(Poppins, thirdQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer3[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer3[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                             }
-
                         }
-
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 3: Fourth question (similar structure as Case 1)
                     case 3:
-
-
+                        // Draw the fourth question text
                         DrawTextEx(Poppins, forthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer4[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer4[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
 
                         break;
 
+                        // Case 4: Fifth question (similar structure as Case 1)
                     case 4:
-
-
+                        // Draw the fifth question text
                         DrawTextEx(Poppins, fifthQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
 
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer5[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
 
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer5[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
 
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
                                 currentQuestionIndex++;
-
                             }
-
                         }
 
-
+                        // Call checkStars function after handling answers
                         checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
 
-
                         break;
+
 
                     }
 

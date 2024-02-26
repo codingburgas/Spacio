@@ -13,7 +13,7 @@ void mainMenu()
 
     InitAudioDevice();
 
-    intro();
-    //pickPlanet();
+    //intro();
+    pickPlanet();
     //spaceShip();
 }
