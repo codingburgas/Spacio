@@ -4,8 +4,6 @@ void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool 
 	Texture2D background = LoadTexture("../assets/images/higgsfieldBg.png");
 	Texture2D particle = LoadTexture("../assets/images/particle.png");
 
-
-
 	Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, 0, 0);
 	Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 500, 0, 0);
 
