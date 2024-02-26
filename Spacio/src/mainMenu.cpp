@@ -14,6 +14,7 @@ void mainMenu()
     InitAudioDevice();
 
     //intro();
-    pickPlanet();
+    //pickPlanet();
     //spaceShip();
+    HiggsFieldGame(1, "Iva", 1, 1);
 }
