@@ -13,6 +13,7 @@ void userConfirm(int pick, std::string userNameStr, bool boyVoice, bool girlVoic
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
     Music girl = LoadMusicStream("../assets/audios/userConfirmGirl.mp3");
+    Music boy = LoadMusicStream("../assets/audios/userConfirmBoy.mp3");
 
     float audioTime = 0.0;
 
@@ -48,7 +49,14 @@ void userConfirm(int pick, std::string userNameStr, bool boyVoice, bool girlVoic
                 audioTime += GetFrameTime();
             }
         }
-        if (boyVoice) DrawTexture(boyAstronaut, 50, 250, RAYWHITE);
+        if (boyVoice)
+            DrawTexture(boyAstronaut, 50, 250, RAYWHITE);
+        PlayMusicStream(boy);
+        if (IsMusicStreamPlaying(boy) and audioTime < 13)
+        {
+            UpdateMusicStream(boy);
+            audioTime += GetFrameTime();
+        }
         DrawTextEx(boldPoppins, ("It seems like you're interested in " + choice + "\nWould you like to change the subject?").c_str(), Vector2(400, 120), 50, 3, RAYWHITE);
 
         DrawTextEx(poppins, "Press Enter to continue\n\nPress 1 to learn about Planets\nPress 2 for Higgs Boson\nPress 3 for Nature", Vector2(675, 420), 50, 3, GetColor(0xBABABAff));
