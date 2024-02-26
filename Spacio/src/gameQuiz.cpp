@@ -54,12 +54,40 @@ void gameQuiz(std::string userNameStr, bool girlVoice, bool boyVoice)
 
     Color Purple = { 52, 34, 69, 1500 };
 
+    Music audioBoy = LoadMusicStream("../assets/audios/gameBoy.mp3");
+    PlayMusicStream(audioBoy);
+
+    Music audioGirl = LoadMusicStream("../assets/audios/gameGirl.mp3");
+    PlayMusicStream(audioGirl);
+
+    float audioSecond1 = GetMusicTimeLength(audioBoy);
+    float audioSecond2 = GetMusicTimeLength(audioGirl);
+    float audioTime = 0.0;
+
     SetTextLineSpacing(45);
 
     while (!WindowShouldClose())
     {
 
         BeginDrawing();
+
+        if (boyVoice)
+        {
+            if (IsMusicStreamPlaying(audioBoy) and audioTime < 2.3)
+            {
+                UpdateMusicStream(audioBoy);
+                audioTime += GetFrameTime();
+            }
+        }
+
+        if (girlVoice)
+        {
+            if (IsMusicStreamPlaying(audioGirl) and audioTime < 2.3)
+            {
+                UpdateMusicStream(audioGirl);
+                audioTime += GetFrameTime();
+            }
+        }
 
         ClearBackground(RAYWHITE);
 
