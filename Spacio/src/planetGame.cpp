@@ -907,8 +907,11 @@ void planetGame() {
             //Mercury
 
         case 1:
+            // Draw the Mercury texture
                 DrawTexture(mercury, GetScreenWidth() / 2 - mercury.width / 2, posY, RAYWHITE);
+                // Draw first dialog
             if (!firstTextShown) {
+
                 DrawTextEx(Poppins, "Wow! Here Mercury is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
                 PlaySound(captainSpeaking);
                 frameCounter++;
@@ -1189,9 +1192,9 @@ void planetGame() {
             //Venus
 
         case 2:
-
+            // Draw the Venus texture
             DrawTexture(venus, GetScreenWidth() / 2 - venus.width / 2, posY, RAYWHITE);
-
+            // Draw first dialog
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Venus is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
@@ -1473,9 +1476,9 @@ void planetGame() {
             //Earth
 
         case 3:
-
+            // Draw the Earth texture
             DrawTexture(earth, GetScreenWidth() / 2 - earth.width / 2, posY, RAYWHITE);
-
+            // Draw first dialog
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Earth is! We are back!", Vector2(420, 500), 48, 2, RAYWHITE);
@@ -1755,42 +1758,34 @@ void planetGame() {
                 //Mars
 
         case 4:
-
+            // Draw the Mars texture
             DrawTexture(mars, GetScreenWidth() / 2 - mars.width / 2, posY, RAYWHITE);
-
+            // Draw first dialog
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Mars is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
                 PlaySound(captainSpeaking);
-
                 frameCounter++;
-
+                // if statement, responsible for the rocket's movement
                 if (frameCounter > firstTextDuration) {
-
                     firstTextShown = true;
-
                     frameCounter = 0;
-
                 }
-
             }
-
+            // Draw second dialog
             else if (!okTextShown) {
+                // Draw the information around the planet
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
-                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
+                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 700), 40, 2, BLUE);
                 PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
-
                     okTextShown = true;
-
                 }
-
             }
 
             else {
-
-
+                // Display the Intruders with an animation
                 if (badGuysLeftX < 0) {
 
                     badGuysLeftX += badGuysSpeed;
@@ -1806,117 +1801,86 @@ void planetGame() {
                 }
 
                 DrawTexture(badGuysRight, badGuysRightX, 0, RAYWHITE);
-
-
+                // if statement, responsible for the "press ENTER to continue" to be displayed for a certain amount of time
                 if (!dialogShown2) {
 
                     DrawTextEx(Poppins, "press ENTER to continue", Vector2(120, 840), 30, 2, BLUE);
-
-
+                    // Display dialog
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
                         PlaySound(youNeedToAnswer);
-                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
+                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
+                        // Quit displaying dialog if the Enter key is pressed
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown = true;
 
                         }
 
+
                     }
-
-
+                    // Display dialog
                     else if (!dialogShown2) {
 
                         DrawTextEx(Poppins, "You need to answer some questions if you want to survive...", Vector2(230, 400), 40, 2, RED);
-
-
+                        // if statement, responsible for the whole dialog piece using enter
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown2 = true;
 
 
-
                         }
 
                     }
 
 
-
                 }
-
-
+                // Start the quiz game
                 if (IsKeyPressed(KEY_ENTER) && dialogShown2 == true) {
 
                     quizGame = true;
 
-
                 }
 
                 if (quizGame) {
-
-
+                    // Draw stars representing remaining lives for the rocket and the Intruders
                     DrawTextureEx(starsRocket[0], Vector2(80, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[1], Vector2(160, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[2], Vector2(240, 790), 0, 0.15, RAYWHITE);
-
-
                     DrawTextureEx(starsBadGuys[0], Vector2(880, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[1], Vector2(960, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[2], Vector2(1040, 20), 0, 0.15, RAYWHITE);
 
+                    // Questions
                     switch (currentQuestionIndex) {
-
+                        //First quetsion
                     case 0:
-
-
+                        // Draw the first question text
                         DrawTextEx(Poppins, firstQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
-
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer1[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
-
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer1[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
-
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                                 currentQuestionIndex++;
-
                             }
-
                         }
-
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
-
                         break;
                         // Case 1: Second question
                     case 1:
@@ -2061,42 +2025,34 @@ void planetGame() {
             //Jupiter
 
         case 5:
-
+            // Draw the Jupiter texture
             DrawTexture(jupiter, GetScreenWidth() / 2 - jupiter.width / 2, posY, RAYWHITE);
-
+            // Draw first dialog
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Jupiter is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
                 PlaySound(captainSpeaking);
-
                 frameCounter++;
-
+                // if statement, responsible for the rocket's movement
                 if (frameCounter > firstTextDuration) {
-
                     firstTextShown = true;
-
                     frameCounter = 0;
-
                 }
-
             }
-
+            // Draw second dialog
             else if (!okTextShown) {
+                // Draw the information around the planet
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
-                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
+                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 700), 40, 2, BLUE);
                 PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
-
                     okTextShown = true;
-
                 }
-
             }
 
             else {
-
-
+                // Display the Intruders with an animation
                 if (badGuysLeftX < 0) {
 
                     badGuysLeftX += badGuysSpeed;
@@ -2112,119 +2068,87 @@ void planetGame() {
                 }
 
                 DrawTexture(badGuysRight, badGuysRightX, 0, RAYWHITE);
-
-
+                // if statement, responsible for the "press ENTER to continue" to be displayed for a certain amount of time
                 if (!dialogShown2) {
 
                     DrawTextEx(Poppins, "press ENTER to continue", Vector2(120, 840), 30, 2, BLUE);
-
-
+                    // Display dialog
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
                         PlaySound(youNeedToAnswer);
-                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
+                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
+                        // Quit displaying dialog if the Enter key is pressed
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown = true;
 
                         }
 
+
                     }
-
-
+                    // Display dialog
                     else if (!dialogShown2) {
 
                         DrawTextEx(Poppins, "You need to answer some questions if you want to survive...", Vector2(230, 400), 40, 2, RED);
-
-
+                        // if statement, responsible for the whole dialog piece using enter
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown2 = true;
 
 
-
                         }
 
                     }
 
 
-
                 }
-
-
+                // Start the quiz game
                 if (IsKeyPressed(KEY_ENTER) && dialogShown2 == true) {
 
                     quizGame = true;
 
-
                 }
 
                 if (quizGame) {
-
-
+                    // Draw stars representing remaining lives for the rocket and the Intruders
                     DrawTextureEx(starsRocket[0], Vector2(80, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[1], Vector2(160, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[2], Vector2(240, 790), 0, 0.15, RAYWHITE);
-
-
                     DrawTextureEx(starsBadGuys[0], Vector2(880, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[1], Vector2(960, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[2], Vector2(1040, 20), 0, 0.15, RAYWHITE);
 
+                    // Questions
                     switch (currentQuestionIndex) {
-
+                        //First quetsion
                     case 0:
-
-
+                        // Draw the first question text
                         DrawTextEx(Poppins, firstQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
-
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer1[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
-
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer1[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
-
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                                 currentQuestionIndex++;
-
                             }
-
                         }
-
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
-
                         break;
-
                         // Case 1: Second question
                     case 1:
                         // Draw the second question text
@@ -2368,42 +2292,34 @@ void planetGame() {
             //Saturn
 
         case 6:
-
+            // Draw the Saturn texture
             DrawTexture(saturn, GetScreenWidth() / 2 - saturn.width / 2, posY, RAYWHITE);
-
+            // Draw first dialog
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Saturn is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
                 PlaySound(captainSpeaking);
-
                 frameCounter++;
-
+                // if statement, responsible for the rocket's movement
                 if (frameCounter > firstTextDuration) {
-
                     firstTextShown = true;
-
                     frameCounter = 0;
-
                 }
-
             }
-
+            // Draw second dialog
             else if (!okTextShown) {
+                // Draw the information around the planet
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
-                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
+                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 700), 40, 2, BLUE);
                 PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
-
                     okTextShown = true;
-
                 }
-
             }
 
             else {
-
-
+                // Display the Intruders with an animation
                 if (badGuysLeftX < 0) {
 
                     badGuysLeftX += badGuysSpeed;
@@ -2419,117 +2335,86 @@ void planetGame() {
                 }
 
                 DrawTexture(badGuysRight, badGuysRightX, 0, RAYWHITE);
-
-
+                // if statement, responsible for the "press ENTER to continue" to be displayed for a certain amount of time
                 if (!dialogShown2) {
 
                     DrawTextEx(Poppins, "press ENTER to continue", Vector2(120, 840), 30, 2, BLUE);
-
-
+                    // Display dialog
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
                         PlaySound(youNeedToAnswer);
-                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
+                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
+                        // Quit displaying dialog if the Enter key is pressed
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown = true;
 
                         }
 
+
                     }
-
-
+                    // Display dialog
                     else if (!dialogShown2) {
 
                         DrawTextEx(Poppins, "You need to answer some questions if you want to survive...", Vector2(230, 400), 40, 2, RED);
-
-
+                        // if statement, responsible for the whole dialog piece using enter
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown2 = true;
 
 
-
                         }
 
                     }
 
 
-
                 }
-
-
+                // Start the quiz game
                 if (IsKeyPressed(KEY_ENTER) && dialogShown2 == true) {
 
                     quizGame = true;
 
-
                 }
 
                 if (quizGame) {
-
-
+                    // Draw stars representing remaining lives for the rocket and the Intruders
                     DrawTextureEx(starsRocket[0], Vector2(80, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[1], Vector2(160, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[2], Vector2(240, 790), 0, 0.15, RAYWHITE);
-
-
                     DrawTextureEx(starsBadGuys[0], Vector2(880, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[1], Vector2(960, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[2], Vector2(1040, 20), 0, 0.15, RAYWHITE);
 
+                    // Questions
                     switch (currentQuestionIndex) {
-
+                        //First quetsion
                     case 0:
-
-
+                        // Draw the first question text
                         DrawTextEx(Poppins, firstQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
-
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer1[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
-
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer1[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
-
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                                 currentQuestionIndex++;
-
                             }
-
                         }
-
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
-
                         break;
                         // Case 1: Second question
                     case 1:
@@ -2674,42 +2559,34 @@ void planetGame() {
             //Uranus
 
         case 7:
-
+            // Draw the Uranus texture
             DrawTexture(uranus, GetScreenWidth() / 2 - uranus.width / 2, posY, RAYWHITE);
-
+            // Draw first dialog
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Uranus is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
                 PlaySound(captainSpeaking);
-
                 frameCounter++;
-
+                // if statement, responsible for the rocket's movement
                 if (frameCounter > firstTextDuration) {
-
                     firstTextShown = true;
-
                     frameCounter = 0;
-
                 }
-
             }
-
+            // Draw second dialog
             else if (!okTextShown) {
+                // Draw the information around the planet
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
-                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
+                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 700), 40, 2, BLUE);
                 PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
-
                     okTextShown = true;
-
                 }
-
             }
 
             else {
-
-
+                // Display the Intruders with an animation
                 if (badGuysLeftX < 0) {
 
                     badGuysLeftX += badGuysSpeed;
@@ -2725,119 +2602,87 @@ void planetGame() {
                 }
 
                 DrawTexture(badGuysRight, badGuysRightX, 0, RAYWHITE);
-
-
+                // if statement, responsible for the "press ENTER to continue" to be displayed for a certain amount of time
                 if (!dialogShown2) {
 
                     DrawTextEx(Poppins, "press ENTER to continue", Vector2(120, 840), 30, 2, BLUE);
-
-
+                    // Display dialog
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
                         PlaySound(youNeedToAnswer);
-                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
+                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
+                        // Quit displaying dialog if the Enter key is pressed
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown = true;
 
                         }
 
+
                     }
-
-
+                    // Display dialog
                     else if (!dialogShown2) {
 
                         DrawTextEx(Poppins, "You need to answer some questions if you want to survive...", Vector2(230, 400), 40, 2, RED);
-
-
+                        // if statement, responsible for the whole dialog piece using enter
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown2 = true;
 
 
-
                         }
 
                     }
 
 
-
                 }
-
-
+                // Start the quiz game
                 if (IsKeyPressed(KEY_ENTER) && dialogShown2 == true) {
 
                     quizGame = true;
 
-
                 }
 
                 if (quizGame) {
-
-
+                    // Draw stars representing remaining lives for the rocket and the Intruders
                     DrawTextureEx(starsRocket[0], Vector2(80, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[1], Vector2(160, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[2], Vector2(240, 790), 0, 0.15, RAYWHITE);
-
-
                     DrawTextureEx(starsBadGuys[0], Vector2(880, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[1], Vector2(960, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[2], Vector2(1040, 20), 0, 0.15, RAYWHITE);
 
+                    // Questions
                     switch (currentQuestionIndex) {
-
+                        //First quetsion
                     case 0:
-
-
+                        // Draw the first question text
                         DrawTextEx(Poppins, firstQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
-
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer1[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
-
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer1[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
-
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                                 currentQuestionIndex++;
-
                             }
-
                         }
-
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
-
                         break;
-
                         // Case 1: Second question
                     case 1:
                         // Draw the second question text
@@ -2979,42 +2824,34 @@ void planetGame() {
             //Neptune
 
         case 8:
-
+            // Draw the Neptune texture
             DrawTexture(neptune, GetScreenWidth() / 2 - neptune.width / 2, posY, RAYWHITE);
-
+            // Draw first dialog
             if (!firstTextShown) {
 
                 DrawTextEx(Poppins, "Wow! Here Neptune is! We are here!", Vector2(420, 500), 48, 2, RAYWHITE);
                 PlaySound(captainSpeaking);
-
                 frameCounter++;
-
+                // if statement, responsible for the rocket's movement
                 if (frameCounter > firstTextDuration) {
-
                     firstTextShown = true;
-
                     frameCounter = 0;
-
                 }
-
             }
-
+            // Draw second dialog
             else if (!okTextShown) {
+                // Draw the information around the planet
                 DrawTextEx(Poppins, leftInformation[chosenPlanetIndex], Vector2(100, 100), 30, 2, RAYWHITE);
                 DrawTextEx(Poppins, rightInformation[chosenPlanetIndex], Vector2(900, 100), 30, 2, RAYWHITE);
-                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 600), 40, 2, BLUE);
+                DrawTextEx(Poppins, "...Captain speaking. You must\n"" learn this information. \n""When you are done, press ENTER.\n""Over.", Vector2(120, 700), 40, 2, BLUE);
                 PlaySound(haltInturder);
                 if (IsKeyPressed(KEY_ENTER)) {
-
                     okTextShown = true;
-
                 }
-
             }
 
             else {
-
-
+                // Display the Intruders with an animation
                 if (badGuysLeftX < 0) {
 
                     badGuysLeftX += badGuysSpeed;
@@ -3030,119 +2867,87 @@ void planetGame() {
                 }
 
                 DrawTexture(badGuysRight, badGuysRightX, 0, RAYWHITE);
-
-
+                // if statement, responsible for the "press ENTER to continue" to be displayed for a certain amount of time
                 if (!dialogShown2) {
 
                     DrawTextEx(Poppins, "press ENTER to continue", Vector2(120, 840), 30, 2, BLUE);
-
-
+                    // Display dialog
                     if (!dialogShown) {
 
                         DrawTextEx(Poppins, "Oh no! ", Vector2(520, 550), 48, 2, RAYWHITE);
                         PlaySound(youNeedToAnswer);
-                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
 
+                        DrawTextEx(Poppins, "Halt, intruder! Prepare to be boarded, probed, and\n""             ... well, you can guess the rest!", Vector2(330, 400), 40, 2, RED);
+                        // Quit displaying dialog if the Enter key is pressed
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown = true;
 
                         }
 
+
                     }
-
-
+                    // Display dialog
                     else if (!dialogShown2) {
 
                         DrawTextEx(Poppins, "You need to answer some questions if you want to survive...", Vector2(230, 400), 40, 2, RED);
-
-
+                        // if statement, responsible for the whole dialog piece using enter
                         if (IsKeyPressed(KEY_ENTER)) {
 
                             dialogShown2 = true;
 
 
-
                         }
 
                     }
 
 
-
                 }
-
-
+                // Start the quiz game
                 if (IsKeyPressed(KEY_ENTER) && dialogShown2 == true) {
 
                     quizGame = true;
 
-
                 }
 
                 if (quizGame) {
-
-
+                    // Draw stars representing remaining lives for the rocket and the Intruders
                     DrawTextureEx(starsRocket[0], Vector2(80, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[1], Vector2(160, 790), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsRocket[2], Vector2(240, 790), 0, 0.15, RAYWHITE);
-
-
                     DrawTextureEx(starsBadGuys[0], Vector2(880, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[1], Vector2(960, 20), 0, 0.15, RAYWHITE);
-
                     DrawTextureEx(starsBadGuys[2], Vector2(1040, 20), 0, 0.15, RAYWHITE);
 
+                    // Questions
                     switch (currentQuestionIndex) {
-
+                        //First quetsion
                     case 0:
-
-
+                        // Draw the first question text
                         DrawTextEx(Poppins, firstQuestion[chosenPlanetIndex], Vector2(230, 400), 40, 2, RED);
-
-
+                        // Draw rectangles representing answer options and answers
                         DrawRectangleRec(left, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, wrongAnswer1[chosenPlanetIndex], Vector2(160, 530), 30, 5, WHITE);
-
-
                         DrawRectangleRec(right, GetColor(0X2C2C2Cff));
-
                         DrawTextEx(boldPoppins, rightAnswer1[chosenPlanetIndex], Vector2(840, 530), 30, 5, WHITE);
-
+                        // Check for mouse button press to select answer
                         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-
                             if (CheckCollisionPointRec(GetMousePosition(), left)) {
-
+                                // Mark wrong answer and update counters
                                 wrongAnswer = true;
-
                                 wrongAnswerCounter++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                                 currentQuestionIndex++;
-
-
                             }
-
                             if (CheckCollisionPointRec(GetMousePosition(), right)) {
-
+                                // Mark correct answer and update counters
                                 correctAnswer = true;
-
                                 rightAnswerCounter++;
-
+                                checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
                                 currentQuestionIndex++;
-
                             }
-
                         }
-
-
-                        checkStars(correctAnswer, wrongAnswer, wrongAnswerCounter, rightAnswerCounter, starsRocket, starsBadGuys, deadStar, fireLeft, fireRight, fireLeftWin, fireRightWin);
-
-
                         break;
-
                         // Case 1: Second question
                     case 1:
                         // Draw the second question text
