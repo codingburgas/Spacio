@@ -65,11 +65,7 @@ void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool 
             speedText += "speed of light";
             infoText = "Photons don't interact with the higgsField so they are very fast.";
             if (girlVoice) {
-                for (int repeat = 0; repeat <= 1; repeat++) {
-                    UpdateMusicStream(girlPhoton);
-                    repeat++;
-                }
-                
+                UpdateMusicStream(girlPhoton);
             }
             else if (boyVoice) {
                 UpdateMusicStream(boyPhoton);
