@@ -35,6 +35,17 @@ void natureScript(std::string userNameStr, bool girlVoice, bool boyVoice)
     int counter = 0;
     int current = 0;
 
+    Music audioBoy = LoadMusicStream("../assets/audios/natureScriptBoy.mp3");
+    PlayMusicStream(audioBoy);
+
+    Music audioGirl = LoadMusicStream("../assets/audios/natureScriptGirl.mp3");
+    PlayMusicStream(audioGirl);
+
+    float audioSecond1 = GetMusicTimeLength(audioBoy);
+    float audioSecond2 = GetMusicTimeLength(audioGirl);
+    float audioTime = 0.0;
+
+
     SetTextLineSpacing(45);
 
     while (!WindowShouldClose())
@@ -42,13 +53,30 @@ void natureScript(std::string userNameStr, bool girlVoice, bool boyVoice)
 
         BeginDrawing();
 
+        
+
         ClearBackground(RAYWHITE);
 
         DrawTexture(background, 0, 0, RAYWHITE);
 
-        if (boyVoice) DrawTexture(images[current], 100, 250, WHITE);
-        if (girlVoice) DrawTexture(imagesGirl[current], 60, 250, WHITE);
-
+        if (boyVoice)
+        {
+            DrawTexture(images[current], 100, 250, WHITE);
+            if (IsMusicStreamPlaying(audioBoy) and audioTime < 65)
+            {
+                UpdateMusicStream(audioBoy);
+                audioTime += GetFrameTime();
+            }
+        }
+        if (girlVoice)
+        {
+            DrawTexture(imagesGirl[current], 60, 250, WHITE);
+            if (IsMusicStreamPlaying(audioGirl) and audioTime < 65)
+            {
+                UpdateMusicStream(audioGirl);
+                audioTime += GetFrameTime();
+            }
+        }
         DrawTextEx(boldPoppins, script[counter], Vector2{ 665, 400 }, 40, 5, WHITE);
         DrawTextEx(boldPoppins, "Press Enter to continue!", Vector2{ 900, 800 }, 40, 5, DARKGRAY);
 
