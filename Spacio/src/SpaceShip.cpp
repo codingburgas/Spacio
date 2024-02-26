@@ -23,21 +23,8 @@ void spaceShip(std::string userNameStr, bool girlVoice, bool boyVoice)
 
     Texture2D player = LoadTexture("../assets/images/gameCharacter.png");
 
-    Music audio = LoadMusicStream("../assets/audios/characterPick.mp3");
-    PlayMusicStream(audio);
-
-    float audioSecond = GetMusicTimeLength(audio);
-    float audioTime = 0.0;
-
     while (!WindowShouldClose())
     {
-
-        if (IsMusicStreamPlaying(audio) and audioTime < 1.1)
-        {
-            UpdateMusicStream(audio);
-            audioTime += GetFrameTime();
-        }
-
         if (IsKeyDown(KEY_RIGHT))
         {
             player = LoadTexture("../assets/images/gameCharacterRotated.png");

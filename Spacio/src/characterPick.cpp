@@ -52,7 +52,7 @@ void characterPick(Font Poppins, Font boldPoppins, std::string userNameStr)
     {
         BeginDrawing();
 
-        if (IsMusicStreamPlaying(audio) and audioTime < 1.1)
+        if (IsMusicStreamPlaying(audio) and audioTime < 1)
         {
             UpdateMusicStream(audio);
             audioTime += GetFrameTime();
