@@ -12,6 +12,10 @@ void userConfirm(int pick, std::string userNameStr, bool boyVoice, bool girlVoic
     Font poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
+    Music girl = LoadMusicStream("../assets/audios/userConfirmGirl.mp3");
+
+    float audioTime = 0.0;
+
     if (pick == 1)
     {
         choice = "astronomy";
@@ -34,7 +38,16 @@ void userConfirm(int pick, std::string userNameStr, bool boyVoice, bool girlVoic
         ClearBackground(RAYWHITE);
 
         DrawTexture(background, 0, 0, RAYWHITE);
-        if (girlVoice) DrawTexture(girlAstronaut, 50, 250, RAYWHITE);
+        if (girlVoice)
+        {
+            DrawTexture(girlAstronaut, 50, 250, RAYWHITE);
+            PlayMusicStream(girl);
+            if (IsMusicStreamPlaying(girl) and audioTime < 17)
+            {
+                UpdateMusicStream(girl);
+                audioTime += GetFrameTime();
+            }
+        }
         if (boyVoice) DrawTexture(boyAstronaut, 50, 250, RAYWHITE);
         DrawTextEx(boldPoppins, ("It seems like you're interested in " + choice + "\nWould you like to change the subject?").c_str(), Vector2(400, 120), 50, 3, RAYWHITE);
 
