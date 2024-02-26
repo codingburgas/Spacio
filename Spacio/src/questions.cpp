@@ -63,6 +63,11 @@ void questions(bool boyVoice, bool girlVoice, std::string userNameStr)
     int planets = 0;
     int higgs = 0;
 
+    Music boy = LoadMusicStream("../assets/audios/welcomeAudio.mp3");
+
+    float boySecond = GetMusicTimeLength(boy);
+    float audioTime = 0.0;
+
     SetTextLineSpacing(38);
 
     while (!WindowShouldClose())
@@ -82,7 +87,18 @@ void questions(bool boyVoice, bool girlVoice, std::string userNameStr)
         ClearBackground(RAYWHITE);
 
         DrawTexture(background, 0, 0, RAYWHITE);
-        if(boyVoice) DrawTexture(boyCompanion, 50, 250, RAYWHITE);
+
+        if (boyVoice)
+        {
+            DrawTexture(boyCompanion, 50, 250, RAYWHITE);
+            PlayMusicStream(boy);
+            if (IsMusicStreamPlaying(boy) and audioTime < boySecond)
+            {
+                UpdateMusicStream(boy);
+                audioTime += GetFrameTime();
+            }
+        }
+
         if (girlVoice) DrawTexture(girlCompanion, 50, 250, RAYWHITE);
 
         DrawTextEx(boldPoppins, "Welcome, choose what you want to learn about", Vector2{ 250, 160 }, 50, 5, WHITE);
@@ -122,5 +138,4 @@ void questions(bool boyVoice, bool girlVoice, std::string userNameStr)
         EndDrawing();
 
     }
-
 }
