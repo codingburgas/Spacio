@@ -39,6 +39,7 @@ void userConfirm(int pick, std::string userNameStr, bool boyVoice, bool girlVoic
         ClearBackground(RAYWHITE);
 
         DrawTexture(background, 0, 0, RAYWHITE);
+
         if (girlVoice)
         {
             DrawTexture(girlAstronaut, 50, 250, RAYWHITE);
@@ -49,13 +50,15 @@ void userConfirm(int pick, std::string userNameStr, bool boyVoice, bool girlVoic
                 audioTime += GetFrameTime();
             }
         }
-        if (boyVoice)
-            DrawTexture(boyAstronaut, 50, 250, RAYWHITE);
-        PlayMusicStream(boy);
-        if (IsMusicStreamPlaying(boy) and audioTime < 13)
+        else if (boyVoice)
         {
-            UpdateMusicStream(boy);
-            audioTime += GetFrameTime();
+            DrawTexture(boyAstronaut, 50, 250, RAYWHITE);
+            PlayMusicStream(boy);
+            if (IsMusicStreamPlaying(boy) and audioTime < 13)
+            {
+                UpdateMusicStream(boy);
+                audioTime += GetFrameTime();
+            }
         }
         DrawTextEx(boldPoppins, ("It seems like you're interested in " + choice + "\nWould you like to change the subject?").c_str(), Vector2(400, 120), 50, 3, RAYWHITE);
 
