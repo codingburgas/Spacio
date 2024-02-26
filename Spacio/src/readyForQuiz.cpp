@@ -35,8 +35,6 @@ void readyForQuiz(std::string userNameStr, bool girlVoice, bool boyVoice)
     Music audioGirl = LoadMusicStream("../assets/audios/readyFemale.mp3");
     PlayMusicStream(audioGirl);
 
-    float audioSecond1 = GetMusicTimeLength(audioBoy);
-    float audioSecond2 = GetMusicTimeLength(audioGirl);
     float audioTime = 0.0;
 
     while (!WindowShouldClose())
@@ -46,7 +44,7 @@ void readyForQuiz(std::string userNameStr, bool girlVoice, bool boyVoice)
 
                 if (boyVoice)
                 {
-                    if (IsMusicStreamPlaying(audioBoy) and audioTime < 3.2)
+                    if (IsMusicStreamPlaying(audioBoy) and audioTime < 1.7)
                     {
                         UpdateMusicStream(audioBoy);
                         audioTime += GetFrameTime();
@@ -55,7 +53,7 @@ void readyForQuiz(std::string userNameStr, bool girlVoice, bool boyVoice)
 
                 if (girlVoice)
                 {
-                    if (IsMusicStreamPlaying(audioGirl) and audioTime < 3.5)
+                    if (IsMusicStreamPlaying(audioGirl) and audioTime < 2.3)
                     {
                         UpdateMusicStream(audioGirl);
                         audioTime += GetFrameTime();

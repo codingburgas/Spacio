@@ -18,8 +18,8 @@ void natureScript(std::string userNameStr, bool girlVoice, bool boyVoice)
         "Currently, dark energy accelerates\nthe universe's expansion,\nchallenging earlier beliefs and\nprompting ongoing research for\nnew insights into its perpetual\ngrowth."
     };
 
-    const char* boyAstronauts[8] = { "../assets/images/astronaut.png", "../assets/images/goodJobAstronaut.png", "../assets/images/astronaut.png", "../assets/images/goodJobAstronaut.png", "../assets/images/astronaut.png", "../assets/images/goodJobAstronaut.png", "../assets/images/astronaut.png", "../assets/images/goodJobAstronaut.png" };
-    const char* girlAstronauts[8] = { "../assets/images/goodJobGirlAstronaut.png", "../assets/images/girlAstronautSure.png", "../assets/images/goodJobGirlAstronaut.png", "../assets/images/girlAstronautSure.png", "../assets/images/goodJobGirlAstronaut.png", "../assets/images/girlAstronautSure.png", "../assets/images/goodJobGirlAstronaut.png", "../assets/images/girlAstronautSure.png" };
+    const char* boyAstronauts[8] = { "../assets/images/boyBook.png", "../assets/images/boyPointing.png", "../assets/images/boyAstronautSure.png", "../assets/images/boyBook.png", "../assets/images/boyPointing.png", "../assets/images/boyAstronautSure.png", "../assets/images/boyBook.png", "../assets/images/boyPointing.png" };
+    const char* girlAstronauts[8] = { "../assets/images/girlBook.png", "../assets/images/girlWorld.png", "../assets/images/girlPointing.png", "../assets/images/girlBook.png", "../assets/images/girlWorld.png", "../assets/images/girlPointing.png", "../assets/images/girlBook.png", "../assets/images/girlWorld.png" };
 
     Texture2D images[sizeof(boyAstronauts) / sizeof(boyAstronauts[0])];
     Texture2D imagesGirl[sizeof(girlAstronauts) / sizeof(girlAstronauts[0])];

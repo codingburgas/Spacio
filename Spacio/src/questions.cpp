@@ -94,7 +94,7 @@ void questions(bool boyVoice, bool girlVoice, std::string userNameStr)
         {
             DrawTexture(boyCompanion, 50, 250, RAYWHITE);
             PlayMusicStream(boy);
-            if (IsMusicStreamPlaying(boy) and audioTime < 2.6)
+            if (IsMusicStreamPlaying(boy) and audioTime < 2.7)
             {
                 UpdateMusicStream(boy);
                 audioTime += GetFrameTime();
