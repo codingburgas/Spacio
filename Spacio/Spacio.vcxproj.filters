@@ -1,22 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="src\characterPick.cpp" />
+    <ClCompile Include="src\gameQuiz.cpp" />
+    <ClCompile Include="src\higgsFieldGame.cpp" />
+    <ClCompile Include="src\intro.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mainMenu.cpp" />
+    <ClCompile Include="src\natureScript.cpp" />
+    <ClCompile Include="src\particlePick.cpp" />
+    <ClCompile Include="src\pickPlanet.cpp" />
+    <ClCompile Include="src\planetGame.cpp" />
+    <ClCompile Include="src\questions.cpp" />
+    <ClCompile Include="src\readyForQuiz.cpp" />
+    <ClCompile Include="src\userConfirm.cpp" />
+    <ClCompile Include="src\getStation.cpp" />
+    <ClCompile Include="src\userName.cpp" />
+    <ClCompile Include="src\endScreen.cpp" />
+    <ClCompile Include="src\SpaceShip.cpp" />
+    <ClCompile Include="src\chooseLearningStyle.cpp" />
+    <ClCompile Include="src\endPlanetGame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Spacio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="src\characterPick.h" />
+    <ClInclude Include="src\gameQuiz.h" />
+    <ClInclude Include="src\getStation.h" />
+    <ClInclude Include="src\higgsFieldGame.h" />
+    <ClInclude Include="src\intro.h" />
+    <ClInclude Include="src\mainMenu.h" />
+    <ClInclude Include="src\natureScript.h" />
+    <ClInclude Include="src\particlePick.h" />
+    <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\pickPlanet.h" />
+    <ClInclude Include="src\planetGame.h" />
+    <ClInclude Include="src\questions.h" />
+    <ClInclude Include="src\readyForQuiz.h" />
+    <ClInclude Include="src\userConfirm.h" />
+    <ClInclude Include="src\userName.h" />
+    <ClInclude Include="src\endScreen.h" />
+    <ClInclude Include="src\SpaceShip.h" />
+    <ClInclude Include="src\chooseLearningStyle.h" />
+    <ClInclude Include="src\endPlanetGame.h" />
   </ItemGroup>
 </Project>
