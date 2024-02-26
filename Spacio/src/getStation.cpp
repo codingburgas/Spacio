@@ -48,7 +48,7 @@ void getStation(std::string userNameStr, bool girlVoice, bool boyVoice){
         if (girlVoice)
         {
             PlayMusicStream(girl);
-            if (IsMusicStreamPlaying(girl) and audioTime <=3.5)
+            if (IsMusicStreamPlaying(girl) and audioTime <=2.5)
             {
                 UpdateMusicStream(girl);
                 audioTime += GetFrameTime();
