@@ -57,13 +57,15 @@ void pickPlanet()
     bool madeChoice = false;
 
     Texture2D background = LoadTexture("../assets/images/pickPlanetBackground.png");
+    Sound whichCelestialObject = LoadSound("../assets/audios/whichCelestialObject.mp3");
+    PlaySound(whichCelestialObject);
     while (!WindowShouldClose())
     {
-
+       
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
-
+       
         DrawTexture(background, 0, 0, RAYWHITE);
         DrawTextEx(Poppins, "Which celestial object are you visiting today?", Vector2(250, 150), 48, 2, RAYWHITE);
 
