@@ -21,19 +21,19 @@ void spaceShip(std::string userNameStr, bool girlVoice, bool boyVoice)
     Rectangle bosonLocation = { 560, 320, 50, 100 };
     Rectangle planetsLocation = { 570, 650, 50, 50 };
 
-    Texture2D player = LoadTexture("../assets/images/gameCharacter.png");
+    Texture2D player = LoadTexture("../assets/images/gameCharacterLeft.png");
 
     while (!WindowShouldClose())
     {
         if (IsKeyDown(KEY_RIGHT))
         {
-            player = LoadTexture("../assets/images/gameCharacterRotated.png");
+            player = LoadTexture("../assets/images/gameCharacterRight.png");
             if ((character.x + character.width) < (spaceship.x + spaceship.width))
                 character.x += characterSpeed;
         }
         else if (IsKeyDown(KEY_LEFT))
         {
-            player = LoadTexture("../assets/images/gameCharacter.png");
+            player = LoadTexture("../assets/images/gameCharacterLeft.png");
             if (character.x > spaceship.x)
                 character.x -= characterSpeed;
         }
