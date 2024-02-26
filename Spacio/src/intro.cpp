@@ -33,6 +33,10 @@ void intro() {
     Rectangle digIn = { 490, 400, 280, 94 };
     Rectangle quit{ 490, 520, 280, 94 };
 
+    Image logo = LoadImage("../assets/images/Windowlogo.png");
+
+    SetWindowIcon(logo);
+
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, 0, 0);
     Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 500, 0, 0);
 

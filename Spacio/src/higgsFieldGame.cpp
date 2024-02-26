@@ -25,6 +25,10 @@ void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool 
     Music girlHiggs = LoadMusicStream("../assets/audios/higgsFemale.mp3");
     Music boyHiggs = LoadMusicStream("../assets/audios/higgsMale.mp3");
 
+    float audioTime = 0.00;
+    float electronAudioTime = 0.00;
+    float higgsAudioTime = 0.00;
+
     PlayMusicStream(girlPhoton);
     PlayMusicStream(boyPhoton);
     PlayMusicStream(girlElectron);
@@ -65,10 +69,19 @@ void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool 
             speedText += "speed of light";
             infoText = "Photons don't interact with the higgsField so they are very fast.";
             if (girlVoice) {
-                UpdateMusicStream(girlPhoton);
+                if (IsMusicStreamPlaying(girlPhoton) and audioTime < 3.4)
+                {
+                    UpdateMusicStream(girlPhoton);
+                    audioTime += GetFrameTime();
+                }
+
             }
             else if (boyVoice) {
-                UpdateMusicStream(boyPhoton);
+                if (IsMusicStreamPlaying(boyPhoton) and audioTime < 4)
+                {
+                    UpdateMusicStream(boyPhoton);
+                    audioTime += GetFrameTime();
+                }
             }
             break;
         case 1:
@@ -76,10 +89,18 @@ void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool 
             speedText += "There is a certain speed.";
             infoText = "Electrons interact with the field a little so they are fast.";
             if (girlVoice) {
-                UpdateMusicStream(girlElectron);
+                if (IsMusicStreamPlaying(girlElectron) and electronAudioTime < 3.5)
+                {
+                    UpdateMusicStream(girlElectron);
+                    electronAudioTime += GetFrameTime();
+                }
             }
             else if (boyVoice) {
-                UpdateMusicStream(boyElectron);
+                if (IsMusicStreamPlaying(boyElectron) and electronAudioTime < 3.7)
+                {
+                    UpdateMusicStream(boyElectron);
+                    electronAudioTime += GetFrameTime();
+                }
             }
             break;
         case 2:
@@ -87,10 +108,18 @@ void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool 
             speedText += "Moves slower.";
             infoText = "Higgs bosons interact strongly so they are slow.";
             if (girlVoice) {
-                UpdateMusicStream(girlHiggs);
+                if (IsMusicStreamPlaying(girlHiggs) and higgsAudioTime < 3)
+                {
+                    UpdateMusicStream(girlHiggs);
+                    higgsAudioTime += GetFrameTime();
+                }
             }
             else if (boyVoice) {
-                UpdateMusicStream(boyHiggs);
+                if (IsMusicStreamPlaying(boyHiggs) and higgsAudioTime < 3.1)
+                {
+                    UpdateMusicStream(boyHiggs);
+                    higgsAudioTime += GetFrameTime();
+                }
             }
             break;
         }
@@ -108,16 +137,4 @@ void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool 
             break;
         }
     }
-    UnloadTexture(background);
-    UnloadTexture(particle);
-    UnloadFont(Poppins);
-    UnloadFont(boldPoppins);
-    UnloadMusicStream(girlPhoton);
-    UnloadMusicStream(boyPhoton);
-    UnloadMusicStream(girlElectron);
-    UnloadMusicStream(boyElectron);
-    UnloadMusicStream(girlHiggs);
-    UnloadMusicStream(boyHiggs);
-
-   
 }
