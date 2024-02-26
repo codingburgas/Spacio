@@ -8,10 +8,35 @@ void endScreen(std::string userNameStr, bool girlVoice, bool boyVoice) {
     Texture2D boyAstronaut = LoadTexture("../assets/images/goodJobAstronaut.png");
     Texture2D girlAstronaut = LoadTexture("../assets/images/goodJobGirlAstronaut.png");
 
+    Music girl = LoadMusicStream("../assets/audios/greatJobFemale.mp3");
+    Music boy = LoadMusicStream("../assets/audios/greatJobMale.mp3");
+
+    float girlSecond = GetMusicTimeLength(girl);
+    float boySecond = GetMusicTimeLength(boy);
+    float audioTime = 0.0;
     while (!WindowShouldClose())
     {
 
         BeginDrawing();
+
+        if (girlVoice)
+        {
+            PlayMusicStream(girl);
+            if (IsMusicStreamPlaying(girl) and audioTime <= girlSecond+1)
+            {
+                UpdateMusicStream(girl);
+                audioTime += GetFrameTime();
+            }
+        }
+        else if (boyVoice)
+        {
+            PlayMusicStream(boy);
+            if (IsMusicStreamPlaying(boy) and audioTime <= boySecond+1)
+            {
+                UpdateMusicStream(boy);
+                audioTime += GetFrameTime();
+            }
+        }
 
         DrawTexture(background, 0, 0, RAYWHITE);
         if(boyVoice) DrawTexture(boyAstronaut, 740, 222, RAYWHITE);
@@ -31,5 +56,6 @@ void endScreen(std::string userNameStr, bool girlVoice, bool boyVoice) {
             break;
         }
     }
-    
+    StopMusicStream(girl);
+    StopMusicStream(boy);
 }
