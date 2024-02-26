@@ -1,5 +1,5 @@
 #include "chooseLearningStyle.h"
-
+//Check if cursor is on rectangle
 bool cursorOnRectangle(Rectangle rectangle) {
     if (CheckCollisionPointRec(GetMousePosition(), rectangle)) {
         return true;
@@ -7,7 +7,7 @@ bool cursorOnRectangle(Rectangle rectangle) {
 
     return false;
 }
-
+// Set mouse cursor based on collision
 void mouseCursorLearningStyle(Rectangle reading, Rectangle playing)
 {
     if (CheckCollisionPointRec(GetMousePosition(), reading)) {
@@ -22,6 +22,7 @@ void mouseCursorLearningStyle(Rectangle reading, Rectangle playing)
 }
 
 void chooseLearningStyle(bool boyVoice, bool girlVoice, std::string userNameStr) {
+    // Load textures, fonts, and music streams
 	Texture2D background = LoadTexture("../assets/images/chooseLearningStyleBg.png");
 
     Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, 0, 0);
@@ -40,7 +41,7 @@ void chooseLearningStyle(bool boyVoice, bool girlVoice, std::string userNameStr)
     while (!WindowShouldClose())
     {
         BeginDrawing();
-
+        // Play music streams based on chosen character
         if (girlVoice)
         {
             PlayMusicStream(girl);
@@ -67,7 +68,7 @@ void chooseLearningStyle(bool boyVoice, bool girlVoice, std::string userNameStr)
         DrawTextEx(boldPoppins, "By playing", Vector2(909, 605), 32, 5, WHITE);
 
         mouseCursorLearningStyle(reading, playing);
-
+        //Function call to set the mouse cursor
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             if (cursorOnRectangle(reading)) {
                 questions(boyVoice, girlVoice, userNameStr);
