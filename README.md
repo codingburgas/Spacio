@@ -101,10 +101,13 @@
 
 
 # 👥 Team
- ### <a href = "https://github.com/IDRaykova22">Iva Raykova</a> (Scrum trainer)
- ### <a href = "https://github.com/NSStoyanova22">Nikol Stoyanova</a> (Developer)
- ### <a href = "https://github.com/SSStefanov22">Simeon Stefanov</a> (Developer)
- ### <a href = "https://github.com/niribareva22">Natali Ribareva</a> (Developer)
+
+| Name | Role | Grade |
+| :---:   | :---: | :---: |
+|  <h3><a href = "https://github.com/IDRaykova22">Iva Raykova</a></h3> | Scrum Trainer | 9G |
+| <h3><a href = "https://github.com/NSStoyanova22">Nikol Stoyanova</a></h3> | Developer | 9G |
+| <h3><a href = "https://github.com/niribareva22">Natali Ribareva</a></h3> |  Developer  | 9V |
+| <h3><a href = "https://github.com/SSStefanov22">Simeon Stefanov</a></h3> | Developer  | 9B |
 
 <p align="center">
     <img width="1920" height="15" src="https://cdn.discordapp.com/attachments/723998679400316949/1211240601199312987/Vector_1234327.png?ex=65ed7ab7&is=65db05b7&hm=71b4bfdfa1f27ac45a009f53196ee3b385a070947ce48c99628069a79dcb6bda&"/>
