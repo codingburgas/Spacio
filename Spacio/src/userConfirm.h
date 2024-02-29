@@ -1,5 +1,6 @@
 #pragma once
 
+#include "GameState.h"
 #include "pch.h"
 
-void userConfirm(int pick, std::string userNameStr, bool boyVoice, bool girlVoice);
+void userConfirm(GameState& state);

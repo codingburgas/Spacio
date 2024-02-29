@@ -1,6 +1,14 @@
 #pragma once
 #include "pch.h"
 
-void Cursor(Rectangle buttonYes, Rectangle buttonNo);
+struct ReadyForQuiz {
+	Texture2D starYes;
+	Texture2D starNo;
 
-void readyForQuiz(std::string userNameStr,bool girlVoice, bool boyVoice);
+	Rectangle buttonYes;
+	Rectangle buttonNo;
+};
+
+static ReadyForQuiz readyForQuizData;
+
+void readyForQuiz(GameState& state);

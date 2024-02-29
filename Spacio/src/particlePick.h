@@ -1,4 +1,14 @@
 #pragma once
 #include "pch.h"
 
-void particlePick(std::string name, bool girlVoice, bool boyVoice);
+extern bool hasMass;
+
+struct ParticlePick
+{
+	Rectangle masslessParticle;
+	Rectangle massParticle;
+};
+
+static ParticlePick particlePickData;
+
+void particlePick(GameState& state);

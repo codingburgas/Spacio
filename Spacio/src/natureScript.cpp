@@ -1,104 +1,74 @@
 #include "natureScript.h"
+#include "basicData.h"
+#include <iostream>
 
-void natureScript(std::string userNameStr, bool girlVoice, bool boyVoice)
+void InitNatureScriptWindow()
 {
-    Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
-    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
+    basicData.Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, NULL, 0);
+    basicData.boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 100, NULL, 0);
 
-    Texture2D background = LoadTexture("../assets/images/natureBackground.png");
+    basicData.background = LoadTexture("../assets/images/natureBackground.png");
 
-    const char* script[8] = {
-        "It seems like you have chosen\nto learn about the Universe. So\nwhat exactly is the Universe\nyou may ask. We can\nsimply say that it is everything.",
-        "The Universe includes all of\nspace, and all the matter and\nenergy that space contains.\nIt even includes time itself\nand, of course, it includes you.",
-        "13.8 billion years ago, a brief\ncosmic inflation period\nrapidly expanded the universe,\ninfluencing its observable\nproperties.",
-        "The subsequent Big Bang created\na hot particle soup, leading\nto nucleosynthesis and the\nformation of basic elements.",
-        "Recombination, 380,000 years\npost-Big Bang, made the universe\ntransparent, producing the\ncosmic microwave background\nradiation.",
-        "After recombination, a dark age\nensued, followed by the\nformation of the first stars in\ncooler regions.",
-        "Their light initiated\nreionization, breaking down\nhydrogen atoms and rendering\nthe universe transparent.",
-        "Currently, dark energy accelerates\nthe universe's expansion,\nchallenging earlier beliefs and\nprompting ongoing research for\nnew insights into its perpetual\ngrowth."
-    };
+    basicData.boyVoiceAudio = LoadMusicStream("../assets/audios/natureScriptBoy.mp3");
+    basicData.girlVoiceAudio = LoadMusicStream("../assets/audios/natureScriptGirl.mp3");
 
-    const char* boyAstronauts[8] = { "../assets/images/boyBook.png", "../assets/images/boyPointing.png", "../assets/images/boyAstronautSure.png", "../assets/images/boyBook.png", "../assets/images/boyPointing.png", "../assets/images/boyAstronautSure.png", "../assets/images/boyBook.png", "../assets/images/boyPointing.png" };
-    const char* girlAstronauts[8] = { "../assets/images/girlBook.png", "../assets/images/girlWorld.png", "../assets/images/girlPointing.png", "../assets/images/girlBook.png", "../assets/images/girlWorld.png", "../assets/images/girlPointing.png", "../assets/images/girlBook.png", "../assets/images/girlWorld.png" };
+    basicData.voiceTime = 0.0;
 
-    Texture2D images[sizeof(boyAstronauts) / sizeof(boyAstronauts[0])];
-    Texture2D imagesGirl[sizeof(girlAstronauts) / sizeof(girlAstronauts[0])];
-
-    for (int i = 0; i < sizeof(boyAstronauts) / sizeof(boyAstronauts[0]); i++) {
-        images[i] = LoadTexture(boyAstronauts[i]);
+    for (int i = 0; i < 8; i++) {
+        natureScriptData.boyImages[i] = LoadTexture((natureScriptData.boyAstronaut[i]).c_str());
     }
 
-    for (int i = 0; i < sizeof(girlAstronauts) / sizeof(girlAstronauts[0]); i++) {
-        imagesGirl[i] = LoadTexture(girlAstronauts[i]);
+    for (int i = 0; i < 8; i++) {
+        natureScriptData.girlImages[i] = LoadTexture((natureScriptData.girlAstronaut[i]).c_str());
     }
+}
 
-    int counter = 0;
-    int current = 0;
+bool loadNature = true;
+int counter = 0;
 
-    Music audioBoy = LoadMusicStream("../assets/audios/natureScriptBoy.mp3");
-    PlayMusicStream(audioBoy);
-
-    Music audioGirl = LoadMusicStream("../assets/audios/natureScriptGirl.mp3");
-    PlayMusicStream(audioGirl);
-
-    float audioSecond1 = GetMusicTimeLength(audioBoy);
-    float audioSecond2 = GetMusicTimeLength(audioGirl);
-    float audioTime = 0.0;
-
-
-    SetTextLineSpacing(45);
-
-    while (!WindowShouldClose())
+void natureScript(GameState& state)
+{
+    if (loadNature)
     {
+        InitNatureScriptWindow();
+        loadNature = false;
+        SetMouseCursor(MOUSE_CURSOR_ARROW);
+        PlayMusicStream(basicData.boyVoiceAudio);
+        PlayMusicStream(basicData.girlVoiceAudio);
+    }
 
-        BeginDrawing();
-
-        
-
-        ClearBackground(RAYWHITE);
-
-        DrawTexture(background, 0, 0, RAYWHITE);
+        DrawTexture(basicData.background, 0, 0, RAYWHITE);
 
         if (boyVoice)
         {
-            DrawTexture(images[current], 100, 250, WHITE);
-            if (IsMusicStreamPlaying(audioBoy) and audioTime < 65)
+            DrawTexture(natureScriptData.boyImages[counter], 60, 250, WHITE);
+            if (IsMusicStreamPlaying(basicData.boyVoiceAudio) and basicData.voiceTime < 67.6)
             {
-                UpdateMusicStream(audioBoy);
-                audioTime += GetFrameTime();
+                UpdateMusicStream(basicData.boyVoiceAudio);
+                basicData.voiceTime += GetFrameTime();
             }
         }
         if (girlVoice)
         {
-            DrawTexture(imagesGirl[current], 60, 250, WHITE);
-            if (IsMusicStreamPlaying(audioGirl) and audioTime < 73)
+            DrawTexture(natureScriptData.girlImages[counter], 60, 250, WHITE);
+            if (IsMusicStreamPlaying(basicData.girlVoiceAudio) and basicData.voiceTime < 73)
             {
-                UpdateMusicStream(audioGirl);
-                audioTime += GetFrameTime();
+                UpdateMusicStream(basicData.girlVoiceAudio);
+                basicData.voiceTime += GetFrameTime();
             }
         }
-        DrawTextEx(boldPoppins, script[counter], Vector2{ 665, 400 }, 40, 5, WHITE);
-        DrawTextEx(boldPoppins, "Press Enter to continue!", Vector2{ 900, 800 }, 40, 5, DARKGRAY);
+        DrawTextEx(basicData.boldPoppins, (natureScriptData.script[counter]).c_str(), Vector2{665, 400}, 40, 5, WHITE);
+        DrawTextEx(basicData.boldPoppins, "Press Enter to continue!", Vector2{ 900, 800 }, 40, 5, DARKGRAY);
 
         if (IsKeyPressed(KEY_ENTER))
         {
             counter++;
-            current = (current + 1) % (sizeof(images) / sizeof(images[0]));
         }
 
-        if (counter == 8)
+        if (counter == 7)
         {
-            readyForQuiz(userNameStr, girlVoice, boyVoice);
-            break;
-
+            state = GameState::ReadyForQuiz;
         }
 
-
-        EndDrawing();
-    }
-
-    for (int i = 0; i < sizeof(images) / sizeof(images[0]); i++) {
-        UnloadTexture(images[i]);
-    }
 
 }

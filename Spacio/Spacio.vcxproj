@@ -168,7 +168,9 @@
     <ClInclude Include="src\chooseLearningStyle.h" />
     <ClInclude Include="src\endPlanetGame.h" />
     <ClInclude Include="src\endScreen.h" />
+    <ClInclude Include="src\basicData.h" />
     <ClInclude Include="src\gameQuiz.h" />
+    <ClInclude Include="src\GameState.h" />
     <ClInclude Include="src\getStation.h" />
     <ClInclude Include="src\higgsFieldGame.h" />
     <ClInclude Include="src\intro.h" />

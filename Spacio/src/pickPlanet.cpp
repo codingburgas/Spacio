@@ -1,13 +1,33 @@
 #include "pickPlanet.h"
+#include "GameState.h"
+#include "basicData.h"
 
 // Global variable to store the index of the chosen planet
 int chosenPlanetIndex = -1;
 
-// Function to draw celestial objects on the screen and handle user clicks
+void InitPickPlanetWindow()
+{
+    basicData.Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, NULL, 0);
+    basicData.boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 100, NULL, 0);
+
+    basicData.background = LoadTexture("../assets/images/pickPlanetBackground.png");
+    pickPlanetData.sun = LoadTexture("../assets/images/objects/sun.png");
+    pickPlanetData.mercury = LoadTexture("../assets/images/objects/mercury.png");
+    pickPlanetData.venus = LoadTexture("../assets/images/objects/venus.png");
+    pickPlanetData.earth = LoadTexture("../assets/images/objects/earth.png");
+    pickPlanetData.mars = LoadTexture("../assets/images/objects/mars.png");
+    pickPlanetData.jupiter = LoadTexture("../assets/images/objects/jupiter.png");
+    pickPlanetData.saturn = LoadTexture("../assets/images/objects/saturn.png");
+    pickPlanetData.uranus = LoadTexture("../assets/images/objects/uranus.png");
+    pickPlanetData.neptune = LoadTexture("../assets/images/objects/neptune.png");
+    pickPlanetData.whichCelestialObject = LoadMusicStream("../assets/audios/whichCelestialObject.mp3");
+
+    basicData.voiceTime = 0.0;
+}
+
+// Function to draw celestial objects and handle user clicks
 void ObjectsDraw(Texture2D sun, Texture2D mercury, Texture2D venus, Texture2D earth, Texture2D mars, Texture2D jupiter, Texture2D saturn, Texture2D uranus, Texture2D neptune, bool objectClicked[9], bool& madeChoice) {
-    // Loop through each celestial object
     for (int i = 0; i < 9; i++) {
-        // Draw the celestial object at its designated position
         switch (i) {
         case 0: DrawTexture(sun, -10, 250, WHITE); break;
         case 1: DrawTexture(mercury, 345, 420, WHITE); break;
@@ -34,7 +54,6 @@ void ObjectsDraw(Texture2D sun, Texture2D mercury, Texture2D venus, Texture2D ea
         case 8: objectRect = { 1280, 380, (float)neptune.width, (float)neptune.height }; break;
         }
 
-        // Check if the mouse is hovering over the current object and if left mouse button is pressed
         if (CheckCollisionPointRec(GetMousePosition(), objectRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             objectClicked[i] = true;
             madeChoice = true;
@@ -43,49 +62,35 @@ void ObjectsDraw(Texture2D sun, Texture2D mercury, Texture2D venus, Texture2D ea
     }
 }
 
-// Function to handle picking a planet
-void pickPlanet() {
-    // Load textures and fonts
-    Texture2D sun = LoadTexture("../assets/images/objects/sun.png");
-    Texture2D mercury = LoadTexture("../assets/images/objects/mercury.png");
-    Texture2D venus = LoadTexture("../assets/images/objects/venus.png");
-    Texture2D earth = LoadTexture("../assets/images/objects/earth.png");
-    Texture2D mars = LoadTexture("../assets/images/objects/mars.png");
-    Texture2D jupiter = LoadTexture("../assets/images/objects/jupiter.png");
-    Texture2D saturn = LoadTexture("../assets/images/objects/saturn.png");
-    Texture2D uranus = LoadTexture("../assets/images/objects/uranus.png");
-    Texture2D neptune = LoadTexture("../assets/images/objects/neptune.png");
-    Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
-    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
+bool loadPickPlanet = true;
 
-    // Array to track clicked objects and flag for indicating choice made
-    bool objectClicked[9] = { false };
-    bool madeChoice = false;
+// Pick a planet
+void pickPlanet(GameState& state) {
 
-    // Load background image and sound
-    Texture2D background = LoadTexture("../assets/images/pickPlanetBackground.png");
-    Sound whichCelestialObject = LoadSound("../assets/audios/whichCelestialObject.mp3");
-    PlaySound(whichCelestialObject);
+    if (loadPickPlanet)
+    {
+        InitPickPlanetWindow();
+        loadPickPlanet = false;
+        SetMouseCursor(MOUSE_CURSOR_ARROW);
+        PlayMusicStream(pickPlanetData.whichCelestialObject);
+    }
 
-    // Main loop to pick a planet
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-
-        // Draw background and instruction text
-        DrawTexture(background, 0, 0, RAYWHITE);
-        DrawTextEx(Poppins, "Which celestial object are you visiting today?", Vector2(250, 150), 48, 2, RAYWHITE);
-
-        // Draw celestial objects and handle user clicks
-        ObjectsDraw(sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, objectClicked, madeChoice);
-
-        // If choice made, transition to planet game and exit loop
-        if (madeChoice) {
-            planetGame();
-            break;
+        if (basicData.voiceTime < 2.4)
+        {
+            UpdateMusicStream(pickPlanetData.whichCelestialObject); // Update music
+            basicData.voiceTime += GetFrameTime();
         }
 
-        EndDrawing();
+    PlayMusicStream(pickPlanetData.whichCelestialObject);
+
+    DrawTexture(basicData.background, 0, 0, RAYWHITE);
+    DrawTextEx(basicData.Poppins, "Which celestial object are you visiting today?", Vector2(250, 150), 48, 2, RAYWHITE);
+
+    ObjectsDraw(pickPlanetData.sun, pickPlanetData.mercury, pickPlanetData.venus, pickPlanetData.earth, pickPlanetData.mars, pickPlanetData.jupiter, pickPlanetData.saturn, pickPlanetData.uranus, pickPlanetData.neptune, pickPlanetData.objectClicked, pickPlanetData.madeChoice);
+
+    // If choice made, transition to planet game
+    if (pickPlanetData.madeChoice) {
+        //planetGame();
     }
 }
 

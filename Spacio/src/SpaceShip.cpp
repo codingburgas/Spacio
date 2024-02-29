@@ -1,107 +1,117 @@
 #include "spaceShip.h"
+#include "basicData.h"
 
-
-void spaceShip(std::string userNameStr, bool girlVoice, bool boyVoice)
+void InitSpaceShipWindow()
 {
-    Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
-    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
+    basicData.Poppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 100, NULL, 0);
+    basicData.boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 100, NULL, 0);
 
-    Texture2D background = LoadTexture("../assets/images/spaceShipInterior.png");
+    basicData.background = LoadTexture("../assets/images/spaceShipInterior.png");
+    spaceShipData.spaceship = { 560, 120, 300, 700 };
 
-    Rectangle spaceship(560, 120, 300, 700);
-
-    Rectangle character = { 720 - 100 / 2,
+    spaceShipData.character = { 720 - 100 / 2,
                             450 - 90 / 2,
                             (100),
                             (90) };
 
-    float characterSpeed = 3;
+    spaceShipData.characterSpeed = 3;
 
-    Rectangle natureLocation = { 750, 480, 100, 50 };
-    Rectangle bosonLocation = { 560, 320, 50, 100 };
-    Rectangle planetsLocation = { 570, 650, 50, 50 };
+    spaceShipData.natureLocation = { 750, 480, 100, 50 };
+    spaceShipData.bosonLocation = { 560, 320, 50, 100 };
+    spaceShipData.planetsLocation = { 570, 650, 50, 50 };
 
-    Texture2D player = LoadTexture("../assets/images/gameCharacterLeft.png");
+    spaceShipData.audio = LoadMusicStream("../assets/audios/storyline.mp3");
+    basicData.voiceTime = 0.0;
+    spaceShipData.player = LoadTexture("../assets/images/gameCharacterLeft.png");
+}
 
-    while (!WindowShouldClose())
+bool loadSpaceShip = true;
+
+void spaceShip(GameState& state)
+{
+    if (loadSpaceShip)
     {
+        InitSpaceShipWindow();
+        loadSpaceShip = false;
+        SetMouseCursor(MOUSE_CURSOR_ARROW);
+        PlayMusicStream(spaceShipData.audio);
+    }
+
+    SetTextLineSpacing(30);
+
+        if (IsMusicStreamPlaying(spaceShipData.audio) and basicData.voiceTime < 36)
+        {
+            UpdateMusicStream(spaceShipData.audio);
+            basicData.voiceTime += GetFrameTime();
+        }
+
         if (IsKeyDown(KEY_RIGHT))
         {
-            player = LoadTexture("../assets/images/gameCharacterRight.png");
-            if ((character.x + character.width) < (spaceship.x + spaceship.width))
-                character.x += characterSpeed;
+            spaceShipData.player = LoadTexture("../assets/images/gameCharacterRight.png");
+            if ((spaceShipData.character.x + spaceShipData.character.width) < (spaceShipData.spaceship.x + spaceShipData.spaceship.width))
+                spaceShipData.character.x += spaceShipData.characterSpeed;
         }
         else if (IsKeyDown(KEY_LEFT))
         {
-            player = LoadTexture("../assets/images/gameCharacterLeft.png");
-            if (character.x > spaceship.x)
-                character.x -= characterSpeed;
+            spaceShipData.player = LoadTexture("../assets/images/gameCharacterLeft.png");
+            if (spaceShipData.character.x > spaceShipData.spaceship.x)
+                spaceShipData.character.x -= spaceShipData.characterSpeed;
         }
 
-        if (IsKeyDown(KEY_DOWN) && (character.y + character.height) < (spaceship.y + spaceship.height)) {
-            character.y += characterSpeed;
+        if (IsKeyDown(KEY_DOWN) && (spaceShipData.character.y + spaceShipData.character.height) < (spaceShipData.spaceship.y + spaceShipData.spaceship.height)) {
+            spaceShipData.character.y += spaceShipData.characterSpeed;
         }
 
-        if (IsKeyDown(KEY_UP) && (character.y + character.height) < (spaceship.y + spaceship.height)){
-            character.y -= characterSpeed;
+        if (IsKeyDown(KEY_UP) && (spaceShipData.character.y + spaceShipData.character.height) < (spaceShipData.spaceship.y + spaceShipData.spaceship.height)) {
+            spaceShipData.character.y -= spaceShipData.characterSpeed;
         }
 
-        BeginDrawing();
+        DrawTexture(basicData.background, 0, 0, RAYWHITE);
 
-        ClearBackground(RAYWHITE);
+        DrawTexture(spaceShipData.player, (spaceShipData.character.x), (spaceShipData.character.y), WHITE);
 
-        DrawTexture(background, 0, 0, RAYWHITE);
+        DrawTextEx(basicData.boldPoppins, "Press Backspace to go back!", Vector2(50, 50), 20, 5, WHITE);
+        //DrawTextEx(basicData.boldPoppins, " In the vast expanse of outer space,\n two companions set out on a quest for\n discovery. Amidst the universe's\n immensity, they mapped new territories\n and witnessed wonders beyond\n imagination.\n Tragedy struck when one was lost due\n to insufficient knowledge, leaving the\n other in grief.\n  Determined to honor\n his friend's memory, the survivor\n immersed himself in the study of space,\n driven by an insatiable thirst for\n understanding. With each day, he\n delved deeper into astrophysics,\n preparing tirelessly for the\n ultimate voyage into the unknown.\n When the time came, he was ready to\n prove that their mission\n was achievable.", Vector2(920, 70), 22, 5, WHITE);
 
-        DrawTexture(player, (character.x), (character.y), WHITE);
-
-        DrawTextEx(boldPoppins, "Press Backspace to go back!", Vector2(50, 50), 20, 5, WHITE);
-
-        if (CheckCollisionRecs(character, natureLocation))
+        if (CheckCollisionRecs(spaceShipData.character, spaceShipData.natureLocation))
         {
-            DrawTextEx(boldPoppins, "Press E for nature!", Vector2(680, 440), 20, 5, WHITE);
+            DrawTextEx(basicData.boldPoppins, "Press E for nature!", Vector2(680, 440), 20, 5, WHITE);
+
+            if (IsKeyDown(KEY_E))
+            {
+                state = GameState::NatureScript; 
+            }
         }
 
-        if (CheckCollisionRecs(character, natureLocation) && IsKeyDown(KEY_E))
+        if (CheckCollisionRecs(spaceShipData.character, spaceShipData.bosonLocation))
         {
-            natureScript(userNameStr, girlVoice, boyVoice);
-            break;
+            DrawTextEx(basicData.boldPoppins, "Press E for higgs boson!", Vector2(550, 300), 20, 5, WHITE);
+
+            if (IsKeyDown(KEY_E))
+            {
+                state = GameState::HiggsBoson; 
+            }
         }
 
-        if (CheckCollisionRecs(character, bosonLocation))
+        if (CheckCollisionRecs(spaceShipData.character, spaceShipData.planetsLocation))
         {
-            DrawTextEx(boldPoppins, "Press E for higgs boson!", Vector2(550, 300), 20, 5, WHITE);
+            DrawTextEx(basicData.boldPoppins, "Press E for planets!", Vector2(550, 620), 20, 5, WHITE);
+
+            if (IsKeyDown(KEY_E))
+            {
+                state = GameState::GetStation;
+            }
         }
 
-        if (CheckCollisionRecs(character, bosonLocation) && IsKeyDown(KEY_E))
-        {
-
-            particlePick(userNameStr, girlVoice, boyVoice);
-            break;
-        }
-
-        if (CheckCollisionRecs(character, planetsLocation))
-        {
-            DrawTextEx(boldPoppins, "Press E for planets!", Vector2(550, 620), 20, 5, WHITE);
-        }
-
-        if (CheckCollisionRecs(character, planetsLocation) && IsKeyDown(KEY_E))
-        {
-            getStation(userNameStr, girlVoice, boyVoice);
-            break;
-        }
 
         if (IsKeyDown(KEY_BACKSPACE))
         {
-            intro();
-            break;
+            state = GameState::Intro;
         }
 
-        DrawRectangleRec(spaceship, GetColor(0x312b4700));
+        DrawRectangleRec(spaceShipData.spaceship, GetColor(0x312b4700));
 
-        DrawRectangleRec(natureLocation, GetColor(0x312b4700));
-        DrawRectangleRec(bosonLocation, GetColor(0x312b4700));
-        DrawRectangleRec(planetsLocation, GetColor(0x312b4700));
-
-        EndDrawing();
-    }
+        DrawRectangleRec(spaceShipData.natureLocation, GetColor(0x312b4700));
+        DrawRectangleRec(spaceShipData.bosonLocation, GetColor(0x312b4700));
+        DrawRectangleRec(spaceShipData.planetsLocation, GetColor(0x312b4700));
 }

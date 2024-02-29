@@ -1,9 +1,25 @@
 #pragma once
-
 #include "pch.h"
+#include "GameState.h"
 
-void characterPick(Font Poppins, Font boldPoppins, std::string userNameStr);
+extern bool girlVoice;
+extern bool boyVoice;
 
-void mouseCursorAstronauts(Rectangle boyAstronaut, Rectangle girlAstronaut);
+struct CharacterPickData {
+	Texture2D backgroundCharacter;
+	
+	Texture2D boyAstronautImg;
+	Texture2D girlAstronautImg;
 
-bool pickVoice(Rectangle boyBox, Rectangle girlBox);
+	Rectangle boyBox;
+	Rectangle girlBox;
+
+	Music characterPickAudio;
+	float audioSecondCharacter;
+};
+
+static CharacterPickData characterPickData;
+
+void InitCharacterPick();
+
+void characterPick(GameState& state);

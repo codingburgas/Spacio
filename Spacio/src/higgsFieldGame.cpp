@@ -1,70 +1,82 @@
 #include "higgsFieldGame.h"
+#include "basicData.h"
+#include "particlePick.h"
 
-void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool boyVoice) {
+void InitHiggsBosonWindow()
+{
+    basicData.background = LoadTexture("../assets/images/higgsfieldBg.png");
+    basicData.Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, 0, 0);
+    basicData.boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 500, 0, 0);
 
-    // Load textures and fonts
-    Texture2D background = LoadTexture("../assets/images/higgsfieldBg.png");
-    Texture2D particle = LoadTexture("../assets/images/particle.png");
+    higgsBoson.horizontalStep = 16;
+    higgsBoson.particleVertical = 707;
+    higgsBoson.particleHorizontal = -1272;
 
-    Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, 0, 0);
-    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 500, 0, 0);
+    higgsBoson.particle = LoadTexture("../assets/images/particle.png");
+    higgsBoson.girlPhoton = LoadMusicStream("../assets/audios/photonsFemale.mp3");
+    higgsBoson.boyPhoton = LoadMusicStream("../assets/audios/photonsMale.mp3");
+    higgsBoson.girlElectron = LoadMusicStream("../assets/audios/electronsFemale.mp3");
+    higgsBoson.boyElectron = LoadMusicStream("../assets/audios/electronsMale.mp3");
+    higgsBoson.girlHiggs = LoadMusicStream("../assets/audios/higgsFemale.mp3");
+    higgsBoson.boyHiggs = LoadMusicStream("../assets/audios/higgsMale.mp3");
 
-    // Define constants and variables for particle movement
-    const int verticalStep = 84;
-    int horizontalStep = 16;
-    const int lowest = 707;
-    const int highest = 539;
-    const int leftStart = -1272;
-    const int rightEnd = -60;
-    int particleVertical = 707;
-    int particleHorizontal = -1272;
+    basicData.voiceTime = 0.0;
+    higgsBoson.electronAudioTime = 0.0;
+    higgsBoson.higgsAudioTime = 0.0;
 
-    // Load music streams for different particles
-    Music girlPhoton = LoadMusicStream("../assets/audios/photonsFemale.mp3");
-    Music boyPhoton = LoadMusicStream("../assets/audios/photonsMale.mp3");
-    Music girlElectron = LoadMusicStream("../assets/audios/electronsFemale.mp3");
-    Music boyElectron = LoadMusicStream("../assets/audios/electronsMale.mp3");
-    Music girlHiggs = LoadMusicStream("../assets/audios/higgsFemale.mp3");
-    Music boyHiggs = LoadMusicStream("../assets/audios/higgsMale.mp3");
+    if (hasMass) {
+        higgsBoson.particleVertical -= 84;
+        higgsBoson.horizontalStep /= 2;
+    }
+}
 
-    // Variables to keep track of audio playback time
-    float audioTime = 0.00;
-    float electronAudioTime = 0.00;
-    float higgsAudioTime = 0.00;
+bool loadHiggsBoson = true;
 
-    // Start playing music streams
-    PlayMusicStream(girlPhoton);
-    PlayMusicStream(boyPhoton);
-    PlayMusicStream(girlElectron);
-    PlayMusicStream(boyElectron);
-    PlayMusicStream(girlHiggs);
-    PlayMusicStream(boyHiggs);
+const int verticalStep = 84;
+const int lowest = 707;
+const int highest = 539;
+const int leftStart = -1272;
+const int rightEnd = -60;
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        DrawTexture(background, 0, 0, RAYWHITE);
+void HiggsFieldGame(GameState& state) {
+
+    if (loadHiggsBoson)
+    {
+        InitHiggsBosonWindow();
+        loadHiggsBoson = false;
+        SetMouseCursor(MOUSE_CURSOR_ARROW);
+
+        PlayMusicStream(higgsBoson.girlPhoton);
+        PlayMusicStream(higgsBoson.boyPhoton);
+        PlayMusicStream(higgsBoson.girlElectron);
+        PlayMusicStream(higgsBoson.boyElectron);
+        PlayMusicStream(higgsBoson.girlHiggs);
+        PlayMusicStream(higgsBoson.boyHiggs);
+    }
+
+        DrawTexture(basicData.background, 0, 0, RAYWHITE);
 
         // Particle movement based on user interaction
-        if (IsKeyPressed(KEY_UP) && particleVertical > highest) {
-            particleVertical -= verticalStep;
-            horizontalStep /= 2;
+        if (IsKeyPressed(KEY_UP) && higgsBoson.particleVertical > highest) {
+            higgsBoson.particleVertical -= verticalStep;
+            higgsBoson.horizontalStep /= 2;
         }
-        if (IsKeyPressed(KEY_DOWN) && particleVertical < lowest) {
-            particleVertical += verticalStep;
-            horizontalStep *= 2;
+        if (IsKeyPressed(KEY_DOWN) && higgsBoson.particleVertical < lowest) {
+            higgsBoson.particleVertical += verticalStep;
+            higgsBoson.horizontalStep *= 2;
         }
         // Particle bouncing off borders
-        if (particleHorizontal > rightEnd || particleHorizontal < leftStart) {
-            horizontalStep = -horizontalStep;
+        if (higgsBoson.particleHorizontal > rightEnd || higgsBoson.particleHorizontal < leftStart) {
+            higgsBoson.horizontalStep =- higgsBoson.horizontalStep;
         }
 
-        particleHorizontal += horizontalStep;
+        higgsBoson.particleHorizontal += higgsBoson.horizontalStep;
 
         // Draw particle
-        DrawTexture(particle, particleHorizontal, particleVertical, RAYWHITE);
+        DrawTexture(higgsBoson.particle, higgsBoson.particleHorizontal, higgsBoson.particleVertical, RAYWHITE);
 
         // Determine particle position and display information
-        int position = (lowest - particleVertical) / verticalStep;
+        int position = (lowest - higgsBoson.particleVertical) / verticalStep;
 
         std::string massText = "Mass: ";
         std::string speedText = "Speed: ";
@@ -77,18 +89,18 @@ void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool 
             infoText = "Photons don't interact with the higgsField so they are very fast.";
             // Play photon audio
             if (girlVoice) {
-                if (IsMusicStreamPlaying(girlPhoton) and audioTime < 3.4)
+                if (IsMusicStreamPlaying(higgsBoson.girlPhoton) and basicData.voiceTime < 3.4)
                 {
-                    UpdateMusicStream(girlPhoton);
-                    audioTime += GetFrameTime();
+                    UpdateMusicStream(higgsBoson.girlPhoton);
+                    basicData.voiceTime += GetFrameTime();
                 }
 
             }
             else if (boyVoice) {
-                if (IsMusicStreamPlaying(boyPhoton) and audioTime < 4)
+                if (IsMusicStreamPlaying(higgsBoson.boyPhoton) and basicData.voiceTime < 4)
                 {
-                    UpdateMusicStream(boyPhoton);
-                    audioTime += GetFrameTime();
+                    UpdateMusicStream(higgsBoson.boyPhoton);
+                    basicData.voiceTime += GetFrameTime();
                 }
             }
             break;
@@ -98,17 +110,17 @@ void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool 
             infoText = "Electrons interact with the field a little so they are fast.";
             if (girlVoice) {
                 // Play electron audio
-                if (IsMusicStreamPlaying(girlElectron) and electronAudioTime < 3.5)
+                if (IsMusicStreamPlaying(higgsBoson.girlElectron) and higgsBoson.electronAudioTime < 3.5)
                 {
-                    UpdateMusicStream(girlElectron);
-                    electronAudioTime += GetFrameTime();
+                    UpdateMusicStream(higgsBoson.girlElectron);
+                    higgsBoson.electronAudioTime += GetFrameTime();
                 }
             }
             else if (boyVoice) {
-                if (IsMusicStreamPlaying(boyElectron) and electronAudioTime < 3.7)
+                if (IsMusicStreamPlaying(higgsBoson.boyElectron) and higgsBoson.electronAudioTime < 3.7)
                 {
-                    UpdateMusicStream(boyElectron);
-                    electronAudioTime += GetFrameTime();
+                    UpdateMusicStream(higgsBoson.boyElectron);
+                    higgsBoson.electronAudioTime += GetFrameTime();
                 }
             }
             break;
@@ -118,35 +130,30 @@ void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool 
             infoText = "Higgs bosons interact strongly so they are slow.";
             if (girlVoice) {
                 // Play Higgs boson audio
-                if (IsMusicStreamPlaying(girlHiggs) and higgsAudioTime < 3)
+                if (IsMusicStreamPlaying(higgsBoson.girlHiggs) and higgsBoson.higgsAudioTime < 3)
                 {
-                    UpdateMusicStream(girlHiggs);
-                    higgsAudioTime += GetFrameTime();
+                    UpdateMusicStream(higgsBoson.girlHiggs);
+                    higgsBoson.higgsAudioTime += GetFrameTime();
                 }
             }
             else if (boyVoice) {
-                if (IsMusicStreamPlaying(boyHiggs) and higgsAudioTime < 3.1)
+                if (IsMusicStreamPlaying(higgsBoson.boyHiggs) and higgsBoson.higgsAudioTime < 3.1)
                 {
-                    UpdateMusicStream(boyHiggs);
-                    higgsAudioTime += GetFrameTime();
+                    UpdateMusicStream(higgsBoson.boyHiggs);
+                    higgsBoson.higgsAudioTime += GetFrameTime();
                 }
             }
             break;
         }
 
         // Draw information text
-        DrawTextEx(boldPoppins, massText.c_str(), Vector2{ 114, 68 }, 48, 5, WHITE);
-        DrawTextEx(boldPoppins, speedText.c_str(), Vector2{ 114, 140 }, 48, 5, WHITE);
-        DrawTextEx(boldPoppins, infoText.c_str(), Vector2{ 114, 247 }, 40, 5, WHITE);
-        DrawTextEx(Poppins, "Press Space to return home", Vector2{ 114, 460 }, 40, 5, GRAY);
+        DrawTextEx(basicData.boldPoppins, massText.c_str(), Vector2{ 114, 68 }, 48, 5, WHITE);
+        DrawTextEx(basicData.boldPoppins, speedText.c_str(), Vector2{ 114, 140 }, 48, 5, WHITE);
+        DrawTextEx(basicData.boldPoppins, infoText.c_str(), Vector2{ 114, 247 }, 40, 5, WHITE);
+        DrawTextEx(basicData.Poppins, "Press Space to return home", Vector2{ 114, 460 }, 40, 5, GRAY);
 
-        ClearBackground(RAYWHITE);
-
-        EndDrawing();
         // Check for space key press to return to continue
         if (IsKeyPressed(KEY_SPACE)) {
-            endScreen(userNameStr, girlVoice, boyVoice);
-            break;
+            state == GameState::EndScreen;
         }
-    }
 }

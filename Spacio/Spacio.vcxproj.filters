@@ -41,5 +41,7 @@
     <ClInclude Include="src\SpaceShip.h" />
     <ClInclude Include="src\chooseLearningStyle.h" />
     <ClInclude Include="src\endPlanetGame.h" />
+    <ClInclude Include="src\GameState.h" />
+    <ClInclude Include="src\basicData.h" />
   </ItemGroup>
 </Project>

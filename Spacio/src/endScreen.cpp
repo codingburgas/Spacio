@@ -1,64 +1,68 @@
 #include "endScreen.h"
+#include "basicData.h"
+#include "userName.h"
+#include <iostream>
 
-void endScreen(std::string userNameStr, bool girlVoice, bool boyVoice) {
-    // Load fonts and textures
-    Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
-    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
+void InitEndScreen()
+{
+    basicData.Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, NULL, 0);
+    basicData.boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
 
-    Texture2D background = LoadTexture("../assets/images/endScreenBg.png");
-    Texture2D boyAstronaut = LoadTexture("../assets/images/goodJobAstronaut.png");
-    Texture2D girlAstronaut = LoadTexture("../assets/images/goodJobGirlAstronaut.png");
+    basicData.background = LoadTexture("../assets/images/endScreenBg.png");
+    basicData.boyCompanion = LoadTexture("../assets/images/goodJobAstronaut.png");
+    basicData.girlCompanion = LoadTexture("../assets/images/goodJobGirlAstronaut.png");
 
-    // Load music streams
-    Music girl = LoadMusicStream("../assets/audios/greatJobFemale.mp3");
-    Music boy = LoadMusicStream("../assets/audios/greatJobMale.mp3");
+    basicData.girlVoiceAudio = LoadMusicStream("../assets/audios/greatJobFemale.mp3");
+    basicData.boyVoiceAudio = LoadMusicStream("../assets/audios/greatJobMale.mp3");
 
-    float audioTime = 0.0;
-    while (!WindowShouldClose())
+    basicData.voiceTime = 0.0;
+}
+
+bool loadEndScreen = true;
+
+void endScreen(GameState& state) {
+    DrawTexture(basicData.background, 0, 0, RAYWHITE);
+    if (loadEndScreen)
     {
-
-        BeginDrawing();
-
-        // Play music streams based on chosen character
-        if (girlVoice)
-        {
-            PlayMusicStream(girl);
-            if (IsMusicStreamPlaying(girl) and audioTime <= 2.7)
-            {
-                UpdateMusicStream(girl);
-                audioTime += GetFrameTime();
-            }
-        }
-        else if (boyVoice)
-        {
-            PlayMusicStream(boy);
-            if (IsMusicStreamPlaying(boy) and audioTime <= 2.7)
-            {
-                UpdateMusicStream(boy);
-                audioTime += GetFrameTime();
-            }
-        }
-
-        // Draw textures and text
-        DrawTexture(background, 0, 0, RAYWHITE);
-        if(boyVoice) DrawTexture(boyAstronaut, 740, 222, RAYWHITE);
-        if(girlVoice) DrawTexture(girlAstronaut, 740, 222, RAYWHITE);
-
-        std::string message = "Good job " + userNameStr + ", you did really great!";
-        DrawTextEx(boldPoppins, message.c_str(), Vector2(150, 114), 55, 5, WHITE);
-        DrawTextEx(Poppins, "Press Space to return home", Vector2(150, 470), 40, 5, GRAY);
-
+        InitEndScreen();
+        loadEndScreen = false;
+        SetMouseCursor(MOUSE_CURSOR_ARROW);
+        PlayMusicStream(basicData.boyVoiceAudio);
+        PlayMusicStream(basicData.girlVoiceAudio);
         ClearBackground(RAYWHITE);
+    }
 
-        EndDrawing();
-
-        // Check for space key press to continue
-        if (IsKeyPressed(KEY_SPACE))
+    // Play music streams based on chosen character
+    if (girlVoice)
+    {
+        PlayMusicStream(basicData.girlVoiceAudio);
+        if (IsMusicStreamPlaying(basicData.girlVoiceAudio) and basicData.voiceTime <= 2.7)
         {
-            spaceShip(userNameStr, girlVoice, boyVoice);
-            break;
+            UpdateMusicStream(basicData.girlVoiceAudio);
+            basicData.voiceTime += GetFrameTime();
         }
     }
-    StopMusicStream(girl);
-    StopMusicStream(boy);
+    else if (boyVoice)
+    {
+        PlayMusicStream(basicData.boyVoiceAudio);
+        if (IsMusicStreamPlaying(basicData.boyVoiceAudio) and basicData.voiceTime <= 2.5)
+        {
+            UpdateMusicStream(basicData.boyVoiceAudio);
+            basicData.voiceTime += GetFrameTime();
+        }
+    }
+
+    // Draw textures and text
+    if (boyVoice) DrawTexture(basicData.boyCompanion, 740, 222, RAYWHITE);
+    if (girlVoice) DrawTexture(basicData.girlCompanion, 740, 222, RAYWHITE);
+
+    std::string message = "Good job " + name + ", you did really great!";
+    DrawTextEx(basicData.boldPoppins, message.c_str(), Vector2(150, 114), 55, 5, WHITE);
+    DrawTextEx(basicData.Poppins, "Press Space to return home", Vector2(150, 470), 40, 5, GRAY);
+
+    // Check for space key press to continue
+    if (IsKeyPressed(KEY_SPACE))
+    {
+        state = GameState::Intro;
+    }
 }

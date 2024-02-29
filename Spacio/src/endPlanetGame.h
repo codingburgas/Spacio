@@ -1,5 +1,5 @@
-#pragma once
-#include "pch.h"
-
-extern int wonOrLostGame;
-void endPlanetGame();
+//#pragma once
+//#include "pch.h"
+//
+//extern int wonOrLostGame;
+//void endPlanetGame();

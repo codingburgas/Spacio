@@ -1,4 +1,6 @@
 #include "characterPick.h"
+#include "mainMenu.h"
+#include "basicData.h"
 #include <iostream>
 
 void mouseCursorAstronauts(Rectangle boyAstronaut, Rectangle girlAstronaut)
@@ -14,8 +16,8 @@ void mouseCursorAstronauts(Rectangle boyAstronaut, Rectangle girlAstronaut)
     }
 }
 
-bool girlVoice = false;
 bool boyVoice = false;
+bool girlVoice = false;
 
 bool pickVoice(Rectangle boyBox, Rectangle girlBox)
 {
@@ -32,59 +34,56 @@ bool pickVoice(Rectangle boyBox, Rectangle girlBox)
     return girlVoice || boyVoice;
 }
 
-void characterPick(Font Poppins, Font boldPoppins, std::string userNameStr)
+void InitCharacterPick()
 {
-    Texture2D background = LoadTexture("../assets/images/characterPickBackground.png");
-    
-    Texture2D boyAstronaut = LoadTexture("../assets/images/boyAstronaut.png");
-    Texture2D girlAstronaut = LoadTexture("../assets/images/girlAstronaut.png");
+    basicData.Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 200, 0, 0);
+    basicData.boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 200, 0, 0);
+    characterPickData.backgroundCharacter = LoadTexture("../assets/images/characterPickBackground.png");
 
-    Rectangle boyBox = { 285, 200, 161, 204 };
-    Rectangle girlBox = { 1018, 180, 214, 214 };
+    characterPickData.boyAstronautImg = LoadTexture("../assets/images/boyAstronaut.png");
+    characterPickData.girlAstronautImg = LoadTexture("../assets/images/girlAstronaut.png");
 
-    Music audio = LoadMusicStream("../assets/audios/characterPick.mp3");
-    PlayMusicStream(audio);
+    characterPickData.boyBox = { 285, 200, 161, 204 };
+    characterPickData.girlBox = { 1018, 180, 214, 214 };
 
-    float audioSecond = GetMusicTimeLength(audio);
-    float audioTime = 0.0;
+    characterPickData.characterPickAudio = LoadMusicStream("../assets/audios/characterPick.mp3");
+    characterPickData.audioSecondCharacter = 0.0;
+}
 
-    while (!WindowShouldClose())
+bool loadCP = true;
+
+void characterPick(GameState& state)
+{
+    if (loadCP)
     {
-        BeginDrawing();
-
-        if (IsMusicStreamPlaying(audio) and audioTime < 1.3)
-        {
-            UpdateMusicStream(audio);
-            audioTime += GetFrameTime();
-        }
-
-        DrawTexture(background, 0, 0, RAYWHITE);
-
-        DrawTexture(girlAstronaut, 1018, 180, RAYWHITE);
-        DrawTexture(boyAstronaut, 285, 200, RAYWHITE);
-
-        mouseCursorAstronauts(boyBox, girlBox);
-
-        DrawTextEx(boldPoppins, "Choose a companion", Vector2(350, 60), 75, 5, WHITE);
-
-        pickVoice(boyBox, girlBox);
-
-        if (boyVoice)
-        {
-            chooseLearningStyle(boyVoice, girlVoice, userNameStr);
-            break;
-        }
-
-        if (girlVoice)
-        {
-            chooseLearningStyle(boyVoice, girlVoice, userNameStr);
-            break;
-        }
-
-        ClearBackground(RAYWHITE);
-
-        EndDrawing();
+        InitCharacterPick();
+        loadCP = false;
+        SetMouseCursor(MOUSE_CURSOR_ARROW);
+        PlayMusicStream(characterPickData.characterPickAudio);
     }
+    if (IsMusicStreamPlaying(characterPickData.characterPickAudio) and characterPickData.audioSecondCharacter < 1.3)
+            {
+                UpdateMusicStream(characterPickData.characterPickAudio);
+                characterPickData.audioSecondCharacter += GetFrameTime();
+            }
 
-    StopMusicStream(audio);
+            DrawTexture(characterPickData.backgroundCharacter, 0, 0, RAYWHITE);
+
+            DrawTexture(characterPickData.girlAstronautImg, 1018, 180, RAYWHITE);
+            DrawTexture(characterPickData.boyAstronautImg, 285, 200, RAYWHITE);
+
+            mouseCursorAstronauts(characterPickData.boyBox, characterPickData.girlBox);
+
+            DrawTextEx(basicData.boldPoppins, "Choose a companion", Vector2(350, 60), 75, 5, WHITE);
+            pickVoice(characterPickData.boyBox, characterPickData.girlBox);
+
+            if (boyVoice)
+            {
+                state = GameState::ChooseLearningStyle;
+            }
+
+            if (girlVoice)
+            {
+                state = GameState::ChooseLearningStyle;
+            }
 }

@@ -1,4 +1,23 @@
 #pragma once
 #include "pch.h"
 
-void HiggsFieldGame(bool hasMass, std::string userNameStr, bool girlVoice, bool boyVoice);
+struct HiggsBoson {
+	Texture2D particle;
+	int horizontalStep;
+	int particleVertical;
+	int particleHorizontal;
+
+	Music girlPhoton;
+	Music boyPhoton;
+	Music girlElectron;
+	Music boyElectron;
+	Music girlHiggs;
+	Music boyHiggs;
+
+	float electronAudioTime;
+	float higgsAudioTime;
+};
+
+static HiggsBoson higgsBoson;
+
+void HiggsFieldGame(GameState& state);

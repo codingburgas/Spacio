@@ -1,4 +1,7 @@
 #include "intro.h"
+#include "mainMenu.h"
+#include "basicData.h"
+
 
 void mouseCursor(Rectangle digIn, Rectangle quit)
 {
@@ -25,53 +28,36 @@ bool buttonActions(Rectangle digIn, Rectangle quit, buttonTypes type)
     return false;
 }
 
+void InitIntroWindow()
+{
+    basicData.background = LoadTexture("../assets/images/introBackground.png");
+    basicData.Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 200, NULL, NULL);
+    basicData.boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 200, NULL, NULL);
 
-void intro() {
+    introData.digIn = { 490, 400, 280, 94 };
+    introData.quit = { 490, 520, 280, 94 };
+    introData.quitButton = false;
+}
 
-    Texture2D background = LoadTexture("../assets/images/introBackground.png");
+void intro(GameState& state)
+{
+    DrawTexture(basicData.background, 0, 0, RAYWHITE);
 
-    Rectangle digIn = { 490, 400, 280, 94 };
-    Rectangle quit{ 490, 520, 280, 94 };
+    DrawRectangleRec(introData.digIn, GetColor(0X2C2C2Cff));
+    DrawTextEx(basicData.boldPoppins, "Dig In", Vector2(540, 410), 70, 5, WHITE);
 
-    Image logo = LoadImage("../assets/images/Windowlogo.png");
+    DrawRectangleRec(introData.quit, GetColor(0X2C2C2Cff));
+    DrawTextEx(basicData.boldPoppins, "Quit", Vector2(560, 530), 70, 5, WHITE);
 
-    SetWindowIcon(logo);
+    mouseCursor(introData.digIn, introData.quit);
 
-    Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 100, 0, 0);
-    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 500, 0, 0);
-
-    bool quitButton = false;
-
-    while (!WindowShouldClose())
+    if (buttonActions(introData.digIn, introData.quit, buttonTypes::QUIT))
     {
-        BeginDrawing();
-
-        ClearBackground(RAYWHITE);
-
-        DrawTexture(background, 0, 0, RAYWHITE);
-
-        DrawRectangleRec(digIn, GetColor(0X2C2C2Cff));
-        DrawTextEx(boldPoppins, "Dig In", Vector2(540, 410), 70, 5, WHITE);
-
-        DrawRectangleRec(quit, GetColor(0X2C2C2Cff));
-        DrawTextEx(boldPoppins, "Quit", Vector2(560, 530), 70, 5, WHITE);
-
-        mouseCursor(digIn, quit);
-
-        if (buttonActions(digIn, quit, buttonTypes::QUIT))
-        {
-            break;
-        }
-
-        if (buttonActions(digIn, quit, buttonTypes::DIGIN))
-        {
-            userName();
-            break;
-        }
-
-        EndDrawing();
+        state = GameState::NONE;
     }
 
-    UnloadTexture(background);
-    UnloadFont(Poppins);
+    if (buttonActions(introData.digIn, introData.quit, buttonTypes::DIGIN))
+    {
+        state = GameState::UserName;
+    }
 }

@@ -1,4 +1,9 @@
 #include "questions.h"
+#include "characterPick.h"
+#include "mainMenu.h"
+#include "basicData.h"
+#include "intro.h"
+#include <iostream>
 
 void mouseCursorQuestions(Rectangle planetButton, Rectangle higgsButton)
 {
@@ -13,7 +18,7 @@ void mouseCursorQuestions(Rectangle planetButton, Rectangle higgsButton)
     }
 }
 
-void confirmReady(int higgs, int planets, int& pick) {
+void confirmReady(int higgs, int planets) {
     if (planets > higgs)
     {
         pick = 1;
@@ -28,125 +33,115 @@ void confirmReady(int higgs, int planets, int& pick) {
     }
 }
 
-void questions(bool boyVoice, bool girlVoice, std::string userNameStr)
+void InitQuestionsWindow()
 {
-    Font Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 1000, NULL, 0);
-    Font boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 1000, NULL, 0);
+    basicData.background = LoadTexture("../assets/images/questionsBackground.png");
+    basicData.boyCompanion = LoadTexture("../assets/images/boyCompanion.png");
+    basicData.girlCompanion = LoadTexture("../assets/images/girlCompanion.png");
 
-    Texture2D background = LoadTexture("../assets/images/questionsBackground.png");
-    Texture2D boyCompanion = LoadTexture("../assets/images/boyCompanion.png");
-    Texture2D girlCompanion = LoadTexture("../assets/images/girlCompanion.png");
+    basicData.Poppins = LoadFontEx("../assets/fonts/Poppins-Regular.ttf", 200, NULL, NULL);
+    basicData.boldPoppins = LoadFontEx("../assets/fonts/Poppins-Bold.ttf", 200, NULL, NULL);
 
-    Rectangle planetButton = { 648, 500, 150, 40 };
-    Rectangle higgsButton = { 648, 580, 180, 40 };
-    bool buttonClickedPlanets = false;
-    bool buttonClickedHiggs = false;
+    questionData.planetButton = { 648, 500, 150, 40 };
+    questionData.higgsButton = { 648, 580, 180, 40 };
+    questionData.buttonClickedPlanets = false;
+    questionData.buttonClickedHiggs = false;
 
-    int pick;
+    questionData.questionCounter = 0;
+    questionData.planets = 0;
+    questionData.higgs = 0;
 
-    const char* questions[8] = { "Do you choose to gaze at the stars\nor delve into the study\nof micro-particles?",
-        "Do you prefer exploring galaxies\nor focusing on elementary particles?",
-        "Does your excitement come from\ncosmic phenomena or\natomic structures?",
-        "Would you rather investigate black\nholes or examine subatomic\ninteractions?",
-        "Do you ponder more on processes in\nstellar cores or on experimental\nresults in particles?",
-        "Are you into studying gravitational\nwaves or interactions between\nquarks?",
-        "Would you enjoy astronomical\nobservation or analyzing data\nfrom particle experiments ?",
-        "Do you prefer examining the vast\nstructures of the Universe or delving\ninto the basics of composite particles?" };
+    basicData.boyVoiceAudio = LoadMusicStream("../assets/audios/welcomeAudio.mp3");
+    basicData.girlVoiceAudio = LoadMusicStream("../assets/audios/welcomeAudioGirl.mp3");
 
-    const char* planetsAnswers[8] = { "Stars", "Galaxies", "Cosmic phenomena", "Black holes",
-        "Stellar cores", "Gravitational waves", "Astronomical observation", "Vast structures" };
+    basicData.voiceTime = 0.0;
+}
 
-    const char* higgsAnswers[8] = { "Micro-particles", "Elementary particles", "Atomic structures", "Subatomic interactions",
-        "Experimental results", "Interactions between quarks", "Analysis of particle data", "Composite particles" };
+bool loadQuestions = true;
 
-    int questionCounter = 0;
-    int planets = 0;
-    int higgs = 0;
+void questions(GameState& state)
+{
 
-    Music boy = LoadMusicStream("../assets/audios/welcomeAudio.mp3");
-    Music girl = LoadMusicStream("../assets/audios/welcomeAudioGirl.mp3");
-
-    float boySecond = GetMusicTimeLength(boy);
-    float girlSecond = GetMusicTimeLength(girl);
-    float audioTime = 0.0;
+    if (loadQuestions)
+    {
+        InitQuestionsWindow();
+        loadQuestions = false;
+        SetMouseCursor(MOUSE_CURSOR_ARROW);
+        PlayMusicStream(basicData.boyVoiceAudio);
+        PlayMusicStream(basicData.girlVoiceAudio);
+    }
 
     SetTextLineSpacing(38);
 
-    while (!WindowShouldClose())
-    {
-        if (CheckCollisionPointRec(GetMousePosition(), planetButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        if (CheckCollisionPointRec(GetMousePosition(), questionData.planetButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            buttonClickedPlanets = true;
+            questionData.buttonClickedPlanets = true;
         }
 
-        if (CheckCollisionPointRec(GetMousePosition(), higgsButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        if (CheckCollisionPointRec(GetMousePosition(), questionData.higgsButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            buttonClickedHiggs = true;
+            questionData.buttonClickedHiggs = true;
         }
 
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
 
-        DrawTexture(background, 0, 0, RAYWHITE);
+        DrawTexture(basicData.background, 0, 0, RAYWHITE);
 
         if (boyVoice)
         {
-            DrawTexture(boyCompanion, 50, 250, RAYWHITE);
-            PlayMusicStream(boy);
-            if (IsMusicStreamPlaying(boy) and audioTime < 2.7)
+            DrawTexture(basicData.boyCompanion, 50, 250, RAYWHITE);
+            PlayMusicStream(basicData.boyVoiceAudio);
+            if (IsMusicStreamPlaying(basicData.boyVoiceAudio) and basicData.voiceTime < 2.6)
             {
-                UpdateMusicStream(boy);
-                audioTime += GetFrameTime();
+                UpdateMusicStream(basicData.boyVoiceAudio);
+                basicData.voiceTime += GetFrameTime();
             }
         }
 
         if (girlVoice)
         {
-            DrawTexture(girlCompanion, 50, 250, RAYWHITE);
-            PlayMusicStream(girl);
-            if (IsMusicStreamPlaying(girl) and audioTime < 2.6)
+            DrawTexture(basicData.girlCompanion, 50, 250, RAYWHITE);
+            PlayMusicStream(basicData.girlVoiceAudio);
+            if (IsMusicStreamPlaying(basicData.girlVoiceAudio) and basicData.voiceTime < 2.2)
             {
-                UpdateMusicStream(girl);
-                audioTime += GetFrameTime();
+                UpdateMusicStream(basicData.girlVoiceAudio);
+                basicData.voiceTime += GetFrameTime();
             }
         }
 
-        DrawTextEx(boldPoppins, "Welcome, choose what you want to learn about", Vector2{ 250, 160 }, 50, 5, WHITE);
+        DrawTextEx(basicData.boldPoppins, "Welcome, choose what you want to learn about", Vector2{ 250, 160 }, 50, 5, WHITE);
 
-        DrawTextEx(Poppins, questions[questionCounter], Vector2{ 600, 320 }, 40, 5, WHITE);
+        DrawTextEx(basicData.Poppins, (questionData.questions[questionData.questionCounter]).c_str(), Vector2{600, 320}, 40, 5, WHITE);
 
-        DrawRectangleRec(planetButton, GetColor(0x312b4700));
-        DrawTextEx(boldPoppins, planetsAnswers[questionCounter], Vector2{ 665, 500 }, 40, 5, WHITE);
+        DrawRectangleRec(questionData.planetButton, GetColor(0x312b4700));
+        DrawTextEx(basicData.boldPoppins, (questionData.planetsAnswers[questionData.questionCounter]).c_str(), Vector2{665, 500}, 40, 5, WHITE);
 
-        mouseCursorQuestions(planetButton, higgsButton);
+        mouseCursorQuestions(questionData.planetButton, questionData.higgsButton);
 
-        DrawRectangleRec(higgsButton, GetColor(0x312b4700));
-        DrawTextEx(boldPoppins, higgsAnswers[questionCounter], Vector2{ 665, 580 }, 40, 5, WHITE);
+        DrawRectangleRec(questionData.higgsButton, GetColor(0x312b4700));
+        DrawTextEx(basicData.boldPoppins, (questionData.higgsAnswers[questionData.questionCounter]).c_str(), Vector2{665, 580}, 40, 5, WHITE);
 
-        if (buttonClickedPlanets)
+
+
+        if (questionData.buttonClickedPlanets)
         {
-            planets++;
-            questionCounter++;
-            buttonClickedPlanets = false;
+            questionData.planets++;
+            questionData.questionCounter++;
+            questionData.buttonClickedPlanets = false;
         }
 
-        if (buttonClickedHiggs)
+        if (questionData.buttonClickedHiggs)
         {
-            higgs++;
-            questionCounter++;
-            buttonClickedHiggs = false;
+            questionData.higgs++;
+            questionData.questionCounter++;
+            questionData.buttonClickedHiggs = false;
         }
-
-        confirmReady(higgs, planets, pick);
-
-        if (questionCounter == 8)
+        confirmReady(questionData.higgs, questionData.planets);
+        if (questionData.questionCounter >= 8)
         {
-            userConfirm(pick, userNameStr, boyVoice, girlVoice);
-            break;
+            state = GameState::UserConfirm;
         }
-
-        EndDrawing();
 
     }
-}
