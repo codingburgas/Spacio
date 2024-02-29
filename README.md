@@ -50,6 +50,10 @@
 <pre>npm run dev</pre>
 
 # 🏅 Application
+### Our application doesn't have a release yet so you will need to download and run it manually.
+### First we clone the repository 
+<pre>git clone https://github.com/codingburgas/2324-space-sprint-project-spacio.git</pre>
+### After that we open Spacio.sln and we run it.
 
 # 💻 Languages-Frameworks-Tools
 ## - Design
